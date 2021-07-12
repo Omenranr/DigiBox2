@@ -1,0 +1,44 @@
+.holdingContainer {
+    width: 100%;
+    display: flex;
+    padding: 30px;
+    box-sizing: border-box;
+    border: black 2px;
+}
+
+.internalContainerLeft {
+    flex: 1;
+    border: 1px solid black;
+    padding: 20px;
+    font-size: 12px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.internalContainerCenter {
+    flex: 1;
+    border: 1px solid black;
+    padding: 20px;
+    font-size: 12px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.internalContainerRight {
+    flex: 1;
+    border: 1px solid black;
+    padding: 20px;
+    font-size: 12px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.buy {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+    .holdingContainer {
+        flex-direction: column;
+    }
+}
+
+
+
