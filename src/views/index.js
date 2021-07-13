@@ -1,2 +1,11 @@
 export {default as Equipe} from './Equipe'
 export {default as HomePage} from './HomePage'
+export {default as WhitePaper} from './WhitePaper'
+export {default as RoadMap} from './RoadMap'
+export {default as Prestataire} from './Prestataire'
+export {default as CGV} from './CGV'
+export {default as SCPresta} from './SCPresta'
+export {default as SC} from './SC'
+export {default as Commentaires} from './Commentaires'
+export {default as AchatNFT} from './AchatNFT'
+

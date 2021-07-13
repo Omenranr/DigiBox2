@@ -31,3 +31,14 @@
   font-size: 25px;
   color: midnightblue;
 }
+
+.btn-meta {
+  position: absolute;
+  left: 1150px;
+  top: 95px;
+  color: midnightblue;
+}
+
+.display-meta{
+  font-size: smaller;
+}

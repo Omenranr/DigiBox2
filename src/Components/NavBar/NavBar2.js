@@ -7,11 +7,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-// import {Link} from '@material-ui/core'
 import {Link} from "react-router-dom"
 
 const useStyles = makeStyles({
@@ -50,7 +46,6 @@ export default function TemporaryDrawer() {
         {['WhitePaper', 'Equipe', 'RoadMap', 'Devenir prestataire'].map((text, index) => (
           <Link to={"/"+text} variant="body2">
           <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
           </Link>
@@ -58,10 +53,9 @@ export default function TemporaryDrawer() {
       </List>
       <Divider />
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+        {['Service client/prestataire', 'Service client', 'CGV', 'Retour sur votre expèrience'].map((text, index) => (
           <Link to={"/"+text} variant="body2">
           <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
           </Link>

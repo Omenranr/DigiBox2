@@ -25,25 +25,24 @@ export default function Equipe() {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="/static/images/cards/contemplative-reptile.jpg"
-          title="Contemplative Reptile"
+          image="https://www.lagrandemaison.ch/wp-content/uploads/2018/12/homepage_restaurant.jpg"
+          title="LGM"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Lizard
+            La grande Maison
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
+          Kim et son équipe se réjouissent de vous accueillir dans leur restaurant avec toujours une carte “fait maison” et des idées originales et goûteuses. Réservations au 027 565 35 70
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
         <Button size="small" color="primary">
-          Share
+          Achat
         </Button>
         <Button size="small" color="primary">
-          Learn More
+          <a href="https://www.lagrandemaison.ch/">En savoir plus</a>
         </Button>
       </CardActions>
     </Card>

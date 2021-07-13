@@ -1,16 +1,20 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import getWeb3 from "./getWeb3";
 import { BrowserRouter as Router } from 'react-router-dom';
 import "./App.css";
 import Routes from './Routes'
 
-class App extends Component {
-  state = { storageValue: 0, web3: null, accounts: null, contract: null };
+const App = () => {
+  
+  const [web3, setweb3] = useState(undefined)
+  const [accounts, setAccounts] = useState(undefined)
+  const [contract, setContract] = useState(undefined)
 
-  componentDidMount = async () => {
-    try {
-      // Get network provider and web3 instance.
+  useEffect(() => {
+
+    const init = async() => {
+             // Get network provider and web3 instance.
       const web3 = await getWeb3();
 
       // Use web3 to get the user's accounts.
@@ -24,41 +28,21 @@ class App extends Component {
         deployedNetwork && deployedNetwork.address,
       );
 
-      // Set web3, accounts, and contract to the state, and then proceed with an
-      // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance }, this.runExample);
-    } catch (error) {
-      // Catch any errors for any of the above operations.
-      alert(
-        `Failed to load web3, accounts, or contract. Check console for details.`,
-      );
-      console.error(error);
+      setweb3(web3)
+      setAccounts(accounts)
+      setContract(contract)
     }
+    init()
+  }, []) 
+ 
 
-  };
-
-  runExample = async () => {
-    const { accounts, contract } = this.state;
-
-    // Stores a given value, 5 by default.
-    await contract.methods.set(5).send({ from: accounts[0] });
-
-    // Get the value from the contract to prove it worked.
-    const response = await contract.methods.get().call();
-
-    // Update state with the result.
-    this.setState({ storageValue: response });
-
-  };
-
-  render() {
-   
     return (
+
       <Router>
         <Routes />
       </Router>
     );
-  }
+
 }
 
 export default App;

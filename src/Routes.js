@@ -2,7 +2,14 @@ import React from 'react';
 import { Switch, Redirect, Route} from 'react-router-dom'
 import {
     Equipe,
-    HomePage
+    HomePage,
+    WhitePaper,
+    RoadMap,
+    Prestataire,
+    SCPresta,
+    SC,
+    CGV,
+    Commentaires
 } from './views'
 
 const Routes = () => {
@@ -18,6 +25,27 @@ const Routes = () => {
       </Route>
       <Route path="/Equipe">
           <Equipe />
+      </Route>
+      <Route path="/WhitePaper">
+          <WhitePaper />
+      </Route>
+      <Route path="/RoadMap">
+          <RoadMap />
+      </Route>
+      <Route path="/Devenir prestataire">
+          <Prestataire />
+      </Route>
+      <Route path="/Service client/prestataire">
+          <SCPresta />
+      </Route>
+      <Route path="/Service client">
+          <SC />
+      </Route>
+      <Route path="/CGV">
+          <CGV />
+      </Route>
+      <Route path="/Retour sur votre expÃ¨rience">
+          <Commentaires />
       </Route>
     </Switch>
   );

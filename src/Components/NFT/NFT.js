@@ -1,4 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
+//Voir comment avoir le bon Path
+import { MemberCard } from '../../views/Equipe/components';
+import "./NFT.css";
+
+export default function NFT() {
+    return (
+        <div className="holdingContainer">
+            <div className="leftDisplay">
+               <MemberCard />
+            </div>
+            <div className="centerDisplay">
+              <MemberCard />
+            </div>
+            <div className="rightNFT">
+              <MemberCard />
+            </div>
+        </div>
+    )
+}
+
+/*import React, { Component } from 'react';
 import "./NFT.css";
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
@@ -45,4 +66,4 @@ const NFT = () => {
         )
 }
 
-export default NFT
+export default NFT */
