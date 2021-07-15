@@ -44,7 +44,7 @@ const Routes = () => {
       <Route path="/CGV">
           <CGV />
       </Route>
-      <Route path="/Retour sur votre expÃ¨rience">
+      <Route path="/Retour sur votre experience">
           <Commentaires />
       </Route>
     </Switch>
