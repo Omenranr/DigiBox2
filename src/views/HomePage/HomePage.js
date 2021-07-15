@@ -4,7 +4,7 @@ import NavBarDetail from "../../Components/NavBarDetail/NavBarDetail";
 import NFT from "../../Components/NFT/NFT";
 import Connection from "../../Connection";
 import "./HomePage.css";
-import logo from "../../Images/LogoDigiBox.png";
+import logo from "../../Images/TransparentLogo.png";
 
 export default function HomePage() {
     return (
