@@ -1,5 +1,5 @@
 # Table of content
- * Introduction
+ * Introduction 
  * Technologies
  * Setup for Launch
  * Project status
@@ -20,7 +20,7 @@ Project is created with :
  
  #### Launch 
   No specific requirements for a better understanding we advice you to get Ganache or metamask in order to interact freely with our Dapp.
-  Clone repo => npm install => npm install use-wallet => cd client => npm start 
+  Clone repo => npm install => cd client => npm start 
 
  ##### Project status
 Still in development, project being created, We will deliver a full functional project in Q4 2021. Stay tunned !
