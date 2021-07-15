@@ -26,6 +26,11 @@ nav {
     background-color: white;
 }
 
+.logo {
+    width: 70px;
+    float:right;
+}
+
 @media screen and (max-width: 500px) {
     
     .list {
