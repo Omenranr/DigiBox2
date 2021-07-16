@@ -53,7 +53,7 @@ export default function TemporaryDrawer() {
       </List>
       <Divider />
       <List>
-        {['Service client/prestataire', 'Service client', 'CGV', 'Retour sur votre expèrience'].map((text, index) => (
+        {['Service client/prestataire', 'Service client', 'CGV', 'Retour sur votre expérience'].map((text, index) => (
           <Link to={"/"+text} variant="body2">
           <ListItem button key={text}>
             <ListItemText primary={text} />

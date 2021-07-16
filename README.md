@@ -19,9 +19,13 @@ Project is created with :
  - Off-Chain storage : IPFS/Pinata,
  
  #### Launch 
-  No specific requirements for a better understanding we advice you to get Ganache or metamask in order to interact freely with our Dapp.
-  Clone repo => npm install => cd client => npm start 
+  No specific requirements for a better understanding we advise you to get Ganache or metamask in order to interact freely with our Dapp.
+  Clone repo => npm install => cd client => npm start
 
+  This project uses Pinata to store data on IPFS, in order to run it correctly create a Pinata account add this variables to your environment:
+  REACT_APP_PINATA_SECRET_API_KEY=
+  REACT_APP_PINATA_API_KEY=
+ 
  ##### Project status
 Still in development, project being created, We will deliver a full functional project in Q4 2021. Stay tunned !
 To-Do list :
