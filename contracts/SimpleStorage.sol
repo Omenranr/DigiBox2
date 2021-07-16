@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "/Users/kilianmongey/Desktop/HomePageDigiBox/DigiBox/node_modules/@uniswap/v3-periphery/contracts/interfaces/IPeripheryPayments.sol";
-///import "/Users/kilianmongey/Desktop/HomePageDigiBox/DigiBox/node_modules/@uniswap/v3-periphery/contracts/interfaces/ISwapRouter.sol";
-///import "/Users/kilianmongey/Desktop/HomePageDigiBox/DigiBox/node_modules/@uniswap/v3-periphery/contracts/interfaces/IQuoter.sol";
+import "../node_modules/@uniswap/v3-periphery/contracts/interfaces/IPeripheryPayments.sol";
+import "../node_modules/@uniswap/v3-periphery/contracts/interfaces/ISwapRouter.sol";
+import "../node_modules/@uniswap/v3-periphery/contracts/interfaces/IQuoter.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 
 contract SimpleStorage {
   uint storedData;
@@ -19,22 +20,16 @@ contract SimpleStorage {
   }
 }
 
-/// Voir si on peux importer directement le smart contract PeripheryPayments directement et faire appel "./Periphery"
+contract TokenERC1155  is ERC1155 {
 
- /* contract Test {
- function refundETH() external payable;
-    
-    function pay(
-        address token,
-        address payer,
-        address recipient,
-        uint256 value
-    ) internal;
- } */
+  constructor() ERC1155("https://gateway.pinata.cloud/ipfs/{id}") {
+  }
 
- ///interface IUniswapRouter is ISwapRouter {
- ///    function refundETH() external payable;
- ///}
+  function mintNft(uint256 id) public{
+    require(balanceOf(msg.sender, id) == 0, "This id is already in use");
+    _mint(msg.sender, id, 1, "0x000");
+  }
+}
 
 contract Vault is Ownable {
     
@@ -93,4 +88,22 @@ contract Vault is Ownable {
     receive() external payable{
         
     }
+
+    /// Voir si on peux importer directement le smart contract PeripheryPayments directement et faire appel "./Periphery"
+
+    /* contract Test {
+    function refundETH() external payable;
+        
+        function pay(
+            address token,
+            address payer,
+            address recipient,
+            uint256 value
+        ) internal;
+    } */
+
+    ///interface IUniswapRouter is ISwapRouter {
+    ///    function refundETH() external payable;
+    ///}
+
 }
