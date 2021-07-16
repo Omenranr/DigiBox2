@@ -17,6 +17,71 @@ const useStyles = makeStyles({
   },
 });
 
+const pinataSDK = require('@pinata/sdk');
+const pinata = pinataSDK(process.env.REACT_APP_PINATA_API_KEY, process.env.REACT_APP_PINATA_SECRET_API_KEY);
+
+async function updatePinataJSON(hashkey) {
+  const metadata = {
+    name: 'blabla',
+    keyvalues: {
+        newKey: 'blabla2',
+        existingKey: 'blabla3',
+        existingKeyToRemove: null
+    }
+  };
+  pinata.hashMetadata(hashkey, metadata).then((result) => {
+      console.log(result);
+  }).catch((err) => {
+      console.log(err);
+  });
+}
+
+async function newPinataJSON(customerData) {
+  const body = {
+    message: 'Pinatas are awesome'
+  };
+  const options = {
+      pinataMetadata: {
+          name: "thisisatestname",
+          keyvalues: {
+              customKey: 'customValue',
+              customKey2: 'customValue2'
+          }
+      },
+      pinataOptions: {
+          cidVersion: 0
+      }
+  };
+  pinata.pinJSONToIPFS(body, options).then((result) => {
+      console.log(result);
+  }).catch((err) => {
+      console.log(err);
+  });
+}
+
+async function authenticatePinata() {
+  pinata.testAuthentication().then((result) => {
+    console.log(result);
+  }).catch((err) => {
+    console.log(err);
+  });
+}
+
+function handleBuyButton() {
+  if (process.env.REACT_APP_PINATA_API_KEY === undefined) {
+    console.log('Pinata keys are not set in your environment !');
+  }
+  
+  // procéder au paiement avant la génération du NFT
+
+  authenticatePinata();
+  // updatePinataJSON('QmUHeDovuppZGU3yMccWpcCZ3GbcfiYGmCTMSUUn7XsqLY');
+  // newPinataJSON();
+
+  // Mint NFT to the customer with pinata hash ID
+  console.log('done');
+}
+
 export default function Equipe() {
   const classes = useStyles();
 
@@ -38,9 +103,7 @@ export default function Equipe() {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Achat
-        </Button>
+        <Button size="small" color="primary" onClick={handleBuyButton}>Acheter</Button>
         <Button size="small" color="primary">
           <a href="https://www.lagrandemaison.ch/">En savoir plus</a>
         </Button>

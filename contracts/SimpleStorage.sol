@@ -36,6 +36,13 @@ contract Vault is Ownable {
     uint256 public amountMinimum;
     address public token;
 
+     struct Payment {
+        uint256 price;
+        uint256 productId;
+    }
+
+    mapping(address => Payment[]) public payments;
+
   IUniswapRouter public constant uniswapRouter = IUniswapRouter(0xE592427A0AEce92De3Edee1F18E0157C05861564);
   IQuoter public constant quoter = IQuoter(0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6);
   address private constant multiDaiKovan = 0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa;
@@ -47,6 +54,7 @@ contract Vault is Ownable {
     event ChangedMinAmount(uint256 MinAmountToConvert);
     event ConvertedEthToUsdt(uint256 Amount);
     event ChangedAddressToken(address TokenAddress);
+    event productBought(address From, uint256 Amount, uint256 productId);
     
     ///@dev toManage if ethPrice fluctuates;
     function setMinAmount(uint256 _minAmount) external onlyOwner() {
@@ -76,6 +84,15 @@ contract Vault is Ownable {
     
     function getBalanceOfUSDT() public view returns(uint256) {
         return storedUsdt;
+    }
+
+    function buyProduct(uint256 productPrice, uint256 productId) public payable {
+        require(msg.value >= productPrice, "You didn't send the correct amount");
+
+         Payment memory _payment = Payment(productPrice, productId);
+         payments[msg.sender].push(_payment);
+
+         emit productBought(msg.sender, msg.value, productId); 
     }
 
      ///Tried this for test only not sure how this works on Kovan, need to test but not enough Keth to test ...
