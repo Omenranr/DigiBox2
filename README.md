@@ -24,7 +24,9 @@ Project is created with :
   Clone repo => npm install => cd client => npm start
 
   This project uses Pinata to store data on IPFS, in order to run it correctly create a Pinata account add this variables to your environment:
+
   REACT_APP_PINATA_SECRET_API_KEY=
+  
   REACT_APP_PINATA_API_KEY=
  
  ##### Project status
