@@ -7,7 +7,6 @@ export default function Equipe() {
         <div className="Team">
             <h1 className="titleTeam"> L'Equipe derrière le projet.</h1> <hr></hr>
               <Connection />
-             <img className="logo" alt="logo" src="./Images/Originale.png" />
         </div>
     )
 }

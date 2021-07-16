@@ -13,7 +13,9 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import Logo from '../../Images/TransparentLogo.png';
 import LeftMenu from './NavBar2'
+
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -175,6 +177,7 @@ export default function PrimarySearchAppBar() {
           <Typography className={classes.title} variant="h6" noWrap>
             DigiBox.io
           </Typography>
+          <img className="logo" src={Logo} alt="logo" style={{width: 50}} />
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
