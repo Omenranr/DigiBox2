@@ -1,4 +1,5 @@
   // SPDX-License-Identifier: MIT
+  ///@Notice this swap is not functional yet, working on it.
 pragma solidity ^0.8.0;
 
 import "../node_modules/@uniswap/v3-periphery/contracts/interfaces/IPeripheryPayments.sol";
@@ -25,13 +26,6 @@ contract Vault is Ownable {
     uint256 public amountMinimum;
     address public token;
 
-     struct Payment {
-        uint256 price;
-        uint256 productId;
-    }
-
-    mapping(address => Payment[]) public payments;
-
   IUniswapRouter public constant uniswapRouter = IUniswapRouter(0xE592427A0AEce92De3Edee1F18E0157C05861564);
   IQuoter public constant quoter = IQuoter(0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6);
   address private constant multiDaiKovan = 0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa;
@@ -43,7 +37,6 @@ contract Vault is Ownable {
     event ChangedMinAmount(uint256 MinAmountToConvert);
     event ConvertedEthToUsdt(uint256 Amount);
     event ChangedAddressToken(address TokenAddress);
-    event productBought(address From, uint256 Amount, uint256 productId);
     
     ///@dev toManage if ethPrice fluctuates;
     function setMinAmount(uint256 _minAmount) external onlyOwner() {
