@@ -7,3 +7,54 @@
 .titleTeam {
     color: midnightblue;
 }
+
+.background {
+    width: 500px;
+    height: 650px;
+    margin-left: 500px;
+}
+
+.wholeTeam {
+    position: relative;
+    display: flex;
+}
+
+.Teo {
+  position: absolute;
+  margin-top:120px;
+  margin-left:200px;
+  text-align: center;
+}
+
+.Alain {
+    position: absolute;
+    margin-top:  400px;
+    margin-left: 200px;
+    text-align: center;
+}
+
+.Nico {
+    position: absolute;
+    margin-top:120px;
+    margin-left: 1100px;
+    text-align: center;
+}
+
+.Kilian {
+    position: absolute;
+    margin-top:  400px;
+    margin-left: 1100px;
+    text-align: center;
+}
+
+.copyright {
+    height: 18px;
+    position:absolute;
+    color: aliceblue;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    bottom: -16px;
+    width: 100%;
+    padding-top: 2px;
+    background: linear-gradient(45deg, rgb(93, 91, 199), rgb(55, 55, 201));
+}
