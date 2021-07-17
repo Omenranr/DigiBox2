@@ -67,7 +67,7 @@ async function authenticatePinata() {
   });
 }
 
-function handleBuyButton() {
+ function handleBuyButton(){
   if (process.env.REACT_APP_PINATA_API_KEY === undefined) {
     console.log('Pinata keys are not set in your environment !');
   }
@@ -80,7 +80,7 @@ function handleBuyButton() {
 
   // Mint NFT to the customer with pinata hash ID
   console.log('done');
-}
+} 
 
 export default function Equipe() {
   const classes = useStyles();
@@ -103,7 +103,7 @@ export default function Equipe() {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" onClick={handleBuyButton}>Acheter</Button>
+      <Button size="small" color="primary" onClick={handleBuyButton}>Acheter</Button>
         <Button size="small" color="primary">
           <a href="https://www.lagrandemaison.ch/">En savoir plus</a>
         </Button>

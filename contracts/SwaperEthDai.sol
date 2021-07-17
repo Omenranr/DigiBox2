@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: MIT
+  // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
 import "../node_modules/@uniswap/v3-periphery/contracts/interfaces/IPeripheryPayments.sol";
@@ -7,17 +7,6 @@ import "../node_modules/@uniswap/v3-periphery/contracts/interfaces/IQuoter.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract SimpleStorage {
-  uint storedData;
-
-  function set(uint x) public {
-    storedData = x;
-  }
-
-  function get() public view returns (uint) {
-    return storedData;
-  }
-}
 
 /// Voir si on peux importer directement le smart contract PeripheryPayments directement et faire appel "./Periphery"
 
@@ -85,17 +74,8 @@ contract Vault is Ownable {
     function getBalanceOfUSDT() public view returns(uint256) {
         return storedUsdt;
     }
-
-    function buyProduct(uint256 productPrice, uint256 productId) public payable {
-        require(msg.value >= productPrice, "You didn't send the correct amount");
-
-         Payment memory _payment = Payment(productPrice, productId);
-         payments[msg.sender].push(_payment);
-
-         emit productBought(msg.sender, msg.value, productId); 
-    }
-
-     ///Tried this for test only not sure how this works on Kovan, need to test but not enough Keth to test ...
+  
+  ///Tried this for test only not sure how this works on Kovan, need to test but not enough Keth to test ...
     function convertExactEthToDai() external payable {
     require(msg.value > 0, "Must pass non 0 ETH amount");
 
@@ -176,7 +156,5 @@ contract Vault is Ownable {
   } 
 
     //@notice allow to receive eth
-    receive() external payable{
-        
-    }
-}
+    receive() external payable{}
+}    
