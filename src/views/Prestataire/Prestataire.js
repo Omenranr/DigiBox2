@@ -11,9 +11,36 @@ import Radio from "@material-ui/core/Radio";
 import NavBarDetail from "../../Components/NavBarDetail/NavBarDetail";
 import Container from '@material-ui/core/Container';
 import logo from "../../Images/TransparentLogo.png";
+import Button from '@material-ui/core/Button';
+import Axios from 'axios'
 
 export default function Prestataire() {
     
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [website, setWebsite] = useState("");
+
+    const [prestataireList, setPrestataireList] = useState([]);
+
+    const addPrestataire = () => {
+        Axios.post('http://localhost:3001/create', {
+            name: name,
+            email: email,
+            website: website
+        }).then(() => {
+            console.log('success');
+        })
+    }
+
+    // const getPrestataire = () => {
+    //     Axios.get('http://localhost:3001/', {
+    //         name: name,
+    //         email: email,
+    //         website: website
+    //     }).then(() => {
+    //         console.log('success');
+    //     })
+    // }
 
     return (
         <div className="Prestataire-Prerequis">
@@ -29,23 +56,52 @@ export default function Prestataire() {
              </Container>
 
              <Grid container alignItems="center" justify="center" direction="column">
-                <TextField
-                    id="nom-input"
-                    name="nom"
-                    label="Nom"
-                    type="text"
-                /> <hr></hr>
              
                 <Grid item>
                     <TextField
-                        id="age-input"
-                        name="age"
-                        label="Entreprise"
+                        id="name-input"
+                        name="name"
+                        label="Name"
                         type="text"
+                        onChange={(event) => {
+                            setName(event.target.value);
+                        }}
                     />
                 </Grid> <hr></hr>
 
-                            <Grid item>
+                <Grid item>
+                    <TextField
+                        id="email-input"
+                        name="email"
+                        label="Email"
+                        type="text"
+                        onChange={(event) => {
+                            setEmail(event.target.value);
+                        }}
+                    />
+                </Grid> <hr></hr>
+
+                <Grid item>
+                    <TextField
+                        id="website"
+                        name="website"
+                        label="Link your website"
+                        type="text"
+                        onChange={(event) => {
+                            setWebsite(event.target.value);
+                        }}
+                    />
+                </Grid> <hr></hr>
+
+                <Button onClick={addPrestataire} variant="contained">Inscription Prestataire</Button>
+
+                <tr></tr>
+
+                {/* <Button onClick={showPrestataire} variant="contained">Afficher Prestataire</Button> */}
+
+
+
+                {/* <Grid item>
                     <FormControl>
                         <FormLabel>Secteur</FormLabel>
                         <RadioGroup
@@ -77,25 +133,7 @@ export default function Prestataire() {
                         />
                         </RadioGroup>
                     </FormControl>
-                    </Grid> <br></br>
-
-                    <Grid item>
-                    <TextField
-                        id="email-input"
-                        name="email"
-                        label="Email"
-                        type="text"
-                    />
-                </Grid> <hr></hr>
-
-                <Grid item>
-                    <TextField
-                        id="website"
-                        name="website"
-                        label="Link your website"
-                        type="text"
-                    />
-                </Grid> <hr></hr>
+                    </Grid> <br></br> */}
 
              </Grid>
              
