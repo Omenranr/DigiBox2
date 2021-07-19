@@ -23,12 +23,15 @@ export default function Prestataire() {
     const [prestataireList, setPrestataireList] = useState([]);
 
     const addPrestataire = () => {
-        Axios.post('http://localhost:3001/create', {
+        Axios.post('http://localhost:3001/users/create', {
             name: name,
             email: email,
             website: website
-        }).then(() => {
-            console.log('success');
+        }).then(response => {
+            console.log(response, "success");
+        })
+        .catch(error => {
+            console.log(error)
         })
     }
 
