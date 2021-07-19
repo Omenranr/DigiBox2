@@ -1,6 +1,5 @@
 import React from 'react';
 import "./Equipe.css";
-import Connection from '../../Connection';
 import NavBarDetail from "../../Components/NavBarDetail/NavBarDetail";
 import Alain from '../../Images/PhotoEquipe/Alain.png';
 import Nico from '../../Images/PhotoEquipe/Nico.png';
@@ -13,8 +12,9 @@ export default function Equipe() {
         <>
         <div className="Team">
             <h1 className="titleTeam"> L'Equipe derrière le projet.</h1> <hr></hr>
-              <Connection />
+              
         </div>
+        
 
          <div className="wholeTeam">
          <img className="background" src={logo} alt="logo"/>

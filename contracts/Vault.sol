@@ -3,17 +3,19 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract Vault is Ownable {
+contract EscrowVault is Ownable {
 
+     address agent;
      uint256 balanceOfDai;
      address public daiToken;
 
-     constructor(address _daiToken) {
-         daiToken = _daiToken;
+     constructor() {
+         agent = msg.sender;
      }
 
      function sendToPresta(address _presta, uint256 _amountInDai) external onlyOwner() {
            ///require("QR Code has been scanned");
+           
            (bool sent, ) = _presta.call{value: _amountInDai}("");
            require(sent, "Failed to send Dai");
      }

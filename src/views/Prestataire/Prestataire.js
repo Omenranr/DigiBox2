@@ -18,7 +18,7 @@ export default function Prestataire() {
     return (
         <div className="Prestataire-Prerequis">
             <h1 className="title"> Devenir partenaire.</h1> <hr></hr>
-             <Connection /> <br></br>
+             <Connection className="meta" /> <br></br>
 
              <h3 className="description"> Rejoignez l'équipe Digibox en quelques clicks !</h3>
 

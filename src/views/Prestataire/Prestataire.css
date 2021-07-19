@@ -23,3 +23,8 @@
     box-sizing: border-box;
 }
 
+.meta {
+    text-align: center;
+    margin-top: 10px;
+}
+
