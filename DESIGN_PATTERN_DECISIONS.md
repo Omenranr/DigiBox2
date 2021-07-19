@@ -1,6 +1,6 @@
 # Design Pattern
 
-  In this doc we will explain the main desicions we took about our code.
+  In this doc we will explain the main decisions we took about our code.
   We decided to follow the Solidity pattern link to check all patterns. See link here: https://fravoll.github.io/solidity-patterns/
 
 ## Behavioral Pattern.
