@@ -12,7 +12,7 @@ DigiBox is a blockChain Dapp. We intend to simplify the interaction between cust
 Project is created with : 
  - Truffle frameWork,
  - Truffle unbox-react,
- - Deploying on Kovan TestNet,
+ - Deploying on Ropsten TestNet,
  - Material UI,
  - Ganache,
  - Bootstrap,
