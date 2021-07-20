@@ -11,16 +11,16 @@ import Axios from 'axios';
 
 function Creation() {
 
-    const [Name, setName] = useState("");
-    const [Offer, setOffer] = useState("");
+    const [Provider, setProvider] = useState("");
+    const [Title, setTitle] = useState("");
     const [Price, setPrice] = useState("");
     const [Description, setDescription] = useState("");
     const [Ether, setEther] = useState("");
 
     const addOffer = () => {
-        Axios.post('http://localhost:3001/users/create', {
-            Name: Name,
-            Offer: Offer,
+        Axios.post('http://localhost:3001/offers/create', {
+            Provider: Provider,
+            Title: Title,
             Price: Price,
             Description: Description
         }).then(response => {
@@ -56,24 +56,24 @@ function Creation() {
 
                         <Grid item>
                             <TextField
-                                id="name-input"
-                                name="name"
-                                label="Nom de la Box"
+                                id="provider-input"
+                                provider="provider"
+                                label="Nom du prestataire"
                                 type="text"
                                 onChange={(event) => {
-                                    setName(event.target.value);
+                                    setProvider(event.target.value);
                                 }}
                             />
                         </Grid> <hr></hr>
 
                             <Grid item>
                                 <TextField
-                                    id="offer-input"
-                                    name="offer"
-                                    label="Offre"
+                                    id="title-input"
+                                    name="title"
+                                    label="Titre"
                                     type="text"
                                     onChange={(event) => {
-                                        setOffer(event.target.value);
+                                        setTitle(event.target.value);
                                     }}
                                 />
                             </Grid> <hr></hr>

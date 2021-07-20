@@ -35,15 +35,15 @@ export default function Prestataire() {
         })
     }
 
-    // const getPrestataire = () => {
-    //     Axios.get('http://localhost:3001/', {
-    //         name: name,
-    //         email: email,
-    //         website: website
-    //     }).then(() => {
-    //         console.log('success');
-    //     })
-    // }
+    const getPrestataire = () => {
+        Axios.get('http://localhost:3001/users/', {})
+        .then(response => {
+            console.log(response, "success");
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
 
     return (
         <div className="Prestataire-Prerequis">
@@ -97,6 +97,7 @@ export default function Prestataire() {
                 </Grid> <hr></hr>
 
                 <Button onClick={addPrestataire} variant="contained">Inscription Prestataire</Button>
+                <Button onClick={getPrestataire} variant="contained">Show Prestataire</Button>
 
                 <tr></tr>
 
