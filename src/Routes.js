@@ -24,6 +24,9 @@ const Routes = () => {
       <Route path="/Homepage">
           <HomePage />
       </Route>
+      <Route path="/WhitePaper">
+          <WhitePaper />
+      </Route>
       <Route path="/Equipe">
           <Equipe />
       </Route>
