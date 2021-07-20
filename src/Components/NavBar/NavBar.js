@@ -7,7 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
-import Button from "@material-ui/core/Button";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
+import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
@@ -15,6 +16,8 @@ import Logo from '../../Images/TransparentLogo.png';
 import LeftMenu from './NavBar2'
 import { Container } from '@material-ui/core';
 import Metamask from "../Metamask/Meta";
+import { Link } from 'react-router-dom'
+import "./NavBar.css";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -135,23 +138,22 @@ export default function PrimarySearchAppBar() {
           >
             <LeftMenu />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
+          <Typography className={classes.title} id="inner" noWrap>
             DigiBox.io
           </Typography>
-          <img className="logo" src={Logo} alt="logo" style={{width: 50}} />
-            
-              <Container maxWidth="sm" >
-                <Button  variant="contained" >
-                    Créer une offre
+          <img className="logo" src={Logo} alt="logo"/>
+               <ButtonGroup className="grp-btn" variant="contained" color="primary" aria-label="contained primary button group">
+               <Button className="btn-left">
+                  <Link to={"/Creation de l'offre"}>Créer une offre</Link>
                 </Button>
-                  <Button onClick={() => {alert('display homePage')}} variant="contained" >
-                    HomePage
+                  <Button className="btn-center">
+                    <Link to={"/HomePage"}>HomePage</Link>
                   </Button>
-                    <Button onClick={() => {alert('display WhitePaper')}} variant="contained" >
-                      WhitePaper
-                    </Button>
-              </Container>
-
+                    <Button className="btn-right">
+                     <Link to={"/WhitePaper"}>WhitePaper</Link>
+                    </Button> 
+               </ButtonGroup>
+                
               <Metamask /> 
             
           <div className={classes.grow} />

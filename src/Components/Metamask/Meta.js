@@ -2,21 +2,20 @@ import { useWallet, UseWalletProvider } from 'use-wallet'
 import React from 'react'
 import {Button} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import "./Meta.css";
 
 function Connection() {
     const wallet = useWallet()
-
     return (
             <div className="btn-meta">
               {wallet.status === 'connected' ? (
                 <div className="display-meta">
-                  <div >Account: {wallet.account}</div>
-                  <div>Balance: {wallet.balance} wei</div>
-                  <Button color="primary" onClick={() => wallet.reset()}>Disconnect</Button>
+                  <div className="accounts">Account: {wallet.account}</div>
+                  <div className="balance">Balance: {wallet.balance} wei</div>
                 </div>
               ) : (
                 <div>
-                  <Button onClick={() => wallet.connect()}>MetaMask</Button>
+                  <Button onClick={() => wallet.connect()}>Connect to MetaMask</Button>
                 </div>
               )}
             </div>

@@ -12,7 +12,7 @@ import {Link} from "react-router-dom"
 
 const useStyles = makeStyles({
   list: {
-    width: 250,
+    width: 230,
   },
   fullList: {
     width: 'auto',
@@ -76,4 +76,5 @@ export default function TemporaryDrawer() {
       ))}
     </div>
   );
+ 
 }
