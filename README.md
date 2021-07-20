@@ -18,6 +18,7 @@ Project is created with :
  - Bootstrap,
  - Solidity ^0.8.0,
  - Off-Chain storage : IPFS/Pinata,
+ - CoinGecko API
  
  #### Launch 
   No specific requirements for a better understanding we advise you to get Ganache or metamask in order to interact freely with our Dapp.

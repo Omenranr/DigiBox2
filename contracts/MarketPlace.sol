@@ -7,6 +7,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 contract MarketPlace is Ownable, ERC20 {
      
     uint256 productPrice;
+    address recipient;
     uint256 amountOfDai;
     uint256 minAmountDai;
     address swaperAddress;
@@ -31,6 +32,7 @@ contract MarketPlace is Ownable, ERC20 {
 
     function buyProduct(uint256 productId) public payable {
         require(msg.value >= productPrice, "You didn't send the correct amount");
+        require(recipient != address(0), "ERC1155: transfer to 0 address");
 
          Payment memory _payment = Payment(productPrice, productId);
          payments[msg.sender].push(_payment);
@@ -42,6 +44,8 @@ contract MarketPlace is Ownable, ERC20 {
       return address(this).balance;
     }
 
+
+  /*
     ///@notice we need to elaborate converter smart contract to deploy following
      function sendToSwaper() external onlyOwner() {
         require(address(this).balance >= 1 ether, "Not gas efficient to send now");
@@ -57,6 +61,6 @@ contract MarketPlace is Ownable, ERC20 {
       require(amountOfDai >= minAmountDai, "Not gas efficient to send now");
         (bool sent, ) = VaultAddress.call{value: amountOfDai}("");
         require(sent, "Failed to send Dai");
-    }
+    } */
 
 }

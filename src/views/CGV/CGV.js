@@ -1,15 +1,16 @@
 import React from 'react';
 import "./CGV.css";
 import Container from '@material-ui/core/Container';
-import NavBar from '../../Components/NavBarDetail/NavBarDetail';
+import NavBar from "../../Components/NavBar/NavBar";
+import NavBarDetail from "../../Components/NavBarDetail/NavBarDetail";
 
 export default function CGV() {
     return (
         <div className="cgv">
-            <h1 className="title"> Conditions générales de vente </h1> <hr></hr>  <br></br> <br></br> 
+          <NavBar />
+            <h1 className="title"> Conditions générales de vente </h1> <hr></hr> <br></br>
 
              <Container className="text-CGV" maxWidth="lg">
-                 <h2 className="h2"> Veuillez lire attentivement les conditions générales de vente.</h2> <hr></hr>
                     <p> 
                     Les conditions générales de vente (CGV) doivent être communiquées par tout professionnel à un acheteur de produits qui en fait la demande pour une activité professionnelle. Un manquement à une telle obligation est sanctionné. Si aucune demande n'est faite, il n'y a pas d'obligation de communication. Les CGV figurent dans les documents contractuels (bons de commande, devis, contrats notamment) ou publicitaires (écriteaux, affiches apposées sur les lieux de vente par exemple).
                     </p> <br></br>
@@ -32,7 +33,7 @@ export default function CGV() {
                           <p> Nous ésperons avoir répondu à toutes vos questions, pour de plus amples explication n'hésitez pas à vous informez sur notre WhitePaper.</p>
              </Container>
 
-             <NavBar />
+             <NavBarDetail />
         </div>
     )
 }

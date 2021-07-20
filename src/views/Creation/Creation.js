@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import "./Creation.css";
-import Connection from '../../Connection';
 import Grid from '@material-ui/core/Grid';
 import TextField from "@material-ui/core/TextField";
+import NavBar from "../../Components/NavBar/NavBar";
 import NavBarDetail from "../../Components/NavBarDetail/NavBarDetail";
 import Container from '@material-ui/core/Container';
 import logo from "../../Images/TransparentLogo.png";
@@ -35,14 +35,13 @@ function Creation() {
         Axios.get("https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd")
         .then(response => {
             setEther(response.data.ethereum.usd);
-            console.log(response.data) 
         }).catch(error => console.log(error))
     }, [Ether]); 
 
     return (
         <div className="creation-offer">
+          <NavBar />  
            <h1 className="title-offer">Création d'une offre</h1> <hr></hr>
-             <Connection className="btn-meta" />
 
                 <Container className="Price-Eth" maxWidth="xs">
                             Ethereum current price. <br></br>
