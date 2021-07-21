@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import "./Creation.css";
 import Grid from '@material-ui/core/Grid';
 import TextField from "@material-ui/core/TextField";
@@ -16,19 +16,48 @@ function Creation() {
     const [Price, setPrice] = useState("");
     const [Description, setDescription] = useState("");
     const [Ether, setEther] = useState("");
+    const [selectedFile, setSelectedFile] = useState("");
+    const fileInput = useRef();
+    
+    const config = {
+        headers: {
+            'accept': 'application/json',
+            'Accept-Language': 'en-US,en;q=0.8',
+            'Content-Type': 'multipart/form-data'
+        }
+    }
 
     const addOffer = () => {
-        Axios.post('http://localhost:3001/offers/create', {
-            Provider: Provider,
-            Title: Title,
-            Price: Price,
-            Description: Description
-        }).then(response => {
+        let formData = new FormData();
+        formData.append("file", selectedFile);
+        formData.append("Provider", Provider);
+        formData.append("Title", Title);
+        formData.append("Price", Price);
+        formData.append("Description", Description);
+
+        // Display the key/value pairs
+        for (var pair of formData.entries()) {
+            console.log(pair[0]+ ', ' + pair[1]); 
+        }
+
+        Axios.post('http://localhost:3001/offers/create', formData, config)
+        .then(response => {
             console.log(response, "success");
         })
         .catch(error => {
             console.log(error)
         })
+
+        // fetch('http://localhost:3001/offers/create', {
+        //     method: 'POST',
+        //     body: formData,
+        //     headers: {
+        //         'Accept': 'multipart/form-data',
+        //     },
+        //     credentials: 'include'
+        // }).then(res => {
+        //     console.log('yo');
+        // })
     }
 
    useEffect(() => {
@@ -38,10 +67,18 @@ function Creation() {
         }).catch(error => console.log(error))
     }, [Ether]); 
 
+    const handleFileInput = (e) => {
+        const file = e.target.files[0];
+        if (file.size / 1000 > 1024)
+            alert("File size cannot exceed more than 1MB" );
+        else
+            setSelectedFile(file);
+    }
+
     return (
         <div className="creation-offer">
-          <NavBar />  
-           <h1 className="title-offer">Création d'une offre</h1> <hr></hr>
+            <NavBar />  
+            <h1 className="title-offer">Création d'une offre</h1> <hr></hr>
 
                 <Container className="Price-Eth" maxWidth="xs">
                             Ethereum current price. <br></br>
@@ -49,107 +86,66 @@ function Creation() {
                             Price of CoinGecko.
                 </Container>
 
-                 <img className="logo-crea" src={logo} alt="logo"/>
+                <img className="logo-crea" src={logo} alt="logo"/>
                 
-                  <Grid className="grid" container alignItems="center" justify="center" direction="column" >
+                <Grid className="grid" container alignItems="center" justify="center" direction="column" >
 
-                        <Grid item>
-                            <TextField
-                                id="provider-input"
-                                provider="provider"
-                                label="Nom du prestataire"
-                                type="text"
-                                onChange={(event) => {
-                                    setProvider(event.target.value);
-                                }}
-                            />
-                        </Grid> <hr></hr>
+                    <div className="file-uploader">
+                        <input ref={fileInput} type="file" onChange={handleFileInput} />
+                        <button onClick={e => fileInput.current && fileInput.current.click()} className="btn btn-primary">Upload File</button>
+                    </div>
 
-                            <Grid item>
-                                <TextField
-                                    id="title-input"
-                                    name="title"
-                                    label="Titre"
-                                    type="text"
-                                    onChange={(event) => {
-                                        setTitle(event.target.value);
-                                    }}
-                                />
-                            </Grid> <hr></hr>
+                    <Grid item>
+                        <TextField
+                            id="provider-input"
+                            provider="provider"
+                            label="Nom du prestataire"
+                            type="text"
+                            onChange={(event) => {
+                                setProvider(event.target.value);
+                            }}
+                        />
+                    </Grid> <hr></hr>
 
-                                <Grid item>
-                                    <TextField
-                                        id="price"
-                                        name="price"
-                                        label="Prix en Ether"
-                                        type="text"
-                                        onChange={(event) => {
-                                            setPrice(event.target.value);
-                                        }}
-                                    />
-                                </Grid> <hr></hr>
+                    <Grid item>
+                        <TextField
+                            id="title-input"
+                            name="title"
+                            label="Titre"
+                            type="text"
+                            onChange={(event) => {
+                                setTitle(event.target.value);
+                            }}
+                        />
+                    </Grid> <hr></hr>
 
-                                    <Grid item>
-                                        <TextField
-                                            id="description"
-                                            name="description"
-                                            label="Description de l'offre"
-                                            type="text"
-                                            onChange={(event) => {
-                                                setDescription(event.target.value);
-                                            }}
-                                        />
-                                    </Grid> <hr></hr>
+                    <Grid item>
+                        <TextField
+                            id="price"
+                            name="price"
+                            label="Prix en Ether"
+                            type="text"
+                            onChange={(event) => {
+                                setPrice(event.target.value);
+                            }}
+                        />
+                    </Grid> <hr></hr>
 
-                                        <Button onClick={addOffer} variant="contained">Soumettre offre NFT</Button>
-
-                                        <tr></tr>
-
-             {/* <Button onClick={showPrestataire} variant="contained">Afficher Prestataire</Button> */}
-
-
-
-             {/* <Grid item>
-                 <FormControl>
-                     <FormLabel>Secteur</FormLabel>
-                     <RadioGroup
-                     name="Hotellerie"
-                     >
-                     <FormControlLabel
-                         key="Hotellerie"
-                         value="0"
-                         control={<Radio size="small" />}
-                         label="Hotellerie"
-                     />
-                     <FormControlLabel
-                         key="Aventure"
-                         value="1"
-                         control={<Radio size="small" />}
-                         label="Aventure"
-                     />
-                     <FormControlLabel
-                         key="Gastronomie"
-                         value="2"
-                         control={<Radio size="small" />}
-                         label="Gastronomie"
-                     />
-                     <FormControlLabel
-                         key="Autres"
-                         value="3"
-                         control={<Radio size="small" />}
-                         label="Autres"
-                     />
-                     </RadioGroup>
-                 </FormControl>
-                 </Grid> <br></br> */}
-
-          </Grid>
-          
-         <NavBarDetail /> 
-               
+                    <Grid item>
+                        <TextField
+                            id="description"
+                            name="description"
+                            label="Description de l'offre"
+                            type="text"
+                            onChange={(event) => {
+                                setDescription(event.target.value);
+                            }}
+                        />
+                    </Grid> <hr></hr>
+                    <Button onClick={addOffer} variant="contained">Soumettre offre NFT</Button>
+                </Grid>
+        <NavBarDetail /> 
         </div>
     )
-
 }
-
 export default Creation;

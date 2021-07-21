@@ -90,8 +90,8 @@ export default function Equipe(props) {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image=""
-          title=""
+          image={'http://localhost:3001/uploads/'+props.offer.filename}
+          title={props.offer.filename}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
