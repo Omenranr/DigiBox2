@@ -14,7 +14,7 @@ export default function Layout({ children }) {
       left="1000px"
       alignItems="center"
       justifyContent="center"
-      h="10vh"
+      h="8vh"
       bg="gray.800"
     >
       {children}

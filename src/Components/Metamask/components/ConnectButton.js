@@ -72,7 +72,7 @@ export default function ConnectButton({ handleOpenModal }) {
         borderColor: "blue.700",
       }}
     >
-      Connect to a wallet
+      Connect to wallet
     </Button>
   );
 }
