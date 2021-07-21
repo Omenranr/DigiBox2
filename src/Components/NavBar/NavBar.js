@@ -19,6 +19,7 @@ import Metamask from "../Metamask/Meta";
 import { Link } from 'react-router-dom'
 import "./NavBar.css";
 
+
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
