@@ -84,6 +84,7 @@ export default function Equipe(props) {
     // procéder au paiement avant la génération du NFT
     // makeDeposit();
 
+    
     // authenticatePinata();
     // updatePinataJSON('QmUHeDovuppZGU3yMccWpcCZ3GbcfiYGmCTMSUUn7XsqLY');
     // newPinataJSON();
