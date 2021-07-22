@@ -11,7 +11,7 @@ function NFT() {
     }, []);
 
     const getAllOffers = () => {
-        axios.get('http://localhost:3001/offers/')
+        axios.get(process.env.REACT_APP_API_URL + '/offers')
         .then((res) => {
             const allOffers = res.data;
             setData(allOffers);

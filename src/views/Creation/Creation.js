@@ -40,24 +40,13 @@ function Creation() {
             console.log(pair[0]+ ', ' + pair[1]); 
         }
 
-        Axios.post('http://localhost:3001/offers/create', formData, config)
+        Axios.post(REACT_APP_API_URL + '/offers/create', formData, config)
         .then(response => {
             console.log(response, "success");
         })
         .catch(error => {
             console.log(error)
         })
-
-        // fetch('http://localhost:3001/offers/create', {
-        //     method: 'POST',
-        //     body: formData,
-        //     headers: {
-        //         'Accept': 'multipart/form-data',
-        //     },
-        //     credentials: 'include'
-        // }).then(res => {
-        //     console.log('yo');
-        // })
     }
 
    useEffect(() => {

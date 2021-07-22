@@ -145,7 +145,7 @@ export default function Equipe(props) {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={'http://localhost:3001/uploads/'+props.offer.filename}
+          image={REACT_APP_API_URL + '/uploads/'+props.offer.filename}
           title={props.offer.filename}
         />
         <CardContent>
