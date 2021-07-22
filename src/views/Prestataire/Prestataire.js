@@ -23,7 +23,7 @@ export default function Prestataire() {
     const [prestataireList, setPrestataireList] = useState([]);
 
     const addPrestataire = () => {
-        Axios.post(REACT_APP_API_URL + '/users/create', {
+        Axios.post(process.env.REACT_APP_API_URL + '/users/create', {
             name: name,
             email: email,
             website: website
@@ -36,7 +36,7 @@ export default function Prestataire() {
     }
 
     const getPrestataire = () => {
-        Axios.get(REACT_APP_API_URL + '/users/', {})
+        Axios.get(process.env.REACT_APP_API_URL + '/users/', {})
         .then(response => {
             console.log(response, "success");
         })

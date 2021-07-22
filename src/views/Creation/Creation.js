@@ -40,7 +40,7 @@ function Creation() {
             console.log(pair[0]+ ', ' + pair[1]); 
         }
 
-        Axios.post(REACT_APP_API_URL + '/offers/create', formData, config)
+        Axios.post(process.env.REACT_APP_API_URL + '/offers/create', formData, config)
         .then(response => {
             console.log(response, "success");
         })
