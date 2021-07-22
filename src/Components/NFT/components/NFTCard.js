@@ -59,12 +59,6 @@ export default function Equipe(props) {
       deployedNetwork && deployedNetwork.address,
     );
 
-    // const contractABI = require("../../../contracts/MarketPlace.json")
-    // const contract = new web3.eth.Contract(
-    //   contractABI,
-    //   '0xCd998a6949875C756DF54BDdE0A80Ac41F3B02d3'
-    // );
-
     setContract(contract)
     console.log('NFT.js -> web3 loaded')
   }
@@ -73,7 +67,7 @@ export default function Equipe(props) {
     console.log(account);
     var etherPrice = 10;
 
-    var gasValue = web3.utils.toHex(web3.utils.toWei('10', 'gwei'));
+    var gasValue = web3.utils.toHex(web3.utils.toWei('21000', 'wei'));
     var etherAmount = web3.utils.toBN(etherPrice);
     var weiValue = web3.utils.toWei(etherAmount,'ether');
     console.log(contract);
@@ -82,34 +76,12 @@ export default function Equipe(props) {
     await contract.methods.buyProduct(1).send({from: account, gas: gasValue, value: weiValue}, function(err, res){ })
   }
 
-  // const makeDeposit = async(event) => {
-  //   // event.preventDefault();
-  //   // const { accounts, contract } = this.state;
-
-  //   if (accounts == undefined) {
-  //     console.log('still loading');
-  //     return;
-  //   } else {
-  //     console.log(accounts[0]);
-  //     console.log(web3);
-  //   }
-  //   var etherPrice = 10;
-
-  //   var gasValue = web3.utils.toHex(web3.utils.toWei('10', 'gwei'));
-  //   var etherAmount = web3.toBigNumber(etherPrice);
-  //   var weiValue = web3.toWei(etherAmount,'ether');
-  //   console.log(accounts[0], gasValue, weiValue);
-
-  //   await contract.methods.buyProduct().send({from: accounts[0], gas: gasValue, value: weiValue}, function(err, res){ })
-  // }
-
   function handleBuyButton(etherPrice){
     if (process.env.REACT_APP_PINATA_API_KEY === undefined) {
       console.log('Pinata keys are not set in your environment !');
     }
 
     // procéder au paiement avant la génération du NFT
-    // makeDeposit(etherPrice);
     // makeDeposit();
 
     // authenticatePinata();
