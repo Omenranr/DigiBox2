@@ -1,3 +1,11 @@
 .titleProfil {
     text-align: center;
 }
+
+.btn-with {
+    width: auto;
+    text-align: center;
+    margin-left: 500px;
+    color: white;
+    background-color: midnightblue;
+}
