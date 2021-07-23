@@ -5,5 +5,7 @@ DigiBox Dapp is also deployed on Heroku
 
 ## Adresses Ropsten.
 
+- Digibox-client: https://digibox-client.herokuapp.com/
+- Digibox-server: https://digibox-server.herokuapp.com/
 - Vault : 
 - ERC-1155 :
