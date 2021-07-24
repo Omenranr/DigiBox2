@@ -21,8 +21,8 @@ export default function Equipe(props) {
     },
   });
   const classes = useStyles();
-  const pinataSDK = require('@pinata/sdk');
-  const pinata = pinataSDK(process.env.REACT_APP_PINATA_API_KEY, process.env.REACT_APP_PINATA_SECRET_API_KEY);
+  // const pinataSDK = require('@pinata/sdk');
+  // const pinata = pinataSDK(process.env.REACT_APP_PINATA_API_KEY, process.env.REACT_APP_PINATA_SECRET_API_KEY);
   
   const [account, setAccount] = useState(null)
   let [web3, setWeb3] = useState(null)
@@ -33,17 +33,17 @@ export default function Equipe(props) {
   }, [])
   
   // invoke to connect to wallet account
-  async function activate() {
-    if (window.ethereum) {
-      try {
-        // await window.ethereum.enable();
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
-        checkAccount()
-      } catch (err) {
-        console.log('user did not add account...', err)
-      }
-    }
-  }
+  // async function activate() {
+  //   if (window.ethereum) {
+  //     try {
+  //       // await window.ethereum.enable();
+  //       await window.ethereum.request({ method: 'eth_requestAccounts' });
+  //       checkAccount()
+  //     } catch (err) {
+  //       console.log('user did not add account...', err)
+  //     }
+  //   }
+  // }
   
   // invoke to check if account is already connected
   async function checkAccount() {
@@ -60,7 +60,6 @@ export default function Equipe(props) {
     );
 
     setContract(contract)
-    console.log('NFT.js -> web3 loaded')
   }
 
   async function makeDeposit() {
@@ -76,69 +75,69 @@ export default function Equipe(props) {
     await contract.methods.buyProduct(1).send({from: account, gas: gasValue, value: weiValue}, function(err, res){ })
   }
 
-  function handleBuyButton(etherPrice){
-    if (process.env.REACT_APP_PINATA_API_KEY === undefined) {
-      console.log('Pinata keys are not set in your environment !');
-    }
+  // function handleBuyButton(etherPrice){
+  //   if (process.env.REACT_APP_PINATA_API_KEY === undefined) {
+  //     console.log('Pinata keys are not set in your environment !');
+  //   }
 
-    // procéder au paiement avant la génération du NFT
-    // makeDeposit();
+  //   // procéder au paiement avant la génération du NFT
+  //   // makeDeposit();
 
     
-    // authenticatePinata();
-    // updatePinataJSON('QmUHeDovuppZGU3yMccWpcCZ3GbcfiYGmCTMSUUn7XsqLY');
-    // newPinataJSON();
+  //   // authenticatePinata();
+  //   // updatePinataJSON('QmUHeDovuppZGU3yMccWpcCZ3GbcfiYGmCTMSUUn7XsqLY');
+  //   // newPinataJSON();
 
-    // Mint NFT to the customer with pinata hash ID
-    console.log('done');
-  }
+  //   // Mint NFT to the customer with pinata hash ID
+  //   console.log('done');
+  // }
 
-  async function updatePinataJSON(hashkey) {
-    const metadata = {
-      name: 'blabla',
-      keyvalues: {
-          newKey: 'blabla2',
-          existingKey: 'blabla3',
-          existingKeyToRemove: null
-      }
-    };
-    pinata.hashMetadata(hashkey, metadata).then((result) => {
-        console.log(result);
-    }).catch((err) => {
-        console.log(err);
-    });
-  }
+  // async function updatePinataJSON(hashkey) {
+  //   const metadata = {
+  //     name: 'blabla',
+  //     keyvalues: {
+  //         newKey: 'blabla2',
+  //         existingKey: 'blabla3',
+  //         existingKeyToRemove: null
+  //     }
+  //   };
+  //   pinata.hashMetadata(hashkey, metadata).then((result) => {
+  //       console.log(result);
+  //   }).catch((err) => {
+  //       console.log(err);
+  //   });
+  // }
 
-  async function newPinataJSON(customerData) {
-    const body = {
-      message: 'Pinatas are awesome'
-    };
-    const options = {
-        pinataMetadata: {
-            name: "thisisatestname",
-            keyvalues: {
-                customKey: 'customValue',
-                customKey2: 'customValue2'
-            }
-        },
-        pinataOptions: {
-            cidVersion: 0
-        }
-    };
-    pinata.pinJSONToIPFS(body, options).then((result) => {
-        console.log(result);
-    }).catch((err) => {
-        console.log(err);
-    });
-  }
+  // async function newPinataJSON(customerData) {
+  //   const body = {
+  //     message: 'Pinatas are awesome'
+  //   };
+  //   const options = {
+  //       pinataMetadata: {
+  //           name: "thisisatestname",
+  //           keyvalues: {
+  //               customKey: 'customValue',
+  //               customKey2: 'customValue2'
+  //           }
+  //       },
+  //       pinataOptions: {
+  //           cidVersion: 0
+  //       }
+  //   };
+  //   pinata.pinJSONToIPFS(body, options).then((result) => {
+  //       console.log(result);
+  //   }).catch((err) => {
+  //       console.log(err);
+  //   });
+  // }
 
-  async function authenticatePinata() {
-    pinata.testAuthentication().then((result) => {
-      console.log(result);
-    }).catch((err) => {
-      console.log(err);
-    });
-  }
+  // async function authenticatePinata() {
+  //   pinata.testAuthentication().then((result) => {
+  //     console.log(result);
+  //   }).catch((err) => {
+  //     console.log(err);
+  //   });
+  // }
 
   return (
     <Card className={classes.root}>
@@ -166,7 +165,7 @@ export default function Equipe(props) {
       <CardActions>
         <Button size="small" color="primary" onClick={() => { makeDeposit() }}>Acheter</Button>
         <Button size="small" color="primary">
-          <a href="#">Lien</a>
+          {/* <a href="#">Lien</a> */}
         </Button>
       </CardActions>
     </Card>
