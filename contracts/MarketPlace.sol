@@ -39,7 +39,7 @@ contract MarketPlace is Ownable {
          totalBalance = totalBalance.add(msg.value);
     }
 
-   function buyProduct(uint256 productId) public payable {
+    function buyProduct(uint256 productId) public payable {
       /*  require(msg.value >= productPrice, "You didn't send the correct amount");
         require(recipient != address(0), "ERC1155: transfer to 0 address");
 
@@ -49,7 +49,7 @@ contract MarketPlace is Ownable {
          //productPrice = productPrice.add(msg.value);
 
          emit productBought(msg.sender, msg.value, productId); */
-    } 
+    }
 
     function allowPresta(address _address) external onlyOwner() {
         prestataire[_address].isAllowedToWithdraw = true;

@@ -164,7 +164,7 @@ export default function Equipe(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-      <Button size="small" color="primary" onClick={() => { makeDeposit() }}>Acheter</Button>
+        <Button size="small" color="primary" onClick={() => { makeDeposit() }}>Acheter</Button>
         <Button size="small" color="primary">
           <a href="#">Lien</a>
         </Button>
