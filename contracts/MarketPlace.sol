@@ -170,8 +170,8 @@ contract MarketPlace is Ownable {
 
   
 
-   function buyProduct(uint256 productId) public payable {
-      /*  require(msg.value >= productPrice, "You didn't send the correct amount");
+    function buyProduct(uint256 productId) public payable {
+        require(msg.value >= productPrice, "You didn't send the correct amount");
         require(recipient != address(0), "ERC1155: transfer to 0 address");
 
          Payment memory _payment = Payment(productPrice, productId);
@@ -180,7 +180,7 @@ contract MarketPlace is Ownable {
          //productPrice = productPrice.add(msg.value);
 
          emit productBought(msg.sender, msg.value, productId); 
-    } 
+    }
 
     function createOffer() external {
          //require(prestataire[msg.sender].isPresta == true);
@@ -199,7 +199,7 @@ contract MarketPlace is Ownable {
       //require(prestataire[msg.sender].isAllowedToWithdraw == true);
 
       //prestataire[msg.sender].amountToWithdraw = 0;
-        /*
+        
       (bool success, ) = msg.sender.call{value: balanceOf[msg.sender]}("");
       require(success, "Failed to send to Presta");
       
