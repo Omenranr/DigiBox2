@@ -12,13 +12,15 @@ DigiBox is a blockChain Dapp. We intend to simplify the interaction between cust
 Project is created with : 
  - Truffle frameWork,
  - Truffle unbox-react,
- - Deploying on Ropsten TestNet,
+ - Deploying on Ropsten or Kovan TestNet,
  - Material UI,
  - Ganache,
  - Bootstrap,
  - Solidity ^0.8.0,
  - Off-Chain storage : IPFS/Pinata,
- - CoinGecko API
+ - CoinGecko API,
+ - UseDApp,
+ - Chakra-UI.
  
  #### Launch 
   No specific requirements for a better understanding we advise you to get Ganache or metamask in order to interact freely with our Dapp.

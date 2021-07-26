@@ -18,8 +18,6 @@
  ## Measures we took against possible vulnerabilities.
 
 
-
-
  ## Unecessary measures for this project.
 
 

@@ -10,7 +10,8 @@ import {
     SC,
     CGV,
     Commentaires,
-    Creation
+    Creation,
+    Profil
 } from './views'
 
 const Routes = () => {
@@ -53,6 +54,9 @@ const Routes = () => {
       </Route>
       <Route path="/Creation de l'offre">
           <Creation />
+      </Route>
+      <Route path="/Profil">
+         <Profil />
       </Route>
     </Switch>
   );

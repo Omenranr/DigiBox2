@@ -9,4 +9,5 @@ export {default as SC} from './SC'
 export {default as Commentaires} from './Commentaires'
 export {default as AchatNFT} from './AchatNFT'
 export {default as Creation} from './Creation' 
+export {default as Profil} from './Profil'
 
