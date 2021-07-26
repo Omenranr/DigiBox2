@@ -2,7 +2,6 @@ import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import {IconButton} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -24,7 +23,7 @@ export default function TemporaryDrawer() {
   const [state, setState] = React.useState({
     left: false,
   });
-  const preventDefault = (event) => event.preventDefault();
+  // const preventDefault = (event) => event.preventDefault();
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
@@ -44,7 +43,7 @@ export default function TemporaryDrawer() {
     >
       <List>
         {['WhitePaper', 'Equipe', 'RoadMap', 'Devenir prestataire', "Creation de l'offre"].map((text, index) => (
-          <Link to={"/"+text} variant="body2">
+          <Link to={"/"+text} key={text} variant="body2">
           <ListItem button key={text}>
             <ListItemText primary={text} />
           </ListItem>
@@ -54,7 +53,7 @@ export default function TemporaryDrawer() {
       <Divider />
       <List>
         {['Service client/prestataire', 'Service client', 'CGV', 'Retour sur votre experience'].map((text, index) => (
-          <Link to={"/"+text} variant="body2">
+          <Link to={"/"+text} key={text} variant="body2">
           <ListItem button key={text}>
             <ListItemText primary={text} />
           </ListItem>
@@ -68,7 +67,7 @@ export default function TemporaryDrawer() {
     <div>
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
-          <IconButton onClick={toggleDrawer(anchor, true)}><MenuIcon /></IconButton>
+          <div onClick={toggleDrawer(anchor, true)}><MenuIcon /></div>
           <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
             {list(anchor)}
           </Drawer>

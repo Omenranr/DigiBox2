@@ -38,3 +38,26 @@ contract TokenERC1155  is ERC1155 {
     _mint(msg.sender, id, 1, "0x000");
   }
 } */
+=======
+import "@openzeppelin/contracts/utils/Counters.sol";
+
+contract TokenERC721 is ERC721URIStorage {
+
+  using Counters for Counters.Counter;
+  Counters.Counter private _tokenIds;
+  mapping(string => uint8) hashes;
+
+  constructor() ERC721("TokenERC721", "TKN") {}
+
+  function awardItem(address recipient, string memory hash, string memory metadata) public returns (uint256)
+  {
+    require(hashes[hash] != 1);
+    hashes[hash] = 1;
+    _tokenIds.increment();
+    uint256 newItemId = _tokenIds.current();
+    _mint(recipient, newItemId);
+    _setTokenURI(newItemId, metadata);
+    return newItemId;
+  }
+}
+>>>>>>> 8633015b83db107af7eae76ec335c6fac9c257cf

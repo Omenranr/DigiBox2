@@ -2,11 +2,6 @@ import React, { useState } from 'react';
 import "./Prestataire.css";
 import Grid from '@material-ui/core/Grid';
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import Radio from "@material-ui/core/Radio";
 import NavBar from "../../Components/NavBar/NavBar";
 import NavBarDetail from "../../Components/NavBarDetail/NavBarDetail";
 import Container from '@material-ui/core/Container';
@@ -19,8 +14,6 @@ export default function Prestataire() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [website, setWebsite] = useState("");
-
-    const [prestataireList, setPrestataireList] = useState([]);
 
     const addPrestataire = () => {
         Axios.post(process.env.REACT_APP_API_URL + '/users/create', {
@@ -98,44 +91,6 @@ export default function Prestataire() {
 
                 <Button onClick={addPrestataire} variant="contained">Inscription Prestataire</Button>
                 <Button onClick={getPrestataire} variant="contained">Show Prestataire</Button>
-
-                <tr></tr>
-
-                {/* <Button onClick={showPrestataire} variant="contained">Afficher Prestataire</Button> */}
-
-                {/* <Grid item>
-                    <FormControl>
-                        <FormLabel>Secteur</FormLabel>
-                        <RadioGroup
-                        name="Hotellerie"
-                        >
-                        <FormControlLabel
-                            key="Hotellerie"
-                            value="0"
-                            control={<Radio size="small" />}
-                            label="Hotellerie"
-                        />
-                        <FormControlLabel
-                            key="Aventure"
-                            value="1"
-                            control={<Radio size="small" />}
-                            label="Aventure"
-                        />
-                        <FormControlLabel
-                            key="Gastronomie"
-                            value="2"
-                            control={<Radio size="small" />}
-                            label="Gastronomie"
-                        />
-                        <FormControlLabel
-                            key="Autres"
-                            value="3"
-                            control={<Radio size="small" />}
-                            label="Autres"
-                        />
-                        </RadioGroup>
-                    </FormControl>
-                    </Grid> <br></br> */}
 
              </Grid>
              

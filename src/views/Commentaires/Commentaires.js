@@ -2,7 +2,6 @@ import React from 'react';
 import "./Commentaires.css";
 import NavBar from "../../Components/NavBar/NavBar";
 import NavBarDetail from "../../Components/NavBarDetail/NavBarDetail";
-import Meta from "../../Components/Metamask/Meta";
 
 export default function Commentaires() {
     return (

@@ -1,24 +1,19 @@
 import React from 'react';
-import { alpha, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Logo from '../../Images/TransparentLogo.png';
 import LeftMenu from './NavBar2'
-import { Container } from '@material-ui/core';
 import Metamask from "../Metamask/Meta";
 import { Link } from 'react-router-dom'
 import "./NavBar.css";
-
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -126,6 +121,7 @@ export default function PrimarySearchAppBar() {
   );
 
   return (
+
     <div className={classes.grow}>
       <AppBar position="static">
         <Toolbar>

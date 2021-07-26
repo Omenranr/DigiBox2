@@ -20,8 +20,8 @@ function NFT() {
 
     return (
         <div className="holdingContainer">
-            {data[0] != undefined && data.map(item => (
-                <div className="cardDisplay">
+            {data[0] !== undefined && data.map(item => (
+                <div key={item} className="cardDisplay">
                     <NFTCard offer={item}/>
                 </div>
             ))}
