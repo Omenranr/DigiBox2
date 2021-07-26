@@ -1,11 +1,9 @@
 # Deployed addresses.
 
-Deployed addresses is the list of usefull addresses deployed on Ropsten or Kovan Testnet.
+Deployed addresses is the list of usefull addresses deployed on Ropsten Testnet.
 DigiBox Dapp is also deployed on Heroku
 
-## Adresses Ropsten.
+## Adresses ropsten.
 
-- Digibox-client: https://digibox-client.herokuapp.com/
-- Digibox-server: https://digibox-server.herokuapp.com/
 - Vault : 
 - ERC-1155 :

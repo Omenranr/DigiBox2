@@ -22,7 +22,7 @@ const useStyles = makeStyles({
 export default function TemporaryDrawer() {
   const classes = useStyles();
   const [state, setState] = React.useState({
-    left: false,
+    left: true,
   });
   const preventDefault = (event) => event.preventDefault();
   const toggleDrawer = (anchor, open) => (event) => {

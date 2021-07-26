@@ -19,7 +19,6 @@ import Metamask from "../Metamask/Meta";
 import { Link } from 'react-router-dom'
 import "./NavBar.css";
 
-
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -98,6 +97,7 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
 
@@ -119,6 +119,7 @@ export default function PrimarySearchAppBar() {
           aria-haspopup="true"
           color="inherit"
         >
+          <AccountCircle />
         </IconButton>
         <p>Profile</p>
       </MenuItem>
@@ -157,9 +158,16 @@ export default function PrimarySearchAppBar() {
             
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-           <Button className="profil">
-              <Link to={"/Profil"}>Profil</Link>
-           </Button>
+            <IconButton
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={handleProfileMenuOpen}
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
           </div>
           <div className={classes.sectionMobile}>
             <IconButton

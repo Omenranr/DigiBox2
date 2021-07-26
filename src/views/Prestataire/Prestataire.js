@@ -15,7 +15,7 @@ import Button from '@material-ui/core/Button';
 import Axios from 'axios'
 
 export default function Prestataire() {
-
+    
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [website, setWebsite] = useState("");
@@ -23,7 +23,7 @@ export default function Prestataire() {
     const [prestataireList, setPrestataireList] = useState([]);
 
     const addPrestataire = () => {
-        Axios.post(process.env.REACT_APP_API_URL + '/users/create', {
+        Axios.post('http://localhost:3001/users/create', {
             name: name,
             email: email,
             website: website
@@ -36,7 +36,7 @@ export default function Prestataire() {
     }
 
     const getPrestataire = () => {
-        Axios.get(process.env.REACT_APP_API_URL + '/users/', {})
+        Axios.get('http://localhost:3001/users/', {})
         .then(response => {
             console.log(response, "success");
         })
