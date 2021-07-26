@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import marketPlaceJson from "../../../contracts/MarketPlace.json";
 import erc1155Json from "../../../contracts/ERC1155.json";
 import Web3 from 'web3'
+import axios from 'axios'
 
 export default function Equipe(props) {
 
@@ -83,7 +84,7 @@ export default function Equipe(props) {
     }
 
     // Mint NFT to the customer with pinata hash ID
-    await erc1155Contract.methods.mint.send({from: account}, function(err, res){ })
+    // await erc1155Contract.methods.mint.send({from: account}, function(err, res){ })
 
     // procéder au paiement avant la génération du NFT
     // makeDeposit(etherPrice);
@@ -140,6 +141,19 @@ export default function Equipe(props) {
   //   });
   // }
 
+  async function createPinata() {
+    axios.post(process.env.REACT_APP_API_URL + '/pinata/create', {
+      Owner: 'blabla',
+      OfferId: '5555'
+    })
+    .then(response => {
+        console.log(response, "success");
+    })
+    .catch(error => {
+        console.log(error)
+    })
+  }
+
   return (
     <Card className={classes.root}>
       <CardActionArea>
@@ -165,6 +179,7 @@ export default function Equipe(props) {
       </CardActionArea>
       <CardActions>
         <Button size="small" color="primary" onClick={() => { handleBuyButton(1) }}>Acheter</Button>
+        <Button size="small" color="primary" onClick={() => { createPinata() }}>Pinata</Button>
         <Button size="small" color="primary">
           {/* <a href="#">Lien</a> */}
         </Button>
