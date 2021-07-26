@@ -3,20 +3,27 @@ pragma solidity ^0.8.0;
 pragma abicoder v2;
 
 import "@openzeppelin/contracts/utils/Counters.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
+//import "@openzeppelin/contracts/access/Ownable.sol";
+//import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+//import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "./ERC721.sol";
 
- contract  Vault is ReentrancyGuard {
-     IERC1155 erc1155;
+ contract  NFTMarket is ReentrancyGuard {
     
     using SafeMath for uint;
     using Counters for Counters.Counter;
-    
     Counters.Counter private _itemIds;
-    Counters.Counter private _itemSold;
+    Counters.Counter private _itemsSold;
+    
+    address payable owner;
+    uint256 listingPrice = 0.001 ether;
+    
+    constructor() {
+        owner = payable(msg.sender);
+    }
     
     struct MarketItem {
         uint256 itemId;
@@ -25,6 +32,7 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
         address payable seller;
         address payable owner;
         uint256 price;
+        bool sold;
     }
     
     mapping(uint256 => MarketItem) private idToMarketItem;
@@ -35,8 +43,13 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
         uint256 tokenId,
         address seller,
         address owner,
-        uint256 price
+        uint256 price,
+        bool sold
         );
+        
+    function getListingPrice() public view returns(uint256) {
+        return listingPrice;
+    }
         
     function createMarketItem(
         address nftContract,
@@ -44,6 +57,7 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
         uint256 price
         ) public payable nonReentrant {
             require(price > 0, "Price must not be equal to zero");
+            require(msg.value >= listingPrice, "Price must be more or equal to listingPrice");
             
             _itemIds.increment();
             uint256 itemId = _itemIds.current();
@@ -54,10 +68,11 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
                 tokenId,
                 payable(msg.sender),
                 payable(address(0)),
-                price
+                price,
+                false
                 );
                 
-          IERC1155(nftContract).safeTransferFrom(msg.sender, address(this), tokenId, 1, "0x000");
+          IERC721(nftContract).transferFrom(msg.sender, address(this), tokenId);
           
           emit MarketItemCreated(
               itemId,
@@ -65,7 +80,8 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
               tokenId,
               msg.sender,
               address(0),
-              price
+              price,
+              false
               );
         } 
         
@@ -73,24 +89,28 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
             address nftContract,
             uint256 itemId
             ) public payable nonReentrant {
+                
                 uint256 price = idToMarketItem[itemId].price;
                 uint256 tokenId = idToMarketItem[itemId].tokenId;
                 
                 require(msg.value >= price, "You haven't paid enough to make the purchase");
                 //Ici trouver comment créée une variables qui remplacera le seller à accountSeller afin de ne pas lui envoyer directement.
-                idToMarketItem[itemId].seller.transfer(msg.value);
                 
-                IERC1155(nftContract).safeTransferFrom(address(this), msg.sender, tokenId, 1, "0x000");
+                idToMarketItem[itemId].seller.transfer(msg.value);
+                IERC721(nftContract).transferFrom(address(this), msg.sender, tokenId);
                 
                 idToMarketItem[itemId].owner = payable(msg.sender);
-                _itemSold.increment();
+                idToMarketItem[itemId].sold = true;
+                _itemsSold.increment();
+                payable(owner).transfer(listingPrice);
             }
             
             ///@dev Voir si nécessaire dans notre projet.
             
             function fetchMarketItems() public view returns(MarketItem[] memory) {
                 uint256 itemCount = _itemIds.current();
-                uint256 unsoldItemCount = itemCount.sub(_itemSold.current());
+                ///@dev voir pour utiliser safeMath here
+                uint256 unsoldItemCount = _itemIds.current() - _itemsSold.current();
                 uint256 currentIndex = 0;
                 
                 MarketItem[] memory items = new MarketItem[](unsoldItemCount);
@@ -119,7 +139,7 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
                 MarketItem[] memory items = new MarketItem[](itemCount);
                 for(uint i = 0; i < totalItemCount; i++) {
                     if(idToMarketItem[i + 1].owner == msg.sender) {
-                        uint256 currentId = idToMarketItem[i + 1].itemId;
+                        uint256 currentId = i + 1;
                         MarketItem storage currentItem = idToMarketItem[currentId];
                         items[currentIndex] = currentItem;
                         currentIndex = currentIndex.add(1);
@@ -127,6 +147,29 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
                     }    
                 return items;
             }
+            
+            function fetchNFTCreated() public view returns(MarketItem[] memory) {
+                uint256 totalItemCount = _itemIds.current();
+                uint256 itemCount = 0;
+                uint256 currentIndex = 0;
+                
+                for(uint256 i = 0; i < totalItemCount; i++) {
+                    if(idToMarketItem[i + 1].seller == msg.sender) {
+                        itemCount = itemCount.add(1);
+                    }
+                }
+                MarketItem[] memory items = new MarketItem[](itemCount);
+                for(uint256 i = 0; i < totalItemCount; i++) {
+                    if(idToMarketItem[i + 1].seller == msg.sender) {
+                        uint256 currentId = i + 1;
+                        MarketItem storage currentItem = idToMarketItem[currentId];
+                        items[currentIndex] = currentItem;
+                        currentIndex = currentIndex.add(1);
+                    }
+                }
+                return items;
+            }
+       
  }        
 
 /*
