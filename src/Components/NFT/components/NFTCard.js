@@ -8,7 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import marketPlaceJson from "../../../contracts/MarketPlace.json";
-import erc1155Json from "../../../contracts/ERC1155.json";
+import erc721Json from "../../../contracts/TokenERC721.json";
 import Web3 from 'web3'
 import axios from 'axios'
 
@@ -29,7 +29,7 @@ export default function Equipe(props) {
   const [account, setAccount] = useState(null)
   let [web3, setWeb3] = useState(null)
   const [marketPlaceContract, setMarketPlaceContract] = useState(null)
-  const [erc1155Contract, setErc1155Contract] = useState(null)
+  const [erc721Contract, setErc721Contract] = useState(null)
 
   useEffect(() => {
     checkAccount()
@@ -61,13 +61,13 @@ export default function Equipe(props) {
       marketPlaceJson.abi,
       deployedNetwork && deployedNetwork.address,
     );
-    const erc1155 = new web3.eth.Contract(
-      erc1155Json.abi,
+    const erc721 = new web3.eth.Contract(
+      erc721Json.abi,
       deployedNetwork && deployedNetwork.address,
     );
 
     setMarketPlaceContract(marketPlace)
-    setErc1155Contract(marketPlace)
+    setErc721Contract(marketPlace)
   }
 
   async function makeDeposit(etherPrice) {
@@ -142,9 +142,10 @@ export default function Equipe(props) {
   // }
 
   async function createPinata() {
+    console.log(account);
     axios.post(process.env.REACT_APP_API_URL + '/pinata/create', {
-      Owner: 'blabla',
-      OfferId: '5555'
+      Owner: account,
+      OfferId: props.offer.id
     })
     .then(response => {
         console.log(response, "success");
