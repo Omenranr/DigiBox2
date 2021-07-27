@@ -5,65 +5,55 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-contract NFT is ERC721URIStorage {
-    using Counters for Counters.Counter;
-    Counters.Counter private _tokenIds;
-    address contractAddress = 0x85A037aAB535dfABB13a20dB3C5A68Eb166B7B7e;
-
-  ///Ici pour le test j'ai retiré address marketPlaceaddress = contractAddress, j'ai mis unr addresse en dur;
-  constructor() ERC721("La grande Maison", "LGM") {
-      contractAddress;
-  }
-
-  function mintToken(string memory tokenURI) public returns(uint256){
-      _tokenIds.increment();
-      uint256 newItemId = _tokenIds.current();
-      
-      _mint(msg.sender, newItemId);
-      _setTokenURI(newItemId, tokenURI);
-      setApprovalForAll(contractAddress, true);
-      return newItemId;
-  }
-}
-
-/*import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
-
-contract TokenERC1155  is ERC1155 {
-
-  constructor() ERC1155("https://gateway.pinata.cloud/ipfs/{id}") {
-  }
-
-  function mintNft(uint256 id) public{
-    require(balanceOf(msg.sender, id) == 0, "This id is already in use");
-    _mint(msg.sender, id, 1, "0x000");
-  }
-} 
-=======
-import "@openzeppelin/contracts/utils/Counters.sol";
-
 contract TokenERC721 is ERC721URIStorage {
 
   using Counters for Counters.Counter;
   Counters.Counter private _tokenIds;
 
   mapping(string => uint8) hashes;
-  mapping (address => uint256[]) internal ownedTokens;
+  mapping(address => uint256) public ethBalance; 
+  mapping(uint256 => uint256) public tokenPrice;
   
   constructor() ERC721("TokenERC721", "TKN") {}
 
-  function awardItem(address recipient, string memory hash, string memory metadata) public returns (uint256)
+  function awardItem(uint256 price, string memory hash, string memory metadata) public payable returns (uint256)
   {
+    require(msg.value >= price, "Send the minimum amount required");  
     require(hashes[hash] != 1);
     hashes[hash] = 1;
 
     _tokenIds.increment();
     uint256 newItemId = _tokenIds.current();
   
-    _mint(recipient, newItemId);
-    ownedTokens[recipient].push(newItemId);
+    _mint(msg.sender, newItemId);
     _setTokenURI(newItemId, metadata);
+    
+    
+    ethBalance[msg.sender] += msg.value;
+    tokenPrice[newItemId] = price;
     
     return newItemId;
   }
+  
+      function transferFrom(address from, address to, uint256 tokenId ) public virtual override {
+        require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
+        _transfer(from, to, tokenId);
+        
+        ethBalance[from] -= tokenPrice[tokenId];
+        ethBalance[to] += tokenPrice[tokenId];
+    }
+     
+  ///Voir pour implémenter nonReentrant ici
+  function reimbursment(address from, uint256 tokenId) external{
+       require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
+        ethBalance[from] -= tokenPrice[tokenId];
+        _burn(tokenId);
+        
+        (bool success, ) = msg.sender.call{value: tokenPrice[tokenId]}("");
+        require(success, "Failed to send Ether");
+  }
+  
+  receive() external payable {}
+  
 }
->>>>>>> 8633015b83db107af7eae76ec335c6fac9c257cf */
+
