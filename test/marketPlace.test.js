@@ -1,6 +1,10 @@
-describe("NFTMarket", function() {
+const { ethers } = require("@openzeppelin/test-helpers");
+const { expect } = require("chai");
+const { accounts, contract } = require('@openzeppelin/test-helpers');
+
+describe("MarketPlace", function() {
     it("Should create and execute market sales", async function() {
-      const Market = await ethers.getContractFactory("NFTMarket")
+      const Market = await ethers.getContractFactory("MarketPlace")
       const market = await Market.deploy()
       await market.deployed()
       const marketAddress = market.address
@@ -39,4 +43,4 @@ describe("NFTMarket", function() {
       }))
       console.log('items: ', items)
     })
-  })
+  }) 

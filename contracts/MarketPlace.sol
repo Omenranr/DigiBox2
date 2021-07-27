@@ -3,15 +3,12 @@ pragma solidity ^0.8.0;
 pragma abicoder v2;
 
 import "@openzeppelin/contracts/utils/Counters.sol";
-//import "@openzeppelin/contracts/access/Ownable.sol";
-//import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-//import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "./ERC721.sol";
 
- contract  NFTMarket is ReentrancyGuard {
+ contract  MarketPlace is ReentrancyGuard {
     
     using SafeMath for uint;
     using Counters for Counters.Counter;
@@ -104,8 +101,6 @@ import "./ERC721.sol";
                 _itemsSold.increment();
                 payable(owner).transfer(listingPrice);
             }
-            
-            ///@dev Voir si nécessaire dans notre projet.
             
             function fetchMarketItems() public view returns(MarketItem[] memory) {
                 uint256 itemCount = _itemIds.current();

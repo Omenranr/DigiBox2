@@ -8,10 +8,11 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 contract NFT is ERC721URIStorage {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
-    address contractAddress;
+    address contractAddress = 0x85A037aAB535dfABB13a20dB3C5A68Eb166B7B7e;
 
-  constructor(address marketPlaceAddress) ERC721("La grande Maison", "LGM") {
-      contractAddress = marketPlaceAddress;
+  ///Ici pour le test j'ai retiré address marketPlaceaddress = contractAddress, j'ai mis unr addresse en dur;
+  constructor() ERC721("La grande Maison", "LGM") {
+      contractAddress;
   }
 
   function mintToken(string memory tokenURI) public returns(uint256){
@@ -23,7 +24,6 @@ contract NFT is ERC721URIStorage {
       setApprovalForAll(contractAddress, true);
       return newItemId;
   }
-  
 }
 
 /*import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
@@ -37,7 +37,7 @@ contract TokenERC1155  is ERC1155 {
     require(balanceOf(msg.sender, id) == 0, "This id is already in use");
     _mint(msg.sender, id, 1, "0x000");
   }
-} */
+} 
 =======
 import "@openzeppelin/contracts/utils/Counters.sol";
 
@@ -66,4 +66,4 @@ contract TokenERC721 is ERC721URIStorage {
     return newItemId;
   }
 }
->>>>>>> 8633015b83db107af7eae76ec335c6fac9c257cf
+>>>>>>> 8633015b83db107af7eae76ec335c6fac9c257cf */

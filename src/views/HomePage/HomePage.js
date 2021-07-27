@@ -5,6 +5,7 @@ import NFT from "../../Components/NFT/NFT";
 import "./HomePage.css";
 import logo from "../../Images/TransparentLogo.png";
 
+
 export default function HomePage() {
     return (
         <div className="App">

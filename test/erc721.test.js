@@ -1,12 +1,12 @@
-/* const MarketPlace = artifacts.require('NFTMarket');
-///const { BN, expectRevert, constants, expectEvent } = require('@openzeppelin/test-helpers');
-const { useEthers } = require("@usedapp/core");
+/*const { ethers } = require("@openzeppelin/test-helpers");
 const { expect } = require("chai");
-const { idText } = require("typescript");
+//const { Contract } = require("ethers");
+///const { it } = require("ethers/wordlists");
+const ERC721 = artifacts.require("./ERC721");
 
-describe("NFTMarket", function () {
+describe("ERC721", function () {
     it("Should create and execute sales", async function () {
-      const Market = await ethers.getContractFactory("NFTMarket")
+      const Market = await ethers.getContractFactory("ERC721")
       const market = await Market.deploy()
       await market.deployed()
       const marketAddress = market.address
@@ -19,7 +19,7 @@ describe("NFTMarket", function () {
       let listingPrice = await market.getListingPrice()
       listingPrice = listingPrice.toString()
 
-      const auctionPrice = ethers.utils.parseUnits("100", "ether")
+      const auctionPrice = ethers.utils.parseUnits("1", "ether")
 
       await nft.mintToken("https://www.mytokenlocation.com")
       await nft.mintToken("https://www.mytokenlocation2.com")

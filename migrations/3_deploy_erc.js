@@ -1,11 +1,5 @@
-var TokenERC1155 = artifacts.require("TokenERC1155");
+var ERC721Token = artifacts.require("./NFT.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(TokenERC1155);
-};
-
-var TokenERC721 = artifacts.require("TokenERC721");
-
-module.exports = function(deployer) {
-  deployer.deploy(TokenERC721);
+  deployer.deploy(ERC721Token);
 };
