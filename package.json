@@ -15,7 +15,6 @@
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@openzeppelin/contracts": "^4.2.0",
     "@openzeppelin/test-helpers": "^0.5.12",
-    "@pinata/sdk": "^1.1.23",
     "@uniswap/v3-periphery": "^1.1.1",
     "@uniswap/v3-sdk": "^3.2.1",
     "@usedapp/core": "^0.4.1",

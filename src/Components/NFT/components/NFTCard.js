@@ -23,8 +23,6 @@ export default function Equipe(props) {
     },
   });
   const classes = useStyles();
-  // const pinataSDK = require('@pinata/sdk');
-  // const pinata = pinataSDK(process.env.REACT_APP_PINATA_API_KEY, process.env.REACT_APP_PINATA_SECRET_API_KEY);
   
   const [account, setAccount] = useState(null)
   let [web3, setWeb3] = useState(null)
@@ -32,7 +30,7 @@ export default function Equipe(props) {
   const [erc721Contract, setErc721Contract] = useState(null)
 
   useEffect(() => {
-    checkAccount()
+    connectWeb3()
   }, [])
   
   // invoke to connect to wallet account
@@ -41,15 +39,14 @@ export default function Equipe(props) {
   //     try {
   //       // await window.ethereum.enable();
   //       await window.ethereum.request({ method: 'eth_requestAccounts' });
-  //       checkAccount()
+  //       connectWeb3()
   //     } catch (err) {
   //       console.log('user did not add account...', err)
   //     }
   //   }
   // }
   
-  // invoke to check if account is already connected
-  async function checkAccount() {
+  async function connectWeb3() {
     let web3 = new Web3(window.ethereum)
     setWeb3(web3)
     const accounts = await web3.eth.getAccounts()
@@ -78,71 +75,15 @@ export default function Equipe(props) {
     await marketPlaceContract.methods.buyProduct(1).send({from: account, gas: gasValue, value: weiValue}, function(err, res){ })
   }
 
-  function handleBuyButton(etherPrice){
+  async function createPinata() {
+    // separate in other functions
     if (process.env.REACT_APP_PINATA_API_KEY === undefined) {
       console.log('Pinata keys are not set in your environment !');
     }
+    if (account === undefined) {
+      alert("Please connect your Metamask");
+    }
 
-    // Mint NFT to the customer with pinata hash ID
-    // await erc1155Contract.methods.mint.send({from: account}, function(err, res){ })
-
-    // procéder au paiement avant la génération du NFT
-    // makeDeposit(etherPrice);
-  }
-    
-    // authenticatePinata();
-    // updatePinataJSON('QmUHeDovuppZGU3yMccWpcCZ3GbcfiYGmCTMSUUn7XsqLY');
-    // newPinataJSON();
-
-  // async function updatePinataJSON(hashkey) {
-  //   const metadata = {
-  //     name: 'blabla',
-  //     keyvalues: {
-  //         newKey: 'blabla2',
-  //         existingKey: 'blabla3',
-  //         existingKeyToRemove: null
-  //     }
-  //   };
-  //   pinata.hashMetadata(hashkey, metadata).then((result) => {
-  //       console.log(result);
-  //   }).catch((err) => {
-  //       console.log(err);
-  //   });
-  // }
-
-  // async function newPinataJSON(customerData) {
-  //   const body = {
-  //     message: 'Pinatas are awesome'
-  //   };
-  //   const options = {
-  //       pinataMetadata: {
-  //           name: "thisisatestname",
-  //           keyvalues: {
-  //               customKey: 'customValue',
-  //               customKey2: 'customValue2'
-  //           }
-  //       },
-  //       pinataOptions: {
-  //           cidVersion: 0
-  //       }
-  //   };
-  //   pinata.pinJSONToIPFS(body, options).then((result) => {
-  //       console.log(result);
-  //   }).catch((err) => {
-  //       console.log(err);
-  //   });
-  // }
-
-  // async function authenticatePinata() {
-  //   pinata.testAuthentication().then((result) => {
-  //     console.log(result);
-  //   }).catch((err) => {
-  //     console.log(err);
-  //   });
-  // }
-
-  async function createPinata() {
-    console.log(account);
     axios.post(process.env.REACT_APP_API_URL + '/pinata/create', {
       Owner: account,
       OfferId: props.offer.id
@@ -153,6 +94,10 @@ export default function Equipe(props) {
     .catch(error => {
         console.log(error)
     })
+
+    // call awardItem from erc 721 contract, with price and hash informations
+
+    // Store NFT/Owner infos in db to display them afterwards in front
   }
 
   return (
@@ -179,11 +124,7 @@ export default function Equipe(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" onClick={() => { handleBuyButton(1) }}>Acheter</Button>
-        <Button size="small" color="primary" onClick={() => { createPinata() }}>Pinata</Button>
-        <Button size="small" color="primary">
-          {/* <a href="#">Lien</a> */}
-        </Button>
+        <Button size="small" color="primary" onClick={() => { createPinata() }}>Acheter</Button>
       </CardActions>
     </Card>
   );
