@@ -13,7 +13,6 @@ export default function HomePage() {
         <h1 className="title">DigiBox, le plaisir d'offrir!</h1> <hr></hr>
                 <div className="text-logo">
                     <h2 className="subTitle">Les DigiBox du moment</h2>
-                    <img className="logo" src={logo} alt="logo" />
                 </div>
             <NFT />
         <NavBarDetail />
