@@ -10,7 +10,6 @@ import Button from '@material-ui/core/Button';
 import Axios from 'axios';
 import erc721Json from "../../contracts/TokenERC721.json";
 import Web3 from 'web3'
-import marketPlaceJson from "../../contracts/MarketPlace.json";
 
 function Creation() {
 
@@ -37,9 +36,8 @@ function Creation() {
         setAccount(accounts[0])
     
         const networkId = await web3.eth.net.getId();
-        const deployedNetwork = marketPlaceJson.networks[networkId];
+        const deployedNetwork = erc721Json.networks[networkId];
         console.log(deployedNetwork)
-        // const deployedNetwork = erc721Json.networks[networkId];
         const erc721 = new web3.eth.Contract(
           erc721Json.abi,
           deployedNetwork && deployedNetwork.address,
@@ -63,12 +61,7 @@ function Creation() {
         formData.append("Price", Price);
         formData.append("Description", Description);
 
-        // Debug to display the key/value pairs
-        // for (var pair of formData.entries()) {
-        //     console.log(pair[0]+ ', ' + pair[1]); 
-        // }
-
-        const smartContractOfferId = await erc721Contract.methods.setPrice(Price).send({from: account}, function(err, res){ })
+        const smartContractOfferId = await erc721Contract.methods.setPrice(Price).call();
         formData.append("smartContractOfferId", smartContractOfferId);
 
         Axios.post(process.env.REACT_APP_API_URL + '/offers/create', formData, config)
@@ -80,7 +73,7 @@ function Creation() {
         })
     }
 
-   useEffect(() => {
+    useEffect(() => {
         Axios.get("https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd")
         .then(response => {
             setEther(response.data.ethereum.usd);
