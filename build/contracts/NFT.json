@@ -17240,12 +17240,21 @@
     "5777": {
       "events": {},
       "links": {},
+<<<<<<< HEAD:src/contracts/NFT.json
       "address": "0xA761D8Fdbb73321777d8EC8aDec5252a8D19E419",
       "transactionHash": "0x0013388909268c00701411f925df98d440426323e4e2b659d63db58c680dd61d"
     }
   },
   "schemaVersion": "3.4.1",
   "updatedAt": "2021-07-28T21:44:50.876Z",
+=======
+      "address": "0x8A5BC83EE768123Ad98670B03a710307A81b85C7",
+      "transactionHash": "0x925cc0683363bfbdcf37f53214ddc2df39affc725fff57f78a17073892bc5b75"
+    }
+  },
+  "schemaVersion": "3.4.1",
+  "updatedAt": "2021-07-28T07:52:02.100Z",
+>>>>>>> 54024ca6c3022984eec43e563587682cee5bd018:build/contracts/NFT.json
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

@@ -274,5 +274,3 @@ contract MarketPlace is Ownable {
         (bool sent, ) = VaultAddress.call{value: amountOfDai}("");
         require(sent, "Failed to send Dai");
     } */
-
-
