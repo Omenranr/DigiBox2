@@ -11,7 +11,7 @@ import axios from 'axios'
 import Web3 from 'web3'
 import erc721Json from "../../../contracts/TokenERC721.json";
 
-export default function Equipe(props) {
+export default function NftCard(props) {
 
   const useStyles = makeStyles({
     root: {
