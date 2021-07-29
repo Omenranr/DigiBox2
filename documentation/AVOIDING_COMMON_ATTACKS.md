@@ -7,10 +7,9 @@
  - Re-Entrancy.
  - Overflow/underflow.
  - Accessing Private Data.
- - Source of randomness.
+ - Source of randomness. 🤷‍♂️
  - Denial-Of-Service.
  - Phising => tx.origin.
- - Malicious code from an external contract.
  - Front running.
  - Block TimeStamp manipulation by miners.
  - Signature Replay.
@@ -18,8 +17,7 @@
  ## Measures we took against possible vulnerabilities.
 
    1. We avoid Reentrancy by using the library non-Reentrant from OpenZeppelin ✅
-   2. We overcome this issue using the OpenZeppelin librarie Counters to increment our indexes.
-       I.E :  
+   2. We overcame the potential issue of overFlow and underFlow by using the OpenZeppelin librarie Counters to increment our indexes. ✅
 ```
 import "@openzeppelin/contracts/utils/Counters.sol";
 
@@ -50,9 +48,21 @@ contract TokenERC721 is ERC721URIStorage {
 
  ## Unecessary measures for this project.
 
-   1. Self-destruct 🟥
+   1. Self-destruct 🟩
    2. DelegateCall 🟥
-   3. 
+   3. Accessing private data 🟥
+   4. Phising => tx.origin 🟥
+   5. Front running 🟥
+   6. Block TimeStamp manipulation by miners 🟥
+   7. Signature Replay 🟥
+   8. Denial-of-service 🟩
+
+   ### Legend
+
+   ✅ => Has been worked on
+   🟩 => To be studied if launched on mainnet.
+   🟥 => Not to be worried about in our this project.
+   
  
 
  
