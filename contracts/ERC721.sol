@@ -29,7 +29,7 @@ contract TokenERC721 is ERC721URIStorage {
 
     function awardItem(uint256 offerId, string memory hash, string memory metadata) public payable returns (uint256) {
         require(msg.value >= prices[offerId], "Send the minimum amount required");  
-        require(hashes[hash] != 1);
+        // require(hashes[hash] != 1);
         hashes[hash] = 1;
 
         _tokenIds.increment();

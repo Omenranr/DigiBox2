@@ -61,7 +61,7 @@ function Creation() {
         formData.append("Price", Price);
         formData.append("Description", Description);
 
-        const smartContractOfferId = await erc721Contract.methods.setPrice(Price).call();
+        const smartContractOfferId = await erc721Contract.methods.setPrice(Price).send({from: account});
         formData.append("smartContractOfferId", smartContractOfferId);
 
         Axios.post(process.env.REACT_APP_API_URL + '/offers/create', formData, config)
