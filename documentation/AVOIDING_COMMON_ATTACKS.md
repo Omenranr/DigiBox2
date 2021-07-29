@@ -20,7 +20,8 @@
    1. We avoid Reentrancy by using the library non-Reentrant from OpenZeppelin ✅
    2. We overcome this issue using the OpenZeppelin librarie Counters to increment our indexes.
        I.E :  
-```import "@openzeppelin/contracts/utils/Counters.sol";
+```
+import "@openzeppelin/contracts/utils/Counters.sol";
 
 contract TokenERC721 is ERC721URIStorage {
 
@@ -43,7 +44,8 @@ contract TokenERC721 is ERC721URIStorage {
     prices[newOfferId] = price;
 
     return newOfferId;
-  } ```
+  } 
+  ```
 
 
  ## Unecessary measures for this project.
