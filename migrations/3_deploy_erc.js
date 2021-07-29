@@ -1,5 +1,5 @@
-var ERC721Token = artifacts.require("./NFT.sol");
+var TokenERC721 = artifacts.require("./ERC721.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(ERC721Token);
+  deployer.deploy(TokenERC721,"DigiboxToken","DGBT");
 };

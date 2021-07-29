@@ -9,12 +9,24 @@ contract TokenERC721 is ERC721URIStorage {
 
   using Counters for Counters.Counter;
   Counters.Counter private _tokenIds;
+  Counters.Counter private _offerIds;
 
+  mapping(uint256 => uint256) prices;
   mapping(string => uint8) hashes;
   mapping(address => uint256) public ethBalance; 
   mapping(uint256 => uint256) public tokenPrice;
   
-  constructor() ERC721("TokenERC721", "TKN") {}
+  constructor() ERC721("DigiboxToken", "DGBT") {}
+
+  receive() external payable {}
+
+  function setPrice(uint256 price) public returns (uint256) {
+    _offerIds.increment();
+    uint256 newOfferId = _offerIds.current();
+    prices[newOfferId] = price;
+
+    return newOfferId;
+  }
 
   function awardItem(uint256 price, string memory hash, string memory metadata) public payable returns (uint256)
   {
@@ -52,8 +64,5 @@ contract TokenERC721 is ERC721URIStorage {
         (bool success, ) = msg.sender.call{value: tokenPrice[tokenId]}("");
         require(success, "Failed to send Ether");
   }
-  
-  receive() external payable {}
-  
 }
 

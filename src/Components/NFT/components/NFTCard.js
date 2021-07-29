@@ -7,10 +7,17 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import marketPlaceJson from "../../../contracts/MarketPlace.json";
-import erc721Json from "../../../contracts/TokenERC721.json";
-import Web3 from 'web3'
 import axios from 'axios'
+import Web3 from 'web3'
+import erc721Json from "../../../contracts/TokenERC721.json";
+
+// import marketPlaceJson from "../../../contracts/MarketPlace.json";
+// const [marketPlaceContract, setMarketPlaceContract] = useState(null)
+// const marketPlace = new web3.eth.Contract(
+//   marketPlaceJson.abi,
+//   deployedNetwork && deployedNetwork.address,
+// );
+// setMarketPlaceContract(marketPlace)
 
 export default function Equipe(props) {
 
@@ -26,7 +33,6 @@ export default function Equipe(props) {
   
   const [account, setAccount] = useState(null)
   let [web3, setWeb3] = useState(null)
-  const [marketPlaceContract, setMarketPlaceContract] = useState(null)
   const [erc721Contract, setErc721Contract] = useState(null)
 
   useEffect(() => {
@@ -53,49 +59,45 @@ export default function Equipe(props) {
     setAccount(accounts[0])
 
     const networkId = await web3.eth.net.getId();
-    const deployedNetwork = marketPlaceJson.networks[networkId];
-    const marketPlace = new web3.eth.Contract(
-      marketPlaceJson.abi,
-      deployedNetwork && deployedNetwork.address,
-    );
+    const deployedNetwork = erc721Json.networks[networkId];
     const erc721 = new web3.eth.Contract(
       erc721Json.abi,
       deployedNetwork && deployedNetwork.address,
     );
-
-    setMarketPlaceContract(marketPlace)
-    setErc721Contract(marketPlace)
-  }
-
-  async function makeDeposit(etherPrice) {
-    var gasValue = web3.utils.toHex(web3.utils.toWei('21000', 'wei'));
-    var etherAmount = web3.utils.toBN(etherPrice);
-    var weiValue = web3.utils.toWei(etherAmount,'ether');
-
-    await marketPlaceContract.methods.buyProduct(1).send({from: account, gas: gasValue, value: weiValue}, function(err, res){ })
+    setErc721Contract(erc721);
   }
 
   async function createPinata() {
-    // separate in other functions
     if (process.env.REACT_APP_PINATA_API_KEY === undefined) {
       console.log('Pinata keys are not set in your environment !');
     }
     if (account === undefined) {
-      alert("Please connect your Metamask");
+      alert("Please connect your account to Metamask");
     }
 
-    axios.post(process.env.REACT_APP_API_URL + '/pinata/create', {
-      Owner: account,
-      OfferId: props.offer.id
+    return new Promise((resolve, reject) => {
+      axios.post(process.env.REACT_APP_API_URL + '/pinata/create', {
+        Owner: account,
+        OfferId: props.offer.id
+      })
+      .then(response => {
+          resolve(response);
+      })
+      .catch(error => {
+        reject(error);
+      })
     })
-    .then(response => {
-        console.log(response, "success");
-    })
-    .catch(error => {
-        console.log(error)
-    })
+  }
 
-    // call awardItem from erc 721 contract, with price and hash informations
+  async function handleBuyProduct() {
+    const pinataJson = await createPinata();
+    const assetHash = pinataJson.data.pinata.asset;
+    const metadataHash = pinataJson.data.pinata.metadata;
+
+    var gasValue = web3.utils.toHex(web3.utils.toWei('21000', 'wei'));
+    var etherValue = web3.utils.toBN(props.offer.price);
+    var weiValue = web3.utils.toWei(etherValue,'ether');
+    await erc721Contract.methods.awarditem().send({from: account, gas: gasValue, value: weiValue}, function(err, res){ })
 
     // Store NFT/Owner infos in db to display them afterwards in front
   }
@@ -105,7 +107,7 @@ export default function Equipe(props) {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={process.env.REACT_APP_API_URL + '/uploads/'+props.offer.filename}
+          image={process.env.REACT_APP_API_URL + '/uploads/' + props.offer.filename}
           title={props.offer.filename}
         />
         <CardContent>
@@ -124,7 +126,7 @@ export default function Equipe(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" onClick={() => { createPinata() }}>Acheter</Button>
+        <Button size="small" color="primary" onClick={() => { handleBuyProduct() }}>Acheter</Button>
       </CardActions>
     </Card>
   );
