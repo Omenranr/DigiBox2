@@ -8,7 +8,7 @@
       ``` 
       _mint(msg.sender, newItemId);
       ```
-      After this, we can not check the provenance. WHY ? We want our NFT to be able to be offered. So Alice, can offer the NFT purchased from our marketPlace to Bob. We just need to be aware of the NFT ID, when it is sent back. 
+      We want our NFT to be able to be offered. So Alice, can offer the NFT purchased from our marketPlace to Bob. We just need to be aware of the NFT ID, when it is sent back. 
  - State Machine : 
  - Oracle : We collect data from the users and the offers directly in our data base. We do not have the necesity to use an Oracle.
  - Randomness : We have no need for random data in our Dapp.
@@ -21,7 +21,7 @@
       (bool success, ) = msg.sender.call{value: tokenPrice[tokenId]}("");
       require(success, "Failed to send Ether");
       ``` 
- - Pull over Push : We are using this method, only difference is that we do not have a "WhiteList". Indeed, each user and/or seller has the possibility to use the function reimbursement. The function reimbursement allows him/her to withdraw the funds that his has on the smart contract. So instead of sending the transaction directly to the balanceOwner we wait for him to call the function reimburse. This avoids a lot of issues regarding using loops to transfer funds for example.
+ - Pull over Push : We are using this method, only difference is that we do not have a "WhiteList". Indeed, each user and/or seller has the possibility to use the function reimbursement. The function reimbursement allows him/her to withdraw the funds that he has on the smart contract. So instead of sending the transaction directly to the balanceOwner we wait for him to call the function reimburse. This avoids a lot of issues regarding using loops to transfer funds for example.
       ``` 
         function reimbursment(address from, uint256 tokenId) external{
             require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");

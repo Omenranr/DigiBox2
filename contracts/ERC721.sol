@@ -15,6 +15,12 @@ contract TokenERC721 is ERC721URIStorage {
     mapping(address => uint256) public ethBalance; 
     mapping(uint256 => uint256) public tokenPrice;
 
+    event priceIsSet(uint256 Price, address From);
+    event mintedNFT(address Buyer, string Hash, string Metadata, uint256 IdOfOffer);
+    event transferedNFT(address From, address To, uint256 tokenId);
+    event reimbursed(address From, uint256 amount);
+
+
     constructor() ERC721("DigiboxToken", "DGBT") {}
 
     receive() external payable {}
@@ -23,6 +29,8 @@ contract TokenERC721 is ERC721URIStorage {
         _offerIds.increment();
         uint256 newOfferId = _offerIds.current();
         prices[newOfferId] = price;
+
+        emit priceIsSet(price, msg.sender);
 
         return newOfferId;
     }
@@ -41,25 +49,31 @@ contract TokenERC721 is ERC721URIStorage {
         ethBalance[msg.sender] += msg.value;
         tokenPrice[newItemId] = prices[offerId];
 
+        emit mintedNFT(msg.sender, hash, metadata, offerId);
+
         return newItemId;
     }
 
     function transferFrom(address from, address to, uint256 tokenId ) public virtual override {
         require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
         _transfer(from, to, tokenId);
+
+        emit transferedNFT(msg.sender, to, tokenId);
         
         ethBalance[from] -= tokenPrice[tokenId];
         ethBalance[to] += tokenPrice[tokenId];
     }
      
     ///Voir pour implémenter nonReentrant ici
-    function reimbursment(address from, uint256 tokenId) external{
+    function reimbursment(address from, uint256 tokenId) external payable {
         require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
         ethBalance[from] -= tokenPrice[tokenId];
         _burn(tokenId);
 
         (bool success, ) = msg.sender.call{value: tokenPrice[tokenId]}("");
         require(success, "Failed to send Ether");
+
+        emit reimbursed(msg.sender, msg.value);
     }
 }
 /*  

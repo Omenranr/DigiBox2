@@ -17,7 +17,7 @@
  ## Measures we took against possible vulnerabilities.
 
    1. We avoid Reentrancy by using the library non-Reentrant from OpenZeppelin ✅
-   2. We overcame the potential issue of overFlow and underFlow by using the OpenZeppelin librarie Counters to increment our indexes. ✅
+   2. We overcame the potential issue of overFlow and underFlow by using the OpenZeppelin library Counters to increment our indexes. ✅
 ```
 import "@openzeppelin/contracts/utils/Counters.sol";
 
