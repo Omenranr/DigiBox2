@@ -1,10 +1,18 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+///@title A NFT MarketPlace, selling and paying.
+///@author Nicolas Fruneau, Kilian Mongey.
+///@notice This contract is open source, you are more then welcomed to copy functions as you please.
+///@dev We purposely put many data Off-Chain, trying to keep our smart contract as gas efficient as possible.
+///NOTE : This smart contract hasn't been audited. Please, DYOR before launching. 
+
+///@dev We will implement the following libraries in our SC.
+
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-contract TokenERC721 is ERC721URIStorage {
+contract TokenERC721 is ERC721URIStorage { 
 
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
@@ -20,10 +28,14 @@ contract TokenERC721 is ERC721URIStorage {
     event transferedNFT(address From, address To, uint256 tokenId);
     event reimbursed(address From, uint256 amount);
 
-
     constructor() ERC721("DigiboxToken", "DGBT") {}
 
-    receive() external payable {}
+    /** @notice Sets the price of the NFT, inputed by the seller.
+     * @dev We use the OZ lib to increment Id's in order to avoid overFlows
+     * @param price We then set the price to the following Id of the NFT
+     * @dev By placing an event here, we will be able to display it on our front-end
+     * @return Finally we return the unique Id created by our function
+     */
 
     function setPrice(uint256 price) public returns (uint256) {
         _offerIds.increment();
@@ -34,7 +46,15 @@ contract TokenERC721 is ERC721URIStorage {
 
         return newOfferId;
     }
-
+     
+     /** @notice Minting and attributing the NFT to the buyer.
+      * @dev Firstly we require that the value sent is higher then the value asked by the seller
+      * then, using the _mint function from OZ lib we create the NFT and send it to the function caller.
+      * UpDate the ether balance of the buyer
+      * @param offerId We want to be able to track the offers created. 
+      * @dev We also want to be able to display in our front a few event, so we added this mintedNFT event
+      * @return We return the item's unique Id
+      */
     function awardItem(uint256 offerId, string memory hash, string memory metadata) public payable returns (uint256) {
         require(msg.value >= prices[offerId], "Send the minimum amount required");  
         // require(hashes[hash] != 1);
@@ -54,6 +74,16 @@ contract TokenERC721 is ERC721URIStorage {
         return newItemId;
     }
 
+    /** @notice This function is used to transfer NFT's, this function 
+     * will be used to send to the seller's, or send the NFT as a gift 
+     * @dev We back this function using OZ ERC721 lib
+     * using the lib, we require that the token owner is the caller of this function
+     * We then proceed to the transfer 
+     * @param tokenId We make sure that the tokenID is inputed as a param by the caller to avoid problems
+     * @dev By emitting these events we are able to display a msg in our front
+     * Finally, we reset the balances of the owner and the receiver.
+     */
+
     function transferFrom(address from, address to, uint256 tokenId ) public virtual override {
         require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
         _transfer(from, to, tokenId);
@@ -64,7 +94,17 @@ contract TokenERC721 is ERC721URIStorage {
         ethBalance[to] += tokenPrice[tokenId];
     }
      
-    ///Voir pour implémenter nonReentrant ici
+    /** @notice This function is our "pay" function, indeed we decided to go with a pull over push function
+     * Firstly for security reasons, it also allows the user that purchased 
+     * the NFT to call this function and to get reimbursed, so everybody win's :)
+     * @dev As in our previous function we use the OZ lib to back-up our contract
+     * We then require that the caller is the owner of the tokenId 
+     * then the balance of the caller is updated.
+     * the token is then burned(using OZ lib)
+     * then => proceed to the payment, the caller will receive his funds by calling the function
+     * Emitting this event will allow the front to send a confirmation/Fail messsage
+     * @param tokenId We need to know the tokenId to proceed
+     */
     function reimbursment(address from, uint256 tokenId) external payable {
         require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
         ethBalance[from] -= tokenPrice[tokenId];
@@ -75,7 +115,19 @@ contract TokenERC721 is ERC721URIStorage {
 
         emit reimbursed(msg.sender, msg.value);
     }
+
+     ///@dev fallback function
+    receive() external payable {}
 }
+
+
+
+
+
+
+
+
+
 /*  
 
 ///@dev j'ai placé le contrat MarketPlace ici au cas ou :).
