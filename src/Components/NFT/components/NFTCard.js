@@ -11,15 +11,7 @@ import axios from 'axios'
 import Web3 from 'web3'
 import erc721Json from "../../../contracts/TokenERC721.json";
 
-// import marketPlaceJson from "../../../contracts/MarketPlace.json";
-// const [marketPlaceContract, setMarketPlaceContract] = useState(null)
-// const marketPlace = new web3.eth.Contract(
-//   marketPlaceJson.abi,
-//   deployedNetwork && deployedNetwork.address,
-// );
-// setMarketPlaceContract(marketPlace)
-
-export default function Equipe(props) {
+export default function NftCard(props) {
 
   const useStyles = makeStyles({
     root: {
@@ -89,17 +81,43 @@ export default function Equipe(props) {
     })
   }
 
+  async function createNFT(assetHash, metadataHash) {
+    return new Promise((resolve, reject) => {
+      var etherValue = web3.utils.toBN(props.offer.price);
+      var weiValue = web3.utils.toWei(etherValue,'ether');
+  
+      erc721Contract.methods.awardItem(props.offer.smartContractOfferId, assetHash, metadataHash)
+        .send({from: account, value: weiValue})
+        .then(response => {
+          resolve(response);
+        })
+        .catch(error => {
+          // unpin pinata if payment fail
+          reject(error);
+        })
+    })
+  }
+
   async function handleBuyProduct() {
     const pinataJson = await createPinata();
     const assetHash = pinataJson.data.pinata.asset;
     const metadataHash = pinataJson.data.pinata.metadata;
 
-    var gasValue = web3.utils.toHex(web3.utils.toWei('21000', 'wei'));
-    var etherValue = web3.utils.toBN(props.offer.price);
-    var weiValue = web3.utils.toWei(etherValue,'ether');
-    await erc721Contract.methods.awarditem().send({from: account, gas: gasValue, value: weiValue}, function(err, res){ })
-
-    // Store NFT/Owner infos in db to display them afterwards in front
+    const res = await createNFT(assetHash, metadataHash);
+    const nftData = {
+      ownerAddress: account,
+      nftId: res.events.Transfer.returnValues.tokenId,
+      offerId: props.offer.smartContractOfferId,
+      imageIpfsHash: assetHash,
+      metadataIpfsHash: metadataHash
+    }
+    await axios.post(process.env.REACT_APP_API_URL + '/nfts/create', nftData)
+    .then(response => {
+        console.log(response, "success");
+    })
+    .catch(error => {
+        console.log(error)
+    })
   }
 
   return (
