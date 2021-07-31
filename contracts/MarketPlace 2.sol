@@ -1,6 +1,5 @@
- ///SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
-/*
 pragma abicoder v2;
 
 import "@openzeppelin/contracts/utils/Counters.sol";
@@ -168,7 +167,7 @@ import "./ERC721.sol";
        
  }        
 
-
+/*
 contract MarketPlace is Ownable {
 
   using SafeMath for uint;
@@ -275,5 +274,3 @@ contract MarketPlace is Ownable {
         (bool sent, ) = VaultAddress.call{value: amountOfDai}("");
         require(sent, "Failed to send Dai");
     } */
-
-
