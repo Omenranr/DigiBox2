@@ -73,7 +73,7 @@ export default function NftCard(props) {
         OfferId: props.offer.id
       })
       .then(response => {
-          resolve(response);
+        resolve(response);
       })
       .catch(error => {
         reject(error);

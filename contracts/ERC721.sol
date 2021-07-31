@@ -15,24 +15,21 @@ contract TokenERC721 is ERC721URIStorage {
     mapping(address => uint256) public ethBalance; 
     mapping(uint256 => uint256) public tokenPrice;
 
-    event priceIsSet(uint256 Price, address From);
+    event priceIsSet(uint256 offerId, address From);
     event mintedNFT(address Buyer, string Hash, string Metadata, uint256 IdOfOffer);
     event transferedNFT(address From, address To, uint256 tokenId);
     event reimbursed(address From, uint256 amount);
-
 
     constructor() ERC721("DigiboxToken", "DGBT") {}
 
     receive() external payable {}
 
-    function setPrice(uint256 price) public returns (uint256) {
+    function setPrice(uint256 price) public {
         _offerIds.increment();
         uint256 newOfferId = _offerIds.current();
         prices[newOfferId] = price;
 
-        emit priceIsSet(price, msg.sender);
-
-        return newOfferId;
+        emit priceIsSet(newOfferId, msg.sender);
     }
 
     function awardItem(uint256 offerId, string memory hash, string memory metadata) public payable returns (uint256) {
@@ -57,13 +54,12 @@ contract TokenERC721 is ERC721URIStorage {
     function transferFrom(address from, address to, uint256 tokenId ) public virtual override {
         require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
         _transfer(from, to, tokenId);
-
-        emit transferedNFT(msg.sender, to, tokenId);
         
         ethBalance[from] -= tokenPrice[tokenId];
         ethBalance[to] += tokenPrice[tokenId];
+        emit transferedNFT(msg.sender, to, tokenId);
     }
-     
+
     ///Voir pour implémenter nonReentrant ici
     function reimbursment(address from, uint256 tokenId) external payable {
         require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");

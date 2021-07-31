@@ -7,7 +7,7 @@ import NavBarDetail from "../../Components/NavBarDetail/NavBarDetail";
 import Container from '@material-ui/core/Container';
 import logo from "../../Images/TransparentLogo.png";
 import Button from '@material-ui/core/Button';
-import Axios from 'axios';
+import axios from 'axios';
 import erc721Json from "../../contracts/TokenERC721.json";
 import Web3 from 'web3'
 
@@ -53,18 +53,23 @@ function Creation() {
         }
     }
 
-    const addOffer = async () => {
+    const setPriceContract = async () => {
+        erc721Contract.events.priceIsSet().on('data', (event) => addOffer(event)).on('error', console.error);
+        await erc721Contract.methods.setPrice(Price).send({from: account})
+    }
+
+    const addOffer = async (event) => {
+        const smartContractOfferId = event.returnValues.offerId;
+
         let formData = new FormData();
         formData.append("file", selectedFile);
         formData.append("Provider", Provider);
         formData.append("Title", Title);
         formData.append("Price", Price);
         formData.append("Description", Description);
-
-        const smartContractOfferId = await erc721Contract.methods.setPrice(Price).send({from: account});
         formData.append("smartContractOfferId", smartContractOfferId);
 
-        Axios.post(process.env.REACT_APP_API_URL + '/offers/create', formData, config)
+        axios.post(process.env.REACT_APP_API_URL + '/offers/create', formData, config)
         .then(response => {
             console.log(response, "success");
         })
@@ -74,11 +79,11 @@ function Creation() {
     }
 
     useEffect(() => {
-        Axios.get("https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd")
+        axios.get("https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd")
         .then(response => {
             setEther(response.data.ethereum.usd);
         }).catch(error => console.log(error))
-    }, [Ether]); 
+    }, [Ether]);
 
     const handleFileInput = (e) => {
         const file = e.target.files[0];
@@ -155,7 +160,7 @@ function Creation() {
                             }}
                         />
                     </Grid> <hr></hr>
-                    <Button onClick={addOffer} variant="contained">Soumettre offre NFT</Button>
+                    <Button onClick={setPriceContract} variant="contained">Soumettre offre NFT</Button>
                 </Grid>
         <NavBarDetail /> 
         </div>
