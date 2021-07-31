@@ -23,26 +23,33 @@ contract TokenERC721 is ERC721URIStorage {
     mapping(address => uint256) public ethBalance; 
     mapping(uint256 => uint256) public tokenPrice;
 
-    event priceIsSet(uint256 offerId, address From);
-    event mintedNFT(address Buyer, string Hash, string Metadata, uint256 IdOfOffer);
+    event priceIsSet(uint256 price, uint256 offerId, address From);
+    event mintedNFT(address Buyer, string Hash, string Metadata, uint256 IdOfOffer, uint256 value);
     event transferedNFT(address From, address To, uint256 tokenId);
     event reimbursed(address From, uint256 amount);
 
     constructor() ERC721("DigiboxToken", "DGBT") {}
 
-    /** @notice Sets the price of the NFT, inputed by the seller.
+    /* @notice Sets the price of the NFT, inputed by the seller.
      * @dev We use the OZ lib to increment Id's in order to avoid overFlows
      * @param price We then set the price to the following Id of the NFT
      * @dev By placing an event here, we will be able to display it on our front-end
      * @return Finally we return the unique Id created by our function
      */
 
+    function getOfferId() public view returns(uint256) {
+        return _offerIds.current();
+    }
+
+    function getTokenId() public view returns(uint256) {
+        return _tokenIds.current();
+    }
+
     function setPrice(uint256 price) public {
-        _offerIds.increment();
         uint256 newOfferId = _offerIds.current();
         prices[newOfferId] = price;
-
-        emit priceIsSet(newOfferId, msg.sender);
+        _offerIds.increment();
+        emit priceIsSet(price, newOfferId, msg.sender);
     }
      
      /** @notice Minting and attributing the NFT to the buyer.
@@ -55,12 +62,12 @@ contract TokenERC721 is ERC721URIStorage {
       * @dev We also want to be able to display in our front a few event, so we added this mintedNFT event
       * @return We return the item's unique Id
       */
+
     function awardItem(uint256 offerId, string memory hash, string memory metadata) public payable returns (uint256) {
         require(msg.value >= prices[offerId], "Send the minimum amount required");  
         // require(hashes[hash] != 1);
         hashes[hash] = 1;
 
-        _tokenIds.increment();
         uint256 newItemId = _tokenIds.current();
 
         _mint(msg.sender, newItemId);
@@ -69,9 +76,15 @@ contract TokenERC721 is ERC721URIStorage {
         ethBalance[msg.sender] += msg.value;
         tokenPrice[newItemId] = prices[offerId];
 
-        emit mintedNFT(msg.sender, hash, metadata, offerId);
+        emit mintedNFT(msg.sender, hash, metadata, offerId, msg.value);
 
+        _tokenIds.increment();
+        
         return newItemId;
+    }
+
+    function getEthBalance(address _address) public view returns(uint256) {
+        return ethBalance[_address];
     }
 
     /** @notice This function is used to transfer NFT's, this function 
@@ -127,16 +140,13 @@ contract TokenERC721 is ERC721URIStorage {
 
 
 /*  
-
 ///@dev j'ai placé le contrat MarketPlace ici au cas ou :).
 pragma abicoder v2;
-
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "./ERC721.sol";
-
  contract  MarketPlace is ReentrancyGuard {
     
     using SafeMath for uint;
@@ -295,76 +305,57 @@ import "./ERC721.sol";
             }
        
  }        
-
-
 contract MarketPlace is Ownable {
-
   using SafeMath for uint;
      
     uint256 productPrice;
     address recipient;
-
     //constructor() ERC20("", "") {}
-
     struct Payment {
         uint256 price;
         uint256 productId;
     }
-
     struct Presta {
       bool isPresta;
       bool isAllowedToWithdraw;
       uint256 amountToWithdraw;
       
     }
-
     struct ownerNFT {
         bool isOwner;
         uint256 id;
         address ownerOfNFT;
     }
-
     ownerNFT[] owner;
-
     mapping(address => Payment[]) public payments;
     mapping(address => Presta) public prestataire;
-
     event productBought(address From, uint256 Amount, uint256 productId);
     event priceChange(address From, uint256 Price);
     event hasDeposited(address from, uint amountDeposited);
     event isAllowedToPull(address isAllowed);
     event hasWithdrawn(address from, uint amountWithdrawn);
-
   
-
     function buyProduct(uint256 productId) public payable {
         require(msg.value >= productPrice, "You didn't send the correct amount");
         require(recipient != address(0), "ERC1155: transfer to 0 address");
-
          Payment memory _payment = Payment(productPrice, productId);
          payments[msg.sender].push(_payment);
-
          //productPrice = productPrice.add(msg.value);
-
          emit productBought(msg.sender, msg.value, productId); 
     }
-
     function createOffer() external {
          //require(prestataire[msg.sender].isPresta == true);
          owner.push(ownerNFT(true, owner.length, msg.sender));
     }
-
     function allowPresta(address _address) external onlyOwner() {
         prestataire[_address].isPresta = true;
         prestataire[_address].isAllowedToWithdraw = true;
         emit isAllowedToPull(_address);
     }
-
     function withdrawFunds() public payable {
       //uint256 amountToClaim = prestataire[msg.sender].amountToWithdraw;
        
       //require(prestataire[msg.sender].isAllowedToWithdraw == true);
-
       //prestataire[msg.sender].amountToWithdraw = 0;
         
       (bool success, ) = msg.sender.call{value: balanceOf[msg.sender]}("");
@@ -372,32 +363,26 @@ contract MarketPlace is Ownable {
       
       balanceOf[msg.sender] = 0; 
     }
-
     function getBalanceOfEth() public view returns(uint256) {
       return address(this).balance;
     }
-
     receive() external payable{
       
     }
 }
-
    function setPrice(uint256 _productPrice) public onlyOwner() {
          productPrice = _productPrice;
          emit priceChange(msg.sender, _productPrice);
     }
-
     ///@notice we need to elaborate converter smart contract to deploy following
      function sendToSwaper() external onlyOwner() {
         require(address(this).balance >= 1 ether, "Not gas efficient to send now");
            (bool sent, ) = swaperAddress.call{value: address(this).balance}("");
            require(sent, "Failed to send Ether");
     }
-
     function setVaultAddress(address _vaultAdd) external onlyOwner() {
       VaultAddress = _vaultAdd;
     } 
-
     function sendDaiToVault() external onlyOwner(){
       require(amountOfDai >= minAmountDai, "Not gas efficient to send now");
         (bool sent, ) = VaultAddress.call{value: amountOfDai}("");
