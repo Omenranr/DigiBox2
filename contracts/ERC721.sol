@@ -46,10 +46,6 @@ contract TokenERC721 is ERC721URIStorage {
 
         return newOfferId;
     }
-
-    function getFuckingPrice(uint256 index) public view returns(uint256) {
-          return prices[index];
-    }
      
      /** @notice Minting and attributing the NFT to the buyer.
       * @dev Firstly we require that the value sent is higher then the value asked by the seller

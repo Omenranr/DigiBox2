@@ -3,7 +3,6 @@ const { expect, assert } = require('chai');
 const ERC721 = artifacts.require('TokenERC721');
 
 contract('ERC721', (accounts) => {
-  let erc721Instance = null;
   const testPrice = new BN(10);
   let owner = accounts[0];
   let sender = accounts[1];
@@ -18,14 +17,13 @@ contract('ERC721', (accounts) => {
   });
 
   it("Should make sure price is set correctly", async () => {
-    expect(await this.erc721Instance.setPrice(10)).to.be.bignumber.equal(testPrice);
+    expect(await this.erc721Instance.setPrice()).to.be.bignumber.equal(testPrice);
   });
 
   it("Caller should receive 1 NFT", async () => {
-    const balanceBefore = 0;
     await this.erc721Instance.awardItem(1, "ohuaz23uh", "metadata");
-    expect()
   });
+
 });
 
 /*contract('ERC721', accounts => {
@@ -80,9 +78,6 @@ contract('ERC721', (accounts) => {
     }) 
 
 })
-
-
-
 
 
 const { accounts, contract } = require('@openzeppelin/test-environment');
