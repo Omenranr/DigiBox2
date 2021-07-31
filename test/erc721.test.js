@@ -1,8 +1,34 @@
-const { BN, expectEvent, expectRevert } = require('@openzeppelin/test-helpers');
-const { expect } = require('chai');
+const { BN, ether, expectEvent, expectRevert } = require('@openzeppelin/test-helpers');
+const { expect, assert } = require('chai');
 const ERC721 = artifacts.require('TokenERC721');
 
-contract('ERC721', accounts => {
+contract('ERC721', (accounts) => {
+  let erc721Instance = null;
+  const testPrice = new BN(10);
+  let owner = accounts[0];
+  let sender = accounts[1];
+  let receiver = accounts[2];
+
+  beforeEach(async() => {
+    erc721Instance = await ERC721.new();
+  })
+
+  it("Should deploy our smart contract", async () => {
+     assert(erc721Instance.address !== "");
+  });
+
+  it("Should make sure price is set correctly", async () => {
+    expect(await this.erc721Instance.setPrice(10)).to.be.bignumber.equal(testPrice);
+  });
+
+  it("Caller should receive 1 NFT", async () => {
+    const balanceBefore = 0;
+    await this.erc721Instance.awardItem(1, "ohuaz23uh", "metadata");
+    expect()
+  });
+});
+
+/*contract('ERC721', accounts => {
   const owner = accounts[0];
   const sender = accounts[1];
   const receiver = [2];
@@ -17,7 +43,7 @@ contract('ERC721', accounts => {
     expect(await this.erc721Instance.setPrice(BN(10)).to.equal(testPrice));
   })
 
-  /* it('Should check ethBalance after transfer', async function() {
+   it('Should check ethBalance after transfer', async function() {
       let tokenId = 1;
       let balanceSenderBefore = await this.erc721Instance.balanceOf(owner);
       let balanceOfReceiverBefore = await this.erc721Instance.balanceOf(receiver);
@@ -51,14 +77,14 @@ contract('ERC721', accounts => {
 
     it('should revert if unsufficient funds are sent', async function() {
       expectRevert()
-    }) */
+    }) 
 
 })
 
 
 
 
-/*
+
 const { accounts, contract } = require('@openzeppelin/test-environment');
 const { expect } = require('chai');
 const {
