@@ -16,17 +16,82 @@ contract('ERC721', (accounts) => {
      assert(erc721Instance.address !== "");
   });
 
-  it("Should make sure price is set correctly", async () => {
-    expect(await this.erc721Instance.setPrice()).to.be.bignumber.equal(testPrice);
+  //function setPrice
+
+  it("Should verify that _offerIds increments", async function() {
+
   });
 
-  it("Caller should receive 1 NFT", async () => {
-    await this.erc721Instance.awardItem(1, "ohuaz23uh", "metadata");
+  it("Should verify that price is = to the inputtedPrice", async function() {
+
   });
+
+  it("Should verify priceIsSet event is triggered", async function() {
+
+  });
+
+  //function awardItem 
+
+  it("Should verify that _tokenIds increments", async function() {
+
+  });
+
+  it("Should verify that msg.sender receives an NFT", async function() {
+
+  });
+
+  it("Should that the balance of msg.sender is updated", async function() {
+
+  });
+
+  it("Should trigger the following event mintedNFT", async function() {
+
+  });
+
+  //function transferFrom 
+  it("Should verify that it is sent from msg.sender to receiver", async function() {
+
+  });
+
+  it("Should verify that the balance of NFT of msg.sender and receiver is updated", async function() {
+
+  });
+
+  it("Should trigger the following event transferedNFT", async function() {
+
+  });
+
+  //function reimbursement
+
+  it("Should verify balance of NFT of msg.sender decreases", async function() {
+
+  });
+
+  it("Should verify that token is burned", async function() {
+
+  });
+
+  it("Should trigger the following event reimbursed", async function() {
+
+  });
+
+
+  
+
+ 
 
 });
 
-/*contract('ERC721', accounts => {
+/*
+it("Should make sure price is set correctly", async () => {
+  expect(await this.erc721Instance.setPrice()).to.be.bignumber.equal(testPrice);
+});
+
+it("Caller should receive 1 NFT", async () => {
+  await this.erc721Instance.awardItem(1, "ohuaz23uh", "metadata");
+});
+
+contract('ERC721', accounts => {
   const owner = accounts[0];
   const sender = accounts[1];
   const receiver = [2];
