@@ -1,34 +1,12 @@
-nav {
-    height: 50px;
-    background: linear-gradient(45deg, rgb(93, 91, 199), midnightblue);
-}
-
-.list {
-    list-style-type: none;
-    background: linear-gradient(45deg, rgb(93, 91, 216), midnightblue);
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    margin: 0;
-    padding: 0;
-}
-
-.items {
-    margin-right: 10px;
-    color: white;
-    cursor: pointer;
-}
-
-.btn {
-    display: none;
-    background-color: white;
-}
-
 .logo {
-    width: 70px;
-    float:right;
+    position: absolute;
+    height: auto;
+    left: 230px;
+}
+
+.grp-btn {
+    position: absolute;
+    left: 470px;
 }
 
 @media screen and (max-width: 500px) {

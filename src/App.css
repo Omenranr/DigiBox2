@@ -2,8 +2,9 @@
   text-align: center;
 }
 
-.btn-meta {
+/*.btn-meta {
   position: absolute;
+  text-align: center;
   left: 1150px;
   top: 95px;
   color: midnightblue;
@@ -11,4 +12,4 @@
 
 .display-meta{
   font-size: smaller;
-}
+} */

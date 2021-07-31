@@ -19,7 +19,14 @@
 
 .text {
     position: absolute;
-    margin-top: 130px;
+    margin-top: 100px;
     box-sizing: border-box;
+    text-align: center;
+    left: 30px;
+}
+
+.meta {
+    text-align: center;
+    margin-top: 10px;
 }
 

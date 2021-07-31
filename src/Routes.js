@@ -9,7 +9,9 @@ import {
     SCPresta,
     SC,
     CGV,
-    Commentaires
+    Commentaires,
+    Creation,
+    Profil
 } from './views'
 
 const Routes = () => {
@@ -22,6 +24,9 @@ const Routes = () => {
       />
       <Route path="/Homepage">
           <HomePage />
+      </Route>
+      <Route path="/WhitePaper">
+          <WhitePaper />
       </Route>
       <Route path="/Equipe">
           <Equipe />
@@ -46,6 +51,12 @@ const Routes = () => {
       </Route>
       <Route path="/Retour sur votre experience">
           <Commentaires />
+      </Route>
+      <Route path="/Creation de l'offre">
+          <Creation />
+      </Route>
+      <Route path="/Profil">
+         <Profil />
       </Route>
     </Switch>
   );

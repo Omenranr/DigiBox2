@@ -9,15 +9,7 @@
     border: black 2px;
 }
 
-.leftDisplay {
-    flex: 1;
-}
-
-.centerDisplay {
-    flex: 1;
-}
-
-.rightNFT {
+.cardDisplay {
     flex: 1;
 }
 
