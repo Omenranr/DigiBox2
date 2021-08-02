@@ -1,0 +1,538 @@
+======= /Users/nicolas/Desktop/client/node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol:ERC721 =======
+Developer Documentation
+{
+  "details": "Implementation of https://eips.ethereum.org/EIPS/eip-721[ERC721] Non-Fungible Token Standard, including the Metadata extension, but not including the Enumerable extension, which is available separately as {ERC721Enumerable}.",
+  "kind": "dev",
+  "methods":
+  {
+    "approve(address,uint256)":
+    {
+      "details": "See {IERC721-approve}."
+    },
+    "balanceOf(address)":
+    {
+      "details": "See {IERC721-balanceOf}."
+    },
+    "constructor":
+    {
+      "details": "Initializes the contract by setting a `name` and a `symbol` to the token collection."
+    },
+    "getApproved(uint256)":
+    {
+      "details": "See {IERC721-getApproved}."
+    },
+    "isApprovedForAll(address,address)":
+    {
+      "details": "See {IERC721-isApprovedForAll}."
+    },
+    "name()":
+    {
+      "details": "See {IERC721Metadata-name}."
+    },
+    "ownerOf(uint256)":
+    {
+      "details": "See {IERC721-ownerOf}."
+    },
+    "safeTransferFrom(address,address,uint256)":
+    {
+      "details": "See {IERC721-safeTransferFrom}."
+    },
+    "safeTransferFrom(address,address,uint256,bytes)":
+    {
+      "details": "See {IERC721-safeTransferFrom}."
+    },
+    "setApprovalForAll(address,bool)":
+    {
+      "details": "See {IERC721-setApprovalForAll}."
+    },
+    "supportsInterface(bytes4)":
+    {
+      "details": "See {IERC165-supportsInterface}."
+    },
+    "symbol()":
+    {
+      "details": "See {IERC721Metadata-symbol}."
+    },
+    "tokenURI(uint256)":
+    {
+      "details": "See {IERC721Metadata-tokenURI}."
+    },
+    "transferFrom(address,address,uint256)":
+    {
+      "details": "See {IERC721-transferFrom}."
+    }
+  },
+  "version": 1
+}
+User Documentation
+{
+  "kind": "user",
+  "methods": {},
+  "version": 1
+}
+
+======= /Users/nicolas/Desktop/client/node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol:IERC721 =======
+Developer Documentation
+{
+  "details": "Required interface of an ERC721 compliant contract.",
+  "events":
+  {
+    "Approval(address,address,uint256)":
+    {
+      "details": "Emitted when `owner` enables `approved` to manage the `tokenId` token."
+    },
+    "ApprovalForAll(address,address,bool)":
+    {
+      "details": "Emitted when `owner` enables or disables (`approved`) `operator` to manage all of its assets."
+    },
+    "Transfer(address,address,uint256)":
+    {
+      "details": "Emitted when `tokenId` token is transferred from `from` to `to`."
+    }
+  },
+  "kind": "dev",
+  "methods":
+  {
+    "approve(address,uint256)":
+    {
+      "details": "Gives permission to `to` to transfer `tokenId` token to another account. The approval is cleared when the token is transferred. Only a single account can be approved at a time, so approving the zero address clears previous approvals. Requirements: - The caller must own the token or be an approved operator. - `tokenId` must exist. Emits an {Approval} event."
+    },
+    "balanceOf(address)":
+    {
+      "details": "Returns the number of tokens in ``owner``'s account."
+    },
+    "getApproved(uint256)":
+    {
+      "details": "Returns the account approved for `tokenId` token. Requirements: - `tokenId` must exist."
+    },
+    "isApprovedForAll(address,address)":
+    {
+      "details": "Returns if the `operator` is allowed to manage all of the assets of `owner`. See {setApprovalForAll}"
+    },
+    "ownerOf(uint256)":
+    {
+      "details": "Returns the owner of the `tokenId` token. Requirements: - `tokenId` must exist."
+    },
+    "safeTransferFrom(address,address,uint256)":
+    {
+      "details": "Safely transfers `tokenId` token from `from` to `to`, checking first that contract recipients are aware of the ERC721 protocol to prevent tokens from being forever locked. Requirements: - `from` cannot be the zero address. - `to` cannot be the zero address. - `tokenId` token must exist and be owned by `from`. - If the caller is not `from`, it must be have been allowed to move this token by either {approve} or {setApprovalForAll}. - If `to` refers to a smart contract, it must implement {IERC721Receiver-onERC721Received}, which is called upon a safe transfer. Emits a {Transfer} event."
+    },
+    "safeTransferFrom(address,address,uint256,bytes)":
+    {
+      "details": "Safely transfers `tokenId` token from `from` to `to`. Requirements: - `from` cannot be the zero address. - `to` cannot be the zero address. - `tokenId` token must exist and be owned by `from`. - If the caller is not `from`, it must be approved to move this token by either {approve} or {setApprovalForAll}. - If `to` refers to a smart contract, it must implement {IERC721Receiver-onERC721Received}, which is called upon a safe transfer. Emits a {Transfer} event."
+    },
+    "setApprovalForAll(address,bool)":
+    {
+      "details": "Approve or remove `operator` as an operator for the caller. Operators can call {transferFrom} or {safeTransferFrom} for any token owned by the caller. Requirements: - The `operator` cannot be the caller. Emits an {ApprovalForAll} event."
+    },
+    "supportsInterface(bytes4)":
+    {
+      "details": "Returns true if this contract implements the interface defined by `interfaceId`. See the corresponding https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[EIP section] to learn more about how these ids are created. This function call must use less than 30 000 gas."
+    },
+    "transferFrom(address,address,uint256)":
+    {
+      "details": "Transfers `tokenId` token from `from` to `to`. WARNING: Usage of this method is discouraged, use {safeTransferFrom} whenever possible. Requirements: - `from` cannot be the zero address. - `to` cannot be the zero address. - `tokenId` token must be owned by `from`. - If the caller is not `from`, it must be approved to move this token by either {approve} or {setApprovalForAll}. Emits a {Transfer} event."
+    }
+  },
+  "version": 1
+}
+User Documentation
+{
+  "kind": "user",
+  "methods": {},
+  "version": 1
+}
+
+======= /Users/nicolas/Desktop/client/node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol:IERC721Receiver =======
+Developer Documentation
+{
+  "details": "Interface for any contract that wants to support safeTransfers from ERC721 asset contracts.",
+  "kind": "dev",
+  "methods":
+  {
+    "onERC721Received(address,address,uint256,bytes)":
+    {
+      "details": "Whenever an {IERC721} `tokenId` token is transferred to this contract via {IERC721-safeTransferFrom} by `operator` from `from`, this function is called. It must return its Solidity selector to confirm the token transfer. If any other value is returned or the interface is not implemented by the recipient, the transfer will be reverted. The selector can be obtained in Solidity with `IERC721.onERC721Received.selector`."
+    }
+  },
+  "title": "ERC721 token receiver interface",
+  "version": 1
+}
+User Documentation
+{
+  "kind": "user",
+  "methods": {},
+  "version": 1
+}
+
+======= /Users/nicolas/Desktop/client/node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol:ERC721URIStorage =======
+Developer Documentation
+{
+  "details": "ERC721 token with storage based token URI management.",
+  "kind": "dev",
+  "methods":
+  {
+    "approve(address,uint256)":
+    {
+      "details": "See {IERC721-approve}."
+    },
+    "balanceOf(address)":
+    {
+      "details": "See {IERC721-balanceOf}."
+    },
+    "getApproved(uint256)":
+    {
+      "details": "See {IERC721-getApproved}."
+    },
+    "isApprovedForAll(address,address)":
+    {
+      "details": "See {IERC721-isApprovedForAll}."
+    },
+    "name()":
+    {
+      "details": "See {IERC721Metadata-name}."
+    },
+    "ownerOf(uint256)":
+    {
+      "details": "See {IERC721-ownerOf}."
+    },
+    "safeTransferFrom(address,address,uint256)":
+    {
+      "details": "See {IERC721-safeTransferFrom}."
+    },
+    "safeTransferFrom(address,address,uint256,bytes)":
+    {
+      "details": "See {IERC721-safeTransferFrom}."
+    },
+    "setApprovalForAll(address,bool)":
+    {
+      "details": "See {IERC721-setApprovalForAll}."
+    },
+    "supportsInterface(bytes4)":
+    {
+      "details": "See {IERC165-supportsInterface}."
+    },
+    "symbol()":
+    {
+      "details": "See {IERC721Metadata-symbol}."
+    },
+    "tokenURI(uint256)":
+    {
+      "details": "See {IERC721Metadata-tokenURI}."
+    },
+    "transferFrom(address,address,uint256)":
+    {
+      "details": "See {IERC721-transferFrom}."
+    }
+  },
+  "version": 1
+}
+User Documentation
+{
+  "kind": "user",
+  "methods": {},
+  "version": 1
+}
+
+======= /Users/nicolas/Desktop/client/node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol:IERC721Metadata =======
+Developer Documentation
+{
+  "details": "See https://eips.ethereum.org/EIPS/eip-721",
+  "kind": "dev",
+  "methods":
+  {
+    "approve(address,uint256)":
+    {
+      "details": "Gives permission to `to` to transfer `tokenId` token to another account. The approval is cleared when the token is transferred. Only a single account can be approved at a time, so approving the zero address clears previous approvals. Requirements: - The caller must own the token or be an approved operator. - `tokenId` must exist. Emits an {Approval} event."
+    },
+    "balanceOf(address)":
+    {
+      "details": "Returns the number of tokens in ``owner``'s account."
+    },
+    "getApproved(uint256)":
+    {
+      "details": "Returns the account approved for `tokenId` token. Requirements: - `tokenId` must exist."
+    },
+    "isApprovedForAll(address,address)":
+    {
+      "details": "Returns if the `operator` is allowed to manage all of the assets of `owner`. See {setApprovalForAll}"
+    },
+    "name()":
+    {
+      "details": "Returns the token collection name."
+    },
+    "ownerOf(uint256)":
+    {
+      "details": "Returns the owner of the `tokenId` token. Requirements: - `tokenId` must exist."
+    },
+    "safeTransferFrom(address,address,uint256)":
+    {
+      "details": "Safely transfers `tokenId` token from `from` to `to`, checking first that contract recipients are aware of the ERC721 protocol to prevent tokens from being forever locked. Requirements: - `from` cannot be the zero address. - `to` cannot be the zero address. - `tokenId` token must exist and be owned by `from`. - If the caller is not `from`, it must be have been allowed to move this token by either {approve} or {setApprovalForAll}. - If `to` refers to a smart contract, it must implement {IERC721Receiver-onERC721Received}, which is called upon a safe transfer. Emits a {Transfer} event."
+    },
+    "safeTransferFrom(address,address,uint256,bytes)":
+    {
+      "details": "Safely transfers `tokenId` token from `from` to `to`. Requirements: - `from` cannot be the zero address. - `to` cannot be the zero address. - `tokenId` token must exist and be owned by `from`. - If the caller is not `from`, it must be approved to move this token by either {approve} or {setApprovalForAll}. - If `to` refers to a smart contract, it must implement {IERC721Receiver-onERC721Received}, which is called upon a safe transfer. Emits a {Transfer} event."
+    },
+    "setApprovalForAll(address,bool)":
+    {
+      "details": "Approve or remove `operator` as an operator for the caller. Operators can call {transferFrom} or {safeTransferFrom} for any token owned by the caller. Requirements: - The `operator` cannot be the caller. Emits an {ApprovalForAll} event."
+    },
+    "supportsInterface(bytes4)":
+    {
+      "details": "Returns true if this contract implements the interface defined by `interfaceId`. See the corresponding https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[EIP section] to learn more about how these ids are created. This function call must use less than 30 000 gas."
+    },
+    "symbol()":
+    {
+      "details": "Returns the token collection symbol."
+    },
+    "tokenURI(uint256)":
+    {
+      "details": "Returns the Uniform Resource Identifier (URI) for `tokenId` token."
+    },
+    "transferFrom(address,address,uint256)":
+    {
+      "details": "Transfers `tokenId` token from `from` to `to`. WARNING: Usage of this method is discouraged, use {safeTransferFrom} whenever possible. Requirements: - `from` cannot be the zero address. - `to` cannot be the zero address. - `tokenId` token must be owned by `from`. - If the caller is not `from`, it must be approved to move this token by either {approve} or {setApprovalForAll}. Emits a {Transfer} event."
+    }
+  },
+  "title": "ERC-721 Non-Fungible Token Standard, optional metadata extension",
+  "version": 1
+}
+User Documentation
+{
+  "kind": "user",
+  "methods": {},
+  "version": 1
+}
+
+======= /Users/nicolas/Desktop/client/node_modules/@openzeppelin/contracts/utils/Address.sol:Address =======
+Developer Documentation
+{
+  "details": "Collection of functions related to the address type",
+  "kind": "dev",
+  "methods": {},
+  "version": 1
+}
+User Documentation
+{
+  "kind": "user",
+  "methods": {},
+  "version": 1
+}
+
+======= /Users/nicolas/Desktop/client/node_modules/@openzeppelin/contracts/utils/Context.sol:Context =======
+Developer Documentation
+{
+  "kind": "dev",
+  "methods": {},
+  "version": 1
+}
+User Documentation
+{
+  "kind": "user",
+  "methods": {},
+  "version": 1
+}
+
+======= /Users/nicolas/Desktop/client/node_modules/@openzeppelin/contracts/utils/Counters.sol:Counters =======
+Developer Documentation
+{
+  "author": "Matt Condon (@shrugs)",
+  "details": "Provides counters that can only be incremented, decremented or reset. This can be used e.g. to track the number of elements in a mapping, issuing ERC721 ids, or counting request ids. Include with `using Counters for Counters.Counter;`",
+  "kind": "dev",
+  "methods": {},
+  "title": "Counters",
+  "version": 1
+}
+User Documentation
+{
+  "kind": "user",
+  "methods": {},
+  "version": 1
+}
+
+======= /Users/nicolas/Desktop/client/node_modules/@openzeppelin/contracts/utils/Strings.sol:Strings =======
+Developer Documentation
+{
+  "details": "String operations.",
+  "kind": "dev",
+  "methods": {},
+  "version": 1
+}
+User Documentation
+{
+  "kind": "user",
+  "methods": {},
+  "version": 1
+}
+
+======= /Users/nicolas/Desktop/client/node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol:ERC165 =======
+Developer Documentation
+{
+  "details": "Implementation of the {IERC165} interface. Contracts that want to implement ERC165 should inherit from this contract and override {supportsInterface} to check for the additional interface id that will be supported. For example: ```solidity function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {     return interfaceId == type(MyInterface).interfaceId || super.supportsInterface(interfaceId); } ``` Alternatively, {ERC165Storage} provides an easier to use but more expensive implementation.",
+  "kind": "dev",
+  "methods":
+  {
+    "supportsInterface(bytes4)":
+    {
+      "details": "See {IERC165-supportsInterface}."
+    }
+  },
+  "version": 1
+}
+User Documentation
+{
+  "kind": "user",
+  "methods": {},
+  "version": 1
+}
+
+======= /Users/nicolas/Desktop/client/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol:IERC165 =======
+Developer Documentation
+{
+  "details": "Interface of the ERC165 standard, as defined in the https://eips.ethereum.org/EIPS/eip-165[EIP]. Implementers can declare support of contract interfaces, which can then be queried by others ({ERC165Checker}). For an implementation, see {ERC165}.",
+  "kind": "dev",
+  "methods":
+  {
+    "supportsInterface(bytes4)":
+    {
+      "details": "Returns true if this contract implements the interface defined by `interfaceId`. See the corresponding https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[EIP section] to learn more about how these ids are created. This function call must use less than 30 000 gas."
+    }
+  },
+  "version": 1
+}
+User Documentation
+{
+  "kind": "user",
+  "methods": {},
+  "version": 1
+}
+
+======= contracts/ERC721.sol:TokenERC721 =======
+Developer Documentation
+{
+  "kind": "dev",
+  "methods":
+  {
+    "approve(address,uint256)":
+    {
+      "details": "See {IERC721-approve}."
+    },
+    "awardItem(uint256,string,string)":
+    {
+      "details": "Firstly we require that the value sent is higher then the value asked by the seller then, using the _mint function from OZ lib we create the NFT and send it to the function caller. UpDate the ether balance of the buyerWe also want to be able to display in our front a few event, so we added this mintedNFT event",
+      "params":
+      {
+        "hash": "Identifier of the image of the NFT on IPFS",
+        "metadata": "Metdata Identifier of the NFT on IPFS",
+        "offerId": "We want to be able to track the offers created. "
+      },
+      "returns":
+      {
+        "_0": "We return the item's unique Id"
+      }
+    },
+    "balanceOf(address)":
+    {
+      "details": "See {IERC721-balanceOf}."
+    },
+    "getApproved(uint256)":
+    {
+      "details": "See {IERC721-getApproved}."
+    },
+    "getOfferId()":
+    {
+      "details": "for tests && front-end display"
+    },
+    "isApprovedForAll(address,address)":
+    {
+      "details": "See {IERC721-isApprovedForAll}."
+    },
+    "name()":
+    {
+      "details": "See {IERC721Metadata-name}."
+    },
+    "ownerOf(uint256)":
+    {
+      "details": "See {IERC721-ownerOf}."
+    },
+    "reimbursement(uint256)":
+    {
+      "details": "As in our previous function we use the OZ lib to back-up our contract We then require that the caller is the owner of the tokenId  then the balance of the caller is updated. the token is then burned(using OZ lib) then => proceed to the payment, the caller will receive his funds by calling the function Emitting this event will allow the front to send a confirmation/Fail messsage",
+      "params":
+      {
+        "tokenId": "We need to know the tokenId to proceed"
+      }
+    },
+    "safeTransferFrom(address,address,uint256)":
+    {
+      "details": "See {IERC721-safeTransferFrom}."
+    },
+    "safeTransferFrom(address,address,uint256,bytes)":
+    {
+      "details": "See {IERC721-safeTransferFrom}."
+    },
+    "setApprovalForAll(address,bool)":
+    {
+      "details": "See {IERC721-setApprovalForAll}."
+    },
+    "setPrice(uint256)":
+    {
+      "details": "We use the OZ lib to increment Id's in order to avoid overFlowsBy placing an event here, we will be able to display it on our front-end",
+      "params":
+      {
+        "price": "We then set the price to the following Id of the NFT"
+      }
+    },
+    "supportsInterface(bytes4)":
+    {
+      "details": "See {IERC165-supportsInterface}."
+    },
+    "symbol()":
+    {
+      "details": "See {IERC721Metadata-symbol}."
+    },
+    "tokenURI(uint256)":
+    {
+      "details": "See {IERC721Metadata-tokenURI}."
+    },
+    "transferFrom(address,address,uint256)":
+    {
+      "details": "We back this function using OZ ERC721 lib using the lib, we require that the token owner is the caller of this function We then proceed to the transfer By emitting these events we are able to display a msg in our front Finally, we reset the balances of the owner and the receiver.",
+      "params":
+      {
+        "from": "The msg.sender",
+        "to": "The receiver ",
+        "tokenId": "We make sure that the tokenID is inputed as a param by the caller to avoid problems"
+      }
+    }
+  },
+  "version": 1
+}
+User Documentation
+{
+  "kind": "user",
+  "methods":
+  {
+    "awardItem(uint256,string,string)":
+    {
+      "notice": "Minting and attributing the NFT to the buyer."
+    },
+    "getOfferId()":
+    {
+      "notice": "these are our getter functions"
+    },
+    "reimbursement(uint256)":
+    {
+      "notice": "This function is our \"pay\" function, indeed we decided to go with a pull over push function Firstly for security reasons, it also allows the user that purchased  the NFT to call this function and to get reimbursed, so everybody win's :)"
+    },
+    "setPrice(uint256)":
+    {
+      "notice": "Sets the price of the NFT, inputed by the seller."
+    },
+    "transferFrom(address,address,uint256)":
+    {
+      "notice": "This function is used to transfer NFTs, this function  will be used to send to the seller, or send the NFT as a gift "
+    }
+  },
+  "version": 1
+}
