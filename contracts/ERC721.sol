@@ -117,12 +117,11 @@ contract TokenERC721 is ERC721URIStorage {
      * the token is then burned(using OZ lib)
      * then => proceed to the payment, the caller will receive his funds by calling the function
      * Emitting this event will allow the front to send a confirmation/Fail messsage
-     * @param from the caller of the function that want to receive his/her funds
      * @param tokenId We need to know the tokenId to proceed
      */
-    function reimbursment(address from, uint256 tokenId) external payable {
+    function reimbursment(uint256 tokenId) external payable {
         require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
-        ethBalance[from] -= tokenPrice[tokenId];
+        ethBalance[msg.sender] -= tokenPrice[tokenId];
         _burn(tokenId);
 
         (bool success, ) = msg.sender.call{value: tokenPrice[tokenId]}("");

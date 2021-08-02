@@ -12,7 +12,7 @@ import erc721Json from "../../../contracts/TokenERC721.json";
 import Popover from '@material-ui/core/Popover';
 import Web3 from 'web3'
 import "./ProfilCard.css";
-// import axios from 'axios'
+import axios from 'axios'
 
 export default function ProfilCard(props) {
   const useStyles = makeStyles((theme) => ({
@@ -57,19 +57,22 @@ export default function ProfilCard(props) {
     setErc721Contract(erc721);
   }
 
-  // async function transfer() {
-  //   var gasValue = web3.utils.toHex(web3.utils.toWei('21000', 'wei'));
+  async function handleTransfer() {
+    await erc721Contract.methods.transferFrom(account, transferAddress, props.nft.nftId).send({from: account})
+    .then(async () => {
+      const body = {
+        ownerAddress: transferAddress,
+        nftId: props.nft.nftId
+      }
+      axios.post(process.env.REACT_APP_API_URL + '/nfts/update', body)
+    })
+    .then(response => { console.log(response, "success") })
+    .catch(error => { console.log(error) })
+  }
 
-  //     await erc721Contract.methods.transferFrom().send({from: account, })
-  // }
-
-  // async function refund() {
-  //   var gasValue = web3.utils.toHex(web3.utils.toWei('21000', 'wei'));
-  //   var amountToReimburse = web3.utils.toBN(tokenPrice);
-  //   var weiValue = web3.utils.toWei(tokenPrice,'ether');
-
-  //    await erc721Contract.methods.reimbursment().send({from: address(this), })
-  // }
+  async function handleReimbursment() {
+    erc721Contract.methods.reimbursment(props.nft.nftId).send({from: account})
+  }
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleClick = (event) => {
@@ -111,9 +114,9 @@ export default function ProfilCard(props) {
               type="text"
               onChange={(event) => { setTransferAddress(event.target.value); }}
           />
-          <Button className={classes.popoverButton} size="small" color="primary">Transférer</Button>
+          <Button className={classes.popoverButton} onClick={handleTransfer} size="small" color="primary">Transférer</Button>
         </Popover>
-        <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}>
+        <Button aria-describedby={id} variant="contained" color="primary" onClick={handleReimbursment}>
           Remboursement
         </Button>
       </CardActions>
