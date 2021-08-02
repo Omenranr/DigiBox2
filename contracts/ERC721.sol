@@ -30,22 +30,13 @@ contract TokenERC721 is ERC721URIStorage {
 
     constructor() ERC721("DigiboxToken", "DGBT") {}
 
-    /* @notice Sets the price of the NFT, inputed by the seller.
+    /** @notice Sets the price of the NFT, inputed by the seller.
      * @dev We use the OZ lib to increment Id's in order to avoid overFlows
      * @param price We then set the price to the following Id of the NFT
      * @dev By placing an event here, we will be able to display it on our front-end
-     * @return Finally we return the unique Id created by our function
      */
-
-    function getOfferId() public view returns(uint256) {
-        return _offerIds.current();
-    }
-
-    function getTokenId() public view returns(uint256) {
-        return _tokenIds.current();
-    }
-
-    function setPrice(uint256 price) public {
+    function setPrice(uint256 price) public{
+        require(price > 0 wei, "Minimum price is 1 wei");
         uint256 newOfferId = _offerIds.current();
         prices[newOfferId] = price;
         _offerIds.increment();
@@ -81,10 +72,6 @@ contract TokenERC721 is ERC721URIStorage {
         _tokenIds.increment();
         
         return newItemId;
-    }
-
-    function getEthBalance(address _address) public view returns(uint256) {
-        return ethBalance[_address];
     }
 
     /** @notice This function is used to transfer NFT's, this function 
@@ -130,6 +117,21 @@ contract TokenERC721 is ERC721URIStorage {
         require(success, "Failed to send Ether");
 
         emit reimbursed(msg.sender, msg.value);
+    }
+
+    /**@notice these are our getter functions
+     *@dev for tests && front-end display
+     */
+    function getOfferId() public view returns(uint256) {
+        return _offerIds.current();
+    }
+
+    function getTokenId() public view returns(uint256) {
+        return _tokenIds.current();
+    }
+
+    function getEthBalance(address _address) public view returns(uint256) {
+        return ethBalance[_address];
     }
 
      ///@dev fallback function
