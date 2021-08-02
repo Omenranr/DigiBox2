@@ -22,24 +22,24 @@ Project is created with :
  - UseDApp,
  - Chakra-UI.
  - Truffle test/helpers
- 
+   
  #### Launch 
-  No specific requirements for a better understanding we advise you to get Ganache or metamask in order to interact freely with our Dapp.
+  No specific requirements for a better understanding we advise you to get Ganache or metamask in order to interact freely with our Dapp.  
   Clone repo => npm install => cd client => npm start
-
-  This project uses Pinata to store data on IPFS, in order to run it correctly create a Pinata account add this variables to your environment:
-  REACT_APP_PINATA_SECRET_API_KEY=
-  REACT_APP_PINATA_API_KEY=
- 
+  
+  This project uses Pinata to store data on IPFS, in order to run it correctly create a Pinata account add this variables to your environment:  
+  REACT_APP_PINATA_SECRET_API_KEY=  
+  REACT_APP_PINATA_API_KEY=  
+    
  ##### Project status
 Still in development, project being created, We will deliver a full functional project in Q4 2021. Stay tunned !
-To-Do list :
-Front-end  => HomePage of Dapp, to be improved => Add some css/Styling.
-Backend => Link smart contracts to front-end using web3.
-Smart contract => Creation of a Vault that allow use to receive eth and send it eth/Dai to our external providers/partners.
-
+To-Do list :  
+Front-end  => HomePage of Dapp, to be improved => Add some css/Styling.  
+Backend => Link smart contracts to front-end using web3.  
+Smart contract => Creation of a Vault that allow use to receive eth and send it eth/Dai to our external providers/partners.  
+  
 ###### Sources 
-Alyra, blockchain school.
-@openzeppelin/contracts.
-#Uniswap-v3-periphery.               
+Alyra, blockchain school.  
+@openzeppelin/contracts.  
+#Uniswap-v3-periphery.              
 
