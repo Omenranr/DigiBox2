@@ -21,6 +21,7 @@ Project is created with :
  - CoinGecko API,
  - UseDApp,
  - Chakra-UI.
+ - Truffle test/helpers
  
  #### Launch 
   No specific requirements for a better understanding we advise you to get Ganache or metamask in order to interact freely with our Dapp.
@@ -35,8 +36,7 @@ Still in development, project being created, We will deliver a full functional p
 To-Do list :
 Front-end  => HomePage of Dapp, to be improved => Add some css/Styling.
 Backend => Link smart contracts to front-end using web3.
-Smart contract => We are currently focusing on the creation and deployment of our ERC1155 standard.
-               => Creation of a Vault that allow use to receive eth and send it eth/Dai to our external providers/partners.
+Smart contract => Creation of a Vault that allow use to receive eth and send it eth/Dai to our external providers/partners.
 
 ###### Sources 
 Alyra, blockchain school.

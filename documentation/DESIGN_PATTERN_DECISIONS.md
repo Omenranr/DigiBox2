@@ -40,6 +40,6 @@
 
  ## Economic Patterns
  - String Equality Comparison : We do not need this pattern. WHY ? We do not need to check if stringA === stringB.
- - Tight Variable Packing : HERE WE NEED TO FINALIZE ALL CODE of smart contract TO SHOW cODE OPTIMIZATION.
+ - Tight Variable Packing : HERE WE NEED TO FINALIZE ALL CODE of smart contract TO SHOW CODE OPTIMIZATION.
  - Memory Array : We have made the choice to export large/heavy folders to IPFS in order to save on gas consumption.
  Indeed we save PDF's on external decentralize servers. Indeed our Dapp has very few functions, and efficient ones cost related.

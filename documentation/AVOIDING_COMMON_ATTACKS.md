@@ -7,7 +7,7 @@
  - Re-Entrancy.
  - Overflow/underflow.
  - Accessing Private Data.
- - Source of randomness. 🤷‍♂️
+ - Source of randomness.
  - Denial-Of-Service.
  - Phising => tx.origin.
  - Front running.

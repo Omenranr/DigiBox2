@@ -3,18 +3,23 @@ const { expect, assert } = require('chai');
 const ERC721 = artifacts.require('TokenERC721');
 
 contract('ERC721', (accounts) => {
-  const testPrice = new BN(10);
-  let owner = accounts[0];
-  let sender = accounts[1];
-  let receiver = accounts[2];
+  const [owner, sender, receiver] = accounts;
 
   beforeEach(async() => {
+    this.value = new BN(1);
     erc721Instance = await ERC721.new();
-  })
+  });
 
   it("Should deploy our smart contract", async () => {
      assert(erc721Instance.address !== "");
   });
+
+  /*it("reverts if price is less than 1 wei", async function() {
+    const testPrice = await erc721Instance.setPrice(0);
+    expectRevert( await erc721Instance.setPrice(testPrice),
+    "Minimum price is 1 wei",
+    );
+  });*/
 
   //function setPrice
 
@@ -54,8 +59,8 @@ contract('ERC721', (accounts) => {
   it("Should verify that transferFrom msg.sender to receiver", async function() {
        let balanceofSenderBefore = 1;
        let balanceOfReceiverBefore = 0;
-       let tokenId = 0;
-       const updatedBalance = await erc721Instance.transferFrom(sender, receiver, tokenId);
+       ///let tokenId = 0;
+       const updatedBalance = await erc721Instance.transferFrom(sender, receiver, 1);
        let balanceofSenderAfter = balanceofSenderBefore.sub(1);
        let balanceOfReceiverAfter = balanceOfReceiverBefore.add(1);
        expect(balanceofSenderAfter == 0 && balanceOfReceiverAfter == 1);
@@ -65,9 +70,10 @@ contract('ERC721', (accounts) => {
   //function reimbursement
 
   it("Should verify that caller is reimbursed", async function() {
+       const price = new BN(10);
        let oldBalanceEth = await erc721Instance.getEthBalance(sender);
-       const upDatedBal = await erc721Instance.reimbursement(prices[tokenId]);
-       expect(oldBalanceEth.add(prices[tokenId]) == upDatedBal);
+       const upDatedBal = await erc721Instance.reimbursement(price);
+       expect(oldBalanceEth.add(price) == upDatedBal);
        expectEvent(await this.erc721Instance.reimbursed(sender, receiver), "reimbursed");
   });
 
