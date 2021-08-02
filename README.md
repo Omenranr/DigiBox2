@@ -9,7 +9,6 @@
 DigiBox is a blockChain Dapp. We intend to simplify the interaction between customers and sellers using blockchain technology. Why you ask ? Using blockchain in this case is efficient as we will cut third parties sellers so less fees for customers.
 
 ### Technologies
-Project is created with : 
  - Truffle
  - React
  - Material UI
