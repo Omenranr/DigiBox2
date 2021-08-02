@@ -54,6 +54,7 @@ contract('ERC721', (accounts) => {
   it("Should verify that transferFrom msg.sender to receiver", async function() {
        let balanceofSenderBefore = 1;
        let balanceOfReceiverBefore = 0;
+       let tokenId = 0;
        const updatedBalance = await erc721Instance.transferFrom(sender, receiver, tokenId);
        let balanceofSenderAfter = balanceofSenderBefore.sub(1);
        let balanceOfReceiverAfter = balanceOfReceiverBefore.add(1);
