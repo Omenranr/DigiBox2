@@ -19,7 +19,6 @@ Project is created with :
  - CoinGecko API
    
 #### Launch 
-  launch the app:  
   - launch Ganache
   - npm i  
   - truffle migrate  
