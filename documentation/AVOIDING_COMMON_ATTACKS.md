@@ -16,7 +16,7 @@
 
  ## Measures we took against possible vulnerabilities.
 
-   1. We avoid Reentrancy by using the library non-Reentrant from OpenZeppelin ✅
+   1. We avoid Reentrancy by using the last version of solidity compiler 0.8.0 ✅
    2. We overcame the potential issue of overFlow and underFlow by using the OpenZeppelin library Counters to increment our indexes. ✅
 ```
 import "@openzeppelin/contracts/utils/Counters.sol";
