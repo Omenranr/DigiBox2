@@ -119,8 +119,9 @@ contract TokenERC721 is ERC721URIStorage {
      * Emitting this event will allow the front to send a confirmation/Fail messsage
      * @param tokenId We need to know the tokenId to proceed
      */
-
-    function reimbursement(address from, uint256 tokenId) external payable {
+       
+       /// J'ai retiré le param address from
+    function reimbursement(uint256 tokenId) external payable {
         require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
         ethBalance[msg.sender] -= tokenPrice[tokenId];
         _burn(tokenId);
