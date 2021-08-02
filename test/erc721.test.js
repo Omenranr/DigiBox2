@@ -51,36 +51,24 @@ contract('ERC721', (accounts) => {
 
 
   //function transferFrom
-  it("Should verify that it is sent from msg.sender to receiver", async function() {
-
-  });
-
-  it("Should verify that the balance of NFT of msg.sender and receiver is updated", async function() {
-
-  });
-
-  it("Should trigger the following event transferedNFT", async function() {
-
+  it("Should verify that transferFrom msg.sender to receiver", async function() {
+       let balanceofSenderBefore = 1;
+       let balanceOfReceiverBefore = 0;
+       const updatedBalance = await erc721Instance.transferFrom(sender, receiver, tokenId);
+       let balanceofSenderAfter = balanceofSenderBefore.sub(1);
+       let balanceOfReceiverAfter = balanceOfReceiverBefore.add(1);
+       expect(balanceofSenderAfter == 0 && balanceOfReceiverAfter == 1);
+       expectEvent(await erc721Instance.transferFrom(sender, receiver, tokenId), 'transferedNFT')
   });
 
   //function reimbursement
 
-  it("Should verify balance of NFT of msg.sender decreases", async function() {
-
+  it("Should verify that caller is reimbursed", async function() {
+       let oldBalanceEth = await erc721Instance.getEthBalance(sender);
+       const upDatedBal = await erc721Instance.reimbursement(prices[tokenId]);
+       expect(oldBalanceEth.add(prices[tokenId]) == upDatedBal);
+       expectEvent(await this.erc721Instance.reimbursed(sender, receiver), "reimbursed");
   });
-
-  it("Should verify that token is burned", async function() {
-
-  });
-
-  it("Should trigger the following event reimbursed", async function() {
-
-  });
-
-
-  
-
- 
 
 });
 

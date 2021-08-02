@@ -120,7 +120,8 @@ contract TokenERC721 is ERC721URIStorage {
      * @param from the caller of the function that want to receive his/her funds
      * @param tokenId We need to know the tokenId to proceed
      */
-    function reimbursment(address from, uint256 tokenId) external payable {
+
+    function reimbursement(address from, uint256 tokenId) external payable {
         require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
         ethBalance[from] -= tokenPrice[tokenId];
         _burn(tokenId);
