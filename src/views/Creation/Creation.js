@@ -57,7 +57,9 @@ function Creation() {
     // erc721Contract.events.priceIsSet().on('data', (event) => addOffer(event)).on('error', console.error);
     const setPriceContract = async () => {
         return new Promise((resolve, reject) => {
-            erc721Contract.methods.setPrice(Price).send({from: account})
+            const weiPrice = Web3.utils.toWei(Price, 'ether');
+
+            erc721Contract.methods.setPrice(weiPrice).send({from: account})
               .then(response => {
                 resolve(response);
               })
@@ -70,12 +72,13 @@ function Creation() {
     const addOffer = async () => {
         const smartContractRes = await setPriceContract();
         const smartContractOfferId = smartContractRes.events.priceIsSet.returnValues.offerId;
+        const weiPrice = Web3.utils.toWei(Price, 'ether');
 
         let formData = new FormData();
         formData.append("file", selectedFile);
         formData.append("Provider", Provider);
         formData.append("Title", Title);
-        formData.append("Price", Price);
+        formData.append("Price", weiPrice);
         formData.append("Description", Description);
         formData.append("smartContractOfferId", smartContractOfferId);
 

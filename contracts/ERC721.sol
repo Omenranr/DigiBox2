@@ -126,14 +126,18 @@ contract TokenERC721 is ERC721URIStorage {
         ethBalance[msg.sender] -= tokenPrice[tokenId];
         _burn(tokenId);
 
-        (bool success, ) = msg.sender.call{value: tokenPrice[tokenId]}("");
-        require(success, "Failed to send Ether");
+        (bool sent, ) = msg.sender.call{value: tokenPrice[tokenId]}("");
+        require(sent, "Failed to withdraw");
 
-        emit reimbursed(msg.sender, msg.value);
+        emit reimbursed(msg.sender, tokenPrice[tokenId]);
     }
 
      ///@dev fallback function
     receive() external payable {}
+
+    function balanceContract() view public returns (uint256) {
+        return address(this).balance;
+    }
 }
 
 

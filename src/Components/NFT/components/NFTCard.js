@@ -83,14 +83,11 @@ export default function NftCard(props) {
 
   async function createNFT(assetHash, metadataHash) {
     return new Promise((resolve, reject) => {
-      var etherValue = web3.utils.toBN(props.offer.price);
-      var weiValue = web3.utils.toWei(etherValue,'ether');
-  
+      var weiValue = web3.utils.toBN(props.offer.price);
+
       erc721Contract.methods.awardItem(props.offer.smartContractOfferId, assetHash, metadataHash)
         .send({from: account, value: weiValue})
-        .then(response => {
-          resolve(response);
-        })
+        .then(response => { resolve(response) })
         .catch(error => {
           // unpin pinata if payment fail
           reject(error);

@@ -37,10 +37,16 @@ export default function ProfilCard(props) {
   const [transferAddress, setTransferAddress] = useState(null)
   const [web3, setWeb3] = useState(null)
   const [erc721Contract, setErc721Contract] = useState(null)
+  const [contractBalance, setContractBalance] = useState(null)
 
   useEffect(() => {
-    connectWeb3()
+    connectWeb3();
   }, [])
+
+  async function getBalanceContract() {
+    const bal = await erc721Contract.methods.balanceContract().call()
+    console.log(bal);
+  }
   
   async function connectWeb3() {
     let web3 = new Web3(window.ethereum)
@@ -70,8 +76,17 @@ export default function ProfilCard(props) {
     .catch(error => { console.log(error) })
   }
 
-  async function handleReimbursment() {
-    erc721Contract.methods.reimbursment(props.nft.nftId).send({from: account})
+  async function handleReimbursement() {
+    await erc721Contract.methods.reimbursement(props.nft.nftId).send({from: account})
+    .then(async (res) => {
+      const body = {
+        ownerAddress: '0x0',
+        nftId: props.nft.nftId
+      }
+      axios.post(process.env.REACT_APP_API_URL + '/nfts/update', body)
+    })
+    .then(response => { console.log(response, "success") })
+    .catch(error => { console.log(error) })
   }
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -116,10 +131,11 @@ export default function ProfilCard(props) {
           />
           <Button className={classes.popoverButton} onClick={handleTransfer} size="small" color="primary">Transférer</Button>
         </Popover>
-        <Button aria-describedby={id} variant="contained" color="primary" onClick={handleReimbursment}>
+        <Button aria-describedby={id} variant="contained" color="primary" onClick={handleReimbursement}>
           Remboursement
         </Button>
       </CardActions>
+      <Button aria-describedby={id} variant="contained" color="primary" onClick={getBalanceContract}>Balance</Button>
     </Card>
   );
 }
