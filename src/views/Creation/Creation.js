@@ -53,13 +53,23 @@ function Creation() {
         }
     }
 
+    // event:
+    // erc721Contract.events.priceIsSet().on('data', (event) => addOffer(event)).on('error', console.error);
     const setPriceContract = async () => {
-        erc721Contract.events.priceIsSet().on('data', (event) => addOffer(event)).on('error', console.error);
-        await erc721Contract.methods.setPrice(Price).send({from: account})
+        return new Promise((resolve, reject) => {
+            erc721Contract.methods.setPrice(Price).send({from: account})
+              .then(response => {
+                resolve(response);
+              })
+              .catch(error => {
+                reject(error);
+              })
+          })
     }
 
-    const addOffer = async (event) => {
-        const smartContractOfferId = event.returnValues.offerId;
+    const addOffer = async () => {
+        const smartContractRes = await setPriceContract();
+        const smartContractOfferId = smartContractRes.events.priceIsSet.returnValues.offerId;
 
         let formData = new FormData();
         formData.append("file", selectedFile);
@@ -160,7 +170,7 @@ function Creation() {
                             }}
                         />
                     </Grid> <hr></hr>
-                    <Button onClick={setPriceContract} variant="contained">Soumettre offre NFT</Button>
+                    <Button onClick={addOffer} variant="contained">Soumettre offre NFT</Button>
                 </Grid>
         <NavBarDetail /> 
         </div>

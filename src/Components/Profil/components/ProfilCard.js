@@ -5,26 +5,37 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import TextField from "@material-ui/core/TextField";
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { Link } from 'react-router-dom'
 import erc721Json from "../../../contracts/TokenERC721.json";
+import Popover from '@material-ui/core/Popover';
 import Web3 from 'web3'
-// import axios from 'axios'
+import "./ProfilCard.css";
+import axios from 'axios'
 
 export default function ProfilCard(props) {
-  const useStyles = makeStyles({
+  const useStyles = makeStyles((theme) => ({
     root: {
       maxWidth: 345,
     },
     media: {
       height: 140,
     },
-  });
+    typography: {
+      padding: theme.spacing(2),
+    },
+    popoverButton: {
+      display: 'block',
+      margin: '0 auto',
+      padding: '10px 20px'
+    }
+  }));
   const classes = useStyles();
 
   const [account, setAccount] = useState(null)
-  let [web3, setWeb3] = useState(null)
+  const [transferAddress, setTransferAddress] = useState(null)
+  const [web3, setWeb3] = useState(null)
   const [erc721Contract, setErc721Contract] = useState(null)
 
   useEffect(() => {
@@ -46,41 +57,69 @@ export default function ProfilCard(props) {
     setErc721Contract(erc721);
   }
 
-  // async function transfer() {
-  //   var gasValue = web3.utils.toHex(web3.utils.toWei('21000', 'wei'));
+  async function handleTransfer() {
+    await erc721Contract.methods.transferFrom(account, transferAddress, props.nft.nftId).send({from: account})
+    .then(async () => {
+      const body = {
+        ownerAddress: transferAddress,
+        nftId: props.nft.nftId
+      }
+      axios.post(process.env.REACT_APP_API_URL + '/nfts/update', body)
+    })
+    .then(response => { console.log(response, "success") })
+    .catch(error => { console.log(error) })
+  }
 
-  //     await erc721Contract.methods.transferFrom().send({from: account, })
-  // }
+  async function handleReimbursment() {
+    erc721Contract.methods.reimbursment(props.nft.nftId).send({from: account})
+  }
 
-  // async function refund() {
-  //   var gasValue = web3.utils.toHex(web3.utils.toWei('21000', 'wei'));
-  //   var amountToReimburse = web3.utils.toBN(tokenPrice);
-  //   var weiValue = web3.utils.toWei(tokenPrice,'ether');
-
-  //    await erc721Contract.methods.reimbursment().send({from: address(this), })
-  // }
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
 
   return (
-            <Card className={classes.root}>
-            <CardActionArea>
-                <CardMedia
-                className={classes.media}
-                image={'https://gateway.pinata.cloud/ipfs/'+props.nft.imageIpfsHash}
-                />
-                <CardContent>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Nft Id: {props.nft.nftId}
-                </Typography>
-                <a href={'https://gateway.pinata.cloud/ipfs/' + props.nft.metadataIpfsHash}>Metadata Link</a>
-                <Typography variant="body2" color="textSecondary" component="p">
-                    Price
-                </Typography>
-                </CardContent>
-            </CardActionArea>
-            <CardActions>
-                <Button size="small" color="primary"  >Transférer</Button>  
-                <Button size="small" color="primary" >Remboursement</Button>
-            </CardActions>
-            </Card>  
+    <Card className={classes.root}>
+      <CardActionArea>
+          <CardMedia
+          className={classes.media}
+          image={'https://gateway.pinata.cloud/ipfs/'+props.nft.imageIpfsHash}
+          />
+          <CardContent>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Nft Id: {props.nft.nftId}
+          </Typography>
+          <a href={'https://gateway.pinata.cloud/ipfs/' + props.nft.metadataIpfsHash}>Metadata Link</a>
+          <Typography variant="body2" color="textSecondary" component="p">
+              Price
+          </Typography>
+          </CardContent>
+      </CardActionArea>
+      <CardActions>
+        <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}>
+          Transfert
+        </Button>
+        <Popover id={id} open={open} anchorEl={anchorEl} onClose={handleClose}
+          anchorOrigin={{vertical: 'bottom', horizontal: 'center' }}
+          transformOrigin={{vertical: 'top', horizontal: 'center',}}
+        >
+          <TextField
+              label="Addresse de transfert"
+              type="text"
+              onChange={(event) => { setTransferAddress(event.target.value); }}
+          />
+          <Button className={classes.popoverButton} onClick={handleTransfer} size="small" color="primary">Transférer</Button>
+        </Popover>
+        <Button aria-describedby={id} variant="contained" color="primary" onClick={handleReimbursment}>
+          Remboursement
+        </Button>
+      </CardActions>
+    </Card>
   );
 }
