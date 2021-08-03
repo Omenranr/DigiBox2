@@ -6,16 +6,16 @@ import AccountModal from "./components/AccountModal";
 import "@fontsource/inter";
 import React from "react";
 
-function MetaMask() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  return (
-    <ChakraProvider theme={theme}>
-      <Layout>
-        <ConnectButton handleOpenModal={onOpen} />
-        <AccountModal isOpen={isOpen} onClose={onClose} />
-      </Layout>
-    </ChakraProvider>
-  );
+  function MetaMask() {
+    const { isOpen, onOpen, onClose } = useDisclosure();
+      return (
+        <ChakraProvider theme={theme}>
+          <Layout>
+            <ConnectButton handleOpenModal={onOpen} />
+            <AccountModal isOpen={isOpen} onClose={onClose} />
+          </Layout>
+        </ChakraProvider>
+      );
 }
 
 export default MetaMask;
