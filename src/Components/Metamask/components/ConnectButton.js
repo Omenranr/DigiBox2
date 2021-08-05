@@ -1,8 +1,9 @@
 import { Button, Box, Text } from "@chakra-ui/react";
 import { useEthers, useEtherBalance } from "@usedapp/core";
+import {AlertBanners} from "../../../Components"
 import { formatEther } from "@ethersproject/units";
 import Identicon from "./Identicon";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export const openMod = {
   handleOpenModal: null,
@@ -11,12 +12,30 @@ export const openMod = {
 export default function ConnectButton({ handleOpenModal }) {
   const { activateBrowserWallet, account } = useEthers();
   const etherBalance = useEtherBalance(account);
+  const [connectionAlert, setConnectionAlert] = useState(false)
+  const [connectionSuccess, setConnectionSuccess] = useState(false)
 
   function handleConnectWallet() {
     activateBrowserWallet();
   }
 
+  useEffect(() => {
+    if (account !== undefined) {
+      setConnectionSuccess(true)
+    } else {
+      setConnectionAlert(true)
+    }
+  }, [account])
+
   return account ? (
+    <div>
+    <AlertBanners 
+    open={connectionSuccess} 
+    setOpen={setConnectionSuccess} 
+    severity="success"
+    alertMessage="Connected to MetaMask successfully"
+    autoHideDuration={1500}
+  />
     <Box
       display="flex"
       alignItems="center"
@@ -54,7 +73,15 @@ export default function ConnectButton({ handleOpenModal }) {
         <Identicon />
       </Button>
     </Box>
+    </div>
   ) : (
+    <div>
+    <AlertBanners 
+      open={connectionAlert} 
+      setOpen={setConnectionAlert} 
+      severity="warning"
+      alertMessage="Please connect to MetaMask"
+    />
     <Button
       onClick={handleConnectWallet}
       bg="blue.800"
@@ -74,5 +101,6 @@ export default function ConnectButton({ handleOpenModal }) {
     >
       Connect to wallet
     </Button>
+    </div>
   );
 }
