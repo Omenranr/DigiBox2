@@ -12,7 +12,7 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import Logo from '../../Images/TransparentLogo.png';
 import LeftMenu from './NavBar2'
 import Metamask from "../Metamask/Meta";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import "./NavBar.css";
 
 const useStyles = makeStyles((theme) => ({

@@ -11,6 +11,7 @@ import axios from 'axios'
 import Web3 from 'web3'
 import erc721Json from "../../../contracts/TokenERC721.json";
 
+
 export default function NftCard(props) {
 
   const useStyles = makeStyles({
@@ -99,6 +100,7 @@ export default function NftCard(props) {
     const pinataJson = await createPinata();
     const assetHash = pinataJson.data.pinata.asset;
     const metadataHash = pinataJson.data.pinata.metadata;
+    const displayAlert = null;
 
     const res = await createNFT(assetHash, metadataHash);
     const nftData = {
