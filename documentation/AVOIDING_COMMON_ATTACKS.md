@@ -16,8 +16,24 @@
 
  ## Measures we took against possible vulnerabilities.
 
-   1. We avoid Reentrancy by using the last version of solidity compiler 0.8.0 ✅
-   2. We overcame the potential issue of overFlow and underFlow by using the OpenZeppelin library Counters to increment our indexes. ✅
+   1. We avoid Reentrancy by re-setting the current balance of the caller at the beggining of the function ✅
+
+  ```
+    function reimbursement(uint256 tokenId) external payable {
+        require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
+        ethBalance[msg.sender] -= tokenPrice[tokenId]; ✅
+        _burn(tokenId); 
+
+        (bool sent, ) = msg.sender.call{value: tokenPrice[tokenId]}("");
+        require(sent, "Failed to withdraw");
+
+        emit reimbursed(msg.sender, tokenPrice[tokenId]);
+    }
+  ```
+
+   2. By using the library Counters given by OZ we sort of counter the problem of OverFlow and underFlow. ✅
+      We do not expect other problem with overFlow or underFlow in our smart contract.
+
 ```
 import "@openzeppelin/contracts/utils/Counters.sol";
 
@@ -27,15 +43,8 @@ contract TokenERC721 is ERC721URIStorage {
   Counters.Counter private _tokenIds;
   Counters.Counter private _offerIds;
 
-  mapping(uint256 => uint256) prices;
-  mapping(string => uint8) hashes;
-  mapping(address => uint256) public ethBalance; 
-  mapping(uint256 => uint256) public tokenPrice;
-  
-  constructor() ERC721("DigiboxToken", "DGBT") {}
-
-  receive() external payable {}
-
+   ....
+   
   function setPrice(uint256 price) public returns (uint256) {
     _offerIds.increment();
     uint256 newOfferId = _offerIds.current();

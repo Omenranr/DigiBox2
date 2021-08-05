@@ -22,6 +22,7 @@ contract TokenERC721 is ERC721URIStorage {
     mapping(string => uint8) hashes;
     mapping(address => uint256) public ethBalance; 
     mapping(uint256 => uint256) public tokenPrice;
+    
 
     event priceIsSet(uint256 price, uint256 offerId, address From);
     event mintedNFT(address Buyer, string Hash, string Metadata, uint256 IdOfOffer, uint256 value);
@@ -105,7 +106,7 @@ contract TokenERC721 is ERC721URIStorage {
      * Emitting this event will allow the front to send a confirmation/Fail messsage
      * @param tokenId We need to know the tokenId to proceed
      */
-
+       
     function reimbursement(uint256 tokenId) external payable {
         require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
         ethBalance[msg.sender] -= tokenPrice[tokenId];
@@ -117,25 +118,27 @@ contract TokenERC721 is ERC721URIStorage {
         emit reimbursed(msg.sender, tokenPrice[tokenId]);
     }
 
-    /// @dev fallback function
+     /// @dev fallback function
     receive() external payable {}
 
     /** @notice these are our getter functions
      * @dev for tests && front-end display
      */
+
     function getOfferId() public view returns(uint256) {
         return _offerIds.current();
-    }
-
-    function getTokenId() public view returns(uint256) {
-        return _tokenIds.current();
     }
 
     function getEthBalance(address _address) public view returns(uint256) {
         return ethBalance[_address];
     }
 
-    function balanceContract() view public returns (uint256) {
+    function getTokenId() public view returns(uint256) {
+        return _tokenIds.current();
+    }
+
+    function balanceContract() public view returns (uint256) {
         return address(this).balance;
     }
+
 }
