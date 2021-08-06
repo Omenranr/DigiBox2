@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./Prestataire.css";
 import Grid from '@material-ui/core/Grid';
 import TextField from "@material-ui/core/TextField";
@@ -8,13 +8,28 @@ import Container from '@material-ui/core/Container';
 import logo from "../../Images/TransparentLogo.png";
 import Button from '@material-ui/core/Button';
 import Axios from 'axios'
+import { AlertBanners } from '../../Components/index';
 
 export default function Prestataire() {
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [website, setWebsite] = useState("");
+    // following is new
+    const [processingSign, setprocessingSign] = useState(false);
+    const [notPresta, setNotPresta] = useState(false);
+    const [signedIn, setSigned] = useState(false); 
+    const [message, setMessage] = useState('');
 
+    useEffect(() => {
+        if (name == '' || email == '' || website == '') {
+            setNotPresta(true)
+        } else {
+            setprocessingSign(true);
+        }
+      })
+
+ 
     const addPrestataire = () => {
         Axios.post(process.env.REACT_APP_API_URL + '/users/create', {
             name: name,
@@ -22,6 +37,8 @@ export default function Prestataire() {
             website: website
         }).then(response => {
             console.log(response, "success");
+            setMessage(response.data);
+            setSigned(true);
         })
         .catch(error => {
             console.log(error)
@@ -40,6 +57,7 @@ export default function Prestataire() {
 
     return (
         <div className="Prestataire-Prerequis">
+            
           <NavBar />  
             <h1 className="title"> Devenir partenaire.</h1> <hr></hr>
 
@@ -92,10 +110,25 @@ export default function Prestataire() {
                 <Button onClick={addPrestataire} variant="contained">Inscription Prestataire</Button>
                 <Button onClick={getPrestataire} variant="contained">Show Prestataire</Button>
 
+                <AlertBanners 
+                  open={notPresta} 
+                  setOpen={setNotPresta} 
+                  severity="warning"
+                  alertMessage="Ils nous manquent des informations, merci de remplir tous les champs !"
+                  autoHideDuration={1100}
+                />
+
+               <AlertBanners 
+                    open={processingSign} 
+                    setOpen={setprocessingSign} 
+                    severity="success"
+                    alertMessage="Merci d'avoir renseigné toutes les infos nécessaires, veuillez valider"
+                    autoHideDuration={1500}
+               />
+
              </Grid>
              
             <NavBarDetail /> 
-            
         </div>
     )
 } 

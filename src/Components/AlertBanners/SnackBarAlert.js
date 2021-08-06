@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CustomizedSnackbars(props) {
+export default function CustomizedSnackbars(props, {message}) {
   const classes = useStyles();
   const {open, setOpen, severity, alertMessage, autoHideDuration} = props
 

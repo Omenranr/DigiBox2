@@ -14,6 +14,9 @@ import LeftMenu from './NavBar2'
 import Metamask from "../Metamask/Meta";
 import { Link } from 'react-router-dom';
 import "./NavBar.css";
+import Container from '@material-ui/core/Container';
+import TelegramIcon from '@material-ui/icons/Telegram';
+import GitHubIcon from '@material-ui/icons/GitHub';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -148,7 +151,14 @@ export default function PrimarySearchAppBar() {
                      <Link to={"/WhitePaper"}>WhitePaper</Link>
                     </Button> 
                </ButtonGroup>
-                
+            
+               <a href="https://github.com/alpsoft/DigiBox" target="_blank" raised>
+                  {<GitHubIcon />}
+               </a>
+               <a href="https://t.me/DigiBoxOfficialGroup" target="_blank" raised>
+                  {<TelegramIcon/>}
+               </a>
+
               <Metamask /> 
             
           <div className={classes.grow} />

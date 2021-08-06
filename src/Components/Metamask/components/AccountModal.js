@@ -33,6 +33,7 @@ import {
   
     return (
       <Modal isOpen={isOpen} onClose={onClose} isCentered size="md">
+        
         <ModalOverlay />
         <ModalContent
           background="gray.900"

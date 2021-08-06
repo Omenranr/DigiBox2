@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import erc721Json from "../../contracts/TokenERC721.json";
 import Web3 from 'web3'
+import { AlertBanner } from "../../Components/AlertBanners/SnackBarAlert";
 
 function Creation() {
 
