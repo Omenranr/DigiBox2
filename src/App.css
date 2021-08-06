@@ -2,14 +2,6 @@
   text-align: center;
 }
 
-/*.btn-meta {
-  position: absolute;
-  text-align: center;
-  left: 1150px;
-  top: 95px;
-  color: midnightblue;
+html, body {
+  height: 100%;
 }
-
-.display-meta{
-  font-size: smaller;
-} */
