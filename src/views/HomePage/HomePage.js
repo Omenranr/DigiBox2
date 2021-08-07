@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import NavBar from "../../Components/NavBar/NavBar";
 import NavBarDetail from "../../Components/NavBarDetail/NavBarDetail";
 import NFT from "../../Components/NFT/NFT";
-import "./HomePage.css";
-import logo from "../../Images/TransparentLogo.png";
 import Particles from 'react-particles-js';
 import Switch from '@material-ui/core/Switch';
+import "./HomePage.css";
 
 export default function HomePage() {
     const [showParticles, setShowParticles] = useState(false);

@@ -38,6 +38,7 @@
     "react-particles-js": "^3.5.3",
     "react-pdf": "^5.3.2",
     "react-pdf-js-worker": "^2.0.0",
+    "react-pdf-viewer": "^0.1.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.2.0",
     "solc": "^0.4.26",

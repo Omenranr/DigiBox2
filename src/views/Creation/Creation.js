@@ -12,8 +12,9 @@ import erc721Json from "../../contracts/TokenERC721.json";
 import Web3 from 'web3'
 import { AlertBanner } from "../../Components/AlertBanners/SnackBarAlert";
 import InfoIcon from '@material-ui/icons/Info';
-import { classNames } from '@react-pdf-viewer/core';
-import { Input } from '@material-ui/core';
+// import { classNames } from '@react-pdf-viewer/core';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import Particles from 'react-particles-js';
 
 
 function Creation() {
@@ -112,9 +113,8 @@ function Creation() {
     }
 
     return (
-        <div className={classNames.root}>
-            <NavBar />  <br></br>
-
+        <div>
+            <NavBar />  
             <h1 className="titre"> Vous souhaitez proposer une offre ?</h1>
 
                {/* <img className="logo-crea" src={logo} alt="logo"/> */} 
