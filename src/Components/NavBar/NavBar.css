@@ -1,12 +1,27 @@
 .logo {
     position: absolute;
     height: auto;
-    left: 230px;
+    left: 24px;
+    width: 160px;
+    float: left;
 }
 
 .grp-btn {
     position: absolute;
-    left: 470px;
+    right: 340px;
+    height: 25px;
+}
+
+.grp-btn button {
+    color: #fff;
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+    text-transform: none;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.grp-btn button:last-child {
+    border: none;
 }
 
 .MuiAppBar-colorPrimary {

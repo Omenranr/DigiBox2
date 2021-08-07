@@ -9,6 +9,7 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import Logo from '../../Images/TransparentLogo.png';
+import LogoHeader from '../../Images/LogoHeader.png';
 import LeftMenu from './NavBar2'
 import Metamask from "../Metamask/Meta";
 import { Link } from 'react-router-dom';
@@ -125,33 +126,28 @@ export default function PrimarySearchAppBar() {
     <div className={classes.grow}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
+          {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="open drawer">
             <LeftMenu />
           </IconButton>
           <Typography className={classes.title} id="inner" noWrap>
             DigiBox
           </Typography>
-          <img className="logo" src={Logo} alt="logo"/>
-               <ButtonGroup className="grp-btn" variant="contained" color="primary" aria-label="contained primary button group">
-               <Button className="btn-left">
-                  <Link to={"/Creation de l'offre"}>Créer une offre</Link>
-                </Button>
-                  <Button className="btn-center">
-                    <Link to={"/HomePage"}>HomePage</Link>
-                  </Button>
-                    <Button className="btn-right">
-                     <Link to={"/WhitePaper"}>WhitePaper</Link>
-                    </Button> 
-                    <Button className="btn-right">
-                     <Link to={"/Profil"}>Mes NFTs</Link>
-                    </Button>
-
-               </ButtonGroup>
+          <img className="logo" src={Logo} alt="logo"/> */}
+          <img className="logo" src={LogoHeader} alt="logo"/>
+          <ButtonGroup className="grp-btn" variant="text" aria-label="text primary button group">
+            <Button className="btn-left">
+              <Link to={"/Creation de l'offre"}>Créer une offre</Link>
+            </Button>
+            <Button className="btn-center">
+              <Link to={"/HomePage"}>HomePage</Link>
+            </Button>
+            <Button className="btn-right">
+              <Link to={"/WhitePaper"}>WhitePaper</Link>
+            </Button> 
+            <Button className="btn-right">
+              <Link to={"/Profil"}>Mes NFTs</Link>
+            </Button>
+          </ButtonGroup>
                         
           <Metamask /> 
 
