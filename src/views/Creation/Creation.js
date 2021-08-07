@@ -113,7 +113,7 @@ function Creation() {
     }
 
     return (
-        <div>
+        <div className="App">
             <NavBar />  
             <h1 className="titre"> Vous souhaitez proposer une offre ?</h1> <hr></hr> <br></br>
 

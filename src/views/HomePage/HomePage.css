@@ -1,3 +1,77 @@
+/* first section */
+.fst-section {
+  margin: 0px auto;
+  max-width: 1100px;;
+  width: 100%;
+  flex-wrap: wrap;
+  display: flex;
+}
+
+.fst-section .grid-column:nth-child(1) {
+  padding: 80px 20px 44px 30px;
+}
+
+.fst-section .grid-column {
+  width: 50%;
+  padding: 113px 110px 44px 0px;
+  align-items: flex-start;
+  flex-direction: column;
+  -webkit-box-align: center;
+}
+
+.fst-section .grid-column .button-container {
+  margin-top: 40px;
+  text-align: left;
+}
+
+.fst-section .grid-column button:first-child {
+  margin-right: 20px;
+  background-color: rgb(68 72 189);
+  border: 1px solid rgb(68 72 189);
+  color: rgb(255, 255, 255);
+}
+
+.fst-section .grid-column button {
+  font-weight: 600;
+  padding: 8px 20px;
+  background-color: #fff;
+  border: 1px solid rgb(68 72 189);
+  color: rgb(68 72 189);
+}
+
+.fst-section .grid-column img {
+  width: 220px;
+  margin: 0 auto;
+}
+
+.App .fst-section h2 {
+  color: rgb(68 72 189);
+  text-align: left;
+  max-width: 100%;
+  margin-right: 10px;
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.App .fst-section h3 {
+  color: rgb(53, 56, 64);
+  margin-top: 20px;
+  max-width: 320px;
+  font-size: 24px;
+  text-align: left;
+}
+
+/* second section */
+.App .snd-section {
+  margin-top: 40px;
+}
+
+.App .snd-section h2 {
+  font-weight: 600;
+  font-size: 24px;
+  color: rgb(4, 17, 29);
+}
+
 .App h2 {
   font-size: 28px;
   font-weight: 600;
