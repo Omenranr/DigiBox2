@@ -40,7 +40,7 @@ export default function HomePage() {
             <div className="fst-section">
                 <div className="grid-column">
                     <h2>Découvrez, Offrez, et Déposez<br/>vos offres sous forme de<br/>NFT</h2>
-                    <h3>La première plateforme<br/>de cadeaux en NFT</h3>
+                    <h3>La première plateforme<br/>de cadeaux en NFTs</h3>
                     <div className="button-container">
                         <Button variant="contained">Découvrir</Button>
                         <Button variant="outlined">Créer</Button>
