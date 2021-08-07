@@ -2,6 +2,18 @@
   text-align: center;
 }
 
-html, body {
+html{
   height: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  position: relative;
+  min-height: 100%;
 }
