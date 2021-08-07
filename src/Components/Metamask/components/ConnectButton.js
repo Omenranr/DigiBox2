@@ -39,7 +39,7 @@ export default function ConnectButton({ handleOpenModal }) {
     <Box
       display="flex"
       alignItems="center"
-      background="gray.700"
+      background="rgb(255, 82, 97, 0.7)"
       borderRadius="xl"
       py="0"
     >
@@ -50,13 +50,11 @@ export default function ConnectButton({ handleOpenModal }) {
       </Box>
       <Button
         onClick={handleOpenModal}
-        bg="gray.800"
+        bg="rgb(142, 0, 12,0.7)"
         border="1px solid transparent"
         _hover={{
-          border: "1px",
-          borderStyle: "solid",
-          borderColor: "blue.400",
-          backgroundColor: "gray.700",
+          border: "1px solid transparent",
+          backgroundColor: "rgb(142, 0, 12,0.8)",
         }}
         borderRadius="xl"
         m="1px"
@@ -84,22 +82,22 @@ export default function ConnectButton({ handleOpenModal }) {
     />
     <Button
       onClick={handleConnectWallet}
-      bg="blue.800"
-      color="blue.300"
+      bg="rgb(142, 0, 12,0.7)"
+      color="#fff"
       fontSize="lg"
       fontWeight="medium"
-      borderRadius="xl"
+      borderRadius="rgb(142, 0, 12,0.7)l"
       border="1px solid transparent"
       _hover={{
-        borderColor: "blue.700",
-        color: "blue.400",
+        borderColor: "transparent",
+        color: "rgb(255, 82, 97, 0.8)",
       }}
       _active={{
-        backgroundColor: "blue.800",
-        borderColor: "blue.700",
+        backgroundColor: "rgb(142, 0, 12,0.7)",
+        borderColor: "transparent",
       }}
     >
-      Connect to wallet
+      Connect to walrgb(142, 0, 12,0.7)et
     </Button>
     </div>
   );

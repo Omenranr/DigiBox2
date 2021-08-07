@@ -8,15 +8,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
-import MoreIcon from '@material-ui/icons/MoreVert';
 import Logo from '../../Images/TransparentLogo.png';
 import LeftMenu from './NavBar2'
 import Metamask from "../Metamask/Meta";
 import { Link } from 'react-router-dom';
 import "./NavBar.css";
-import Container from '@material-ui/core/Container';
-import TelegramIcon from '@material-ui/icons/Telegram';
-import GitHubIcon from '@material-ui/icons/GitHub';
+// import MoreIcon from '@material-ui/icons/MoreVert';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -137,7 +134,7 @@ export default function PrimarySearchAppBar() {
             <LeftMenu />
           </IconButton>
           <Typography className={classes.title} id="inner" noWrap>
-            DigiBox.io
+            DigiBox
           </Typography>
           <img className="logo" src={Logo} alt="logo"/>
                <ButtonGroup className="grp-btn" variant="contained" color="primary" aria-label="contained primary button group">
@@ -150,37 +147,22 @@ export default function PrimarySearchAppBar() {
                     <Button className="btn-right">
                      <Link to={"/WhitePaper"}>WhitePaper</Link>
                     </Button> 
-               </ButtonGroup>
-            
-               <a href="https://github.com/alpsoft/DigiBox" target="_blank" raised>
-                  {<GitHubIcon />}
-               </a>
-               <a href="https://t.me/DigiBoxOfficialGroup" target="_blank" raised>
-                  {<TelegramIcon/>}
-               </a>
+                    <Button className="btn-right">
+                     <Link to={"/Profil"}>Mes NFTs</Link>
+                    </Button>
 
-              <Metamask /> 
-            
-          <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
-           <Button className="profil">
-              <Link to={"/Profil"}>Profil</Link>
-           </Button>
-          </div>
-          <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
+               </ButtonGroup>
+                        
+          <Metamask /> 
+
+          {/* <div className={classes.sectionMobile}>
+            <IconButton aria-label="show more" aria-controls={mobileMenuId} aria-haspopup="true" onClick={handleMobileMenuOpen} color="inherit" >
               <MoreIcon />
             </IconButton>
-          </div>
+          </div> */}
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
+      {/* {renderMobileMenu} */}
       {renderMenu}
     </div>
   );

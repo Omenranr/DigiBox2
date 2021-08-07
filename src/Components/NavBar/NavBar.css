@@ -9,6 +9,10 @@
     left: 470px;
 }
 
+.MuiAppBar-colorPrimary {
+    background: linear-gradient(45deg, rgb(68 72 189), rgb(81 36 204))
+}
+
 @media screen and (max-width: 500px) {
     
     .list {

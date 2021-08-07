@@ -8,7 +8,7 @@ const StyledIdenticon = styled.div`
   height: 1rem;
   width: 1rem;
   border-radius: 1.125rem;
-  background-color: black;
+  background-color: #fff;
 `;
 
 export default function Identicon() {
