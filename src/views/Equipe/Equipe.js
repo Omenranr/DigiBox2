@@ -6,7 +6,7 @@ import Alain from '../../Images/PhotoEquipe/Alain.png';
 import Nico from '../../Images/PhotoEquipe/Nico.png';
 import Teo from '../../Images/PhotoEquipe/Teo.png';
 import Kilian from '../../Images/PhotoEquipe/Kilian.png';
-import logo from "../../Images/TransparentLogo.png";
+import logo from "../../Images/LogoDigiBox.png";
 
 export default function Equipe() {
     return (

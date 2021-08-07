@@ -5,7 +5,6 @@ import TextField from "@material-ui/core/TextField";
 import NavBar from "../../Components/NavBar/NavBar";
 import NavBarDetail from "../../Components/NavBarDetail/NavBarDetail";
 import Container from '@material-ui/core/Container';
-import logo from "../../Images/TransparentLogo.png";
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import erc721Json from "../../contracts/TokenERC721.json";

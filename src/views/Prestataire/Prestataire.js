@@ -5,7 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import NavBar from "../../Components/NavBar/NavBar";
 import NavBarDetail from "../../Components/NavBarDetail/NavBarDetail";
 import Container from '@material-ui/core/Container';
-import logo from "../../Images/TransparentLogo.png";
+import logo from "../../Images/LogoDigiBox.png";
 import Button from '@material-ui/core/Button';
 import Axios from 'axios'
 import { AlertBanners } from '../../Components/index';
