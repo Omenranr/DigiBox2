@@ -13,8 +13,8 @@ import Web3 from 'web3'
 import { AlertBanner } from "../../Components/AlertBanners/SnackBarAlert";
 import InfoIcon from '@material-ui/icons/Info';
 import { classNames } from '@react-pdf-viewer/core';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-import Particles from 'react-particles-js';
+import { Input } from '@material-ui/core';
+
 
 function Creation() {
 
@@ -113,34 +113,22 @@ function Creation() {
 
     return (
         <div className={classNames.root}>
-            <NavBar />  
-            <Particles
-                params={{
-                    particles: {
-                        retina_detect: true,
-                        move: { enable:true,speed:1,direction:"none",random:false,straight:false,out_mode:"out",bounce:false,attract: { enable:false,rotateX:600,rotateY:1200 }},
-                        number: { value: 80 },
-                        density: { enable: true, value_area: 800 },
-                        color: { value: "#4448bd" },
-                        shape: { type: "circle", stroke: { width:0, color:"#000000" }, polygon:{ nb_sides:5 }},
-                        line_linked: { color: "#4448bd", distance: 150, enable: true, opacity: 0.4, width: 1 },
-                        opacity: { value:0.5, random:false, anim:{ enable:false,speed:1,opacity_min:0.1,sync:false }},
-                        size: { value:3,random:true,anim: { enable:false,speed:40,size_min:0.1,sync:false }}
-                    }
-                }}
-            />
-            <h1 className="title-offer">Création d'une offre</h1> <hr></hr> <br></br>
+            <NavBar />  <br></br>
 
             <h1 className="titre"> Vous souhaitez proposer une offre ?</h1>
 
-                <img className="logo-crea" src={logo} alt="logo"/>
-                
-                <Grid className="grid" container alignItems="center" justify="center" direction="column" >
+               {/* <img className="logo-crea" src={logo} alt="logo"/> */} 
 
-                    <div className="file-uploader">
-                        <input className="inputFichier" ref={fileInput} type="file" onChange={handleFileInput}  />
-                        <Button onClick={e => fileInput.current && fileInput.current.click()} variant="contained" color="primary">Upload File</Button>
+               <div className="container">
+                <div className="chooseDoc">
+                 <input ref={fileInput} type="file" onChange={handleFileInput}/>
+                </div> <br></br>
+                    <div className="upload">
+                     <Button onClick={e => fileInput.current && fileInput.current.click()} variant="contained" color="primary">Upload File</Button>
                     </div>
+                </div>
+                
+                <Grid className="grid" container alignItems="" justify="center" direction="column" >
 
                     <Grid item>
                         <TextField
@@ -153,7 +141,7 @@ function Creation() {
                                 setProvider(event.target.value);
                             }}
                         />
-                    </Grid> <hr></hr>
+                    </Grid> 
 
                     <Grid item>
                         <TextField
@@ -167,22 +155,20 @@ function Creation() {
                                 setTitle(event.target.value);
                             }}
                         />
-                    </Grid> <hr></hr>
+                    </Grid>
 
                     <Grid item>
-                        <TextareaAutosize
+                        <TextField
                             id="description"
                             name="description"
                             label="Description de l'offre"
-                            placeholder="Description"
                             style={{ margin: 8}}
-                            minRows={5}
                             type="text"
                             onChange={(event) => {
                                 setDescription(event.target.value);
                             }}
                         /> <br></br>
-                    </Grid> <hr></hr>
+                    </Grid> 
 
                     <Grid item>
                         <TextField
@@ -195,17 +181,20 @@ function Creation() {
                                 setPrice(event.target.value);
                             }}
                         />
-                    </Grid> <hr></hr><br></br>
+                    </Grid> <br></br>
 
                        <Container 
-                            className="Price-" maxWidth="xs">
+                            className="Price" maxWidth="xs">
                             <InfoIcon />
-                            1 ETH =  
-                            USD${Ether} 
+                            1 Ether =  
+                            {Ether}$
                             - mis à jour par CoinGecko
                         </Container> <br></br>
-                    <Button  onClick={addOffer} variant="contained" color="primary" >Soumettre mon offre</Button>
+                    
                 </Grid>
+                <div className="submit">
+                  <Button  onClick={addOffer} variant="contained" color="primary">Soumettre mon offre</Button>
+                </div>
         <NavBarDetail /> 
         </div>
     )

@@ -1,54 +1,56 @@
-.title-offer {
-    text-align: center;
-    color: midnightblue;
-}
-
 .grid {
     margin-top: 50px;
-}
-
-.meta-btn {
+    position: relative;
+    padding-left: 30px;
     text-align: center;
-    margin-top: 10px;
 }
 
-.logo-crea {
+.submit {
+    position: flex;
+    align-items: center;
+    margin-left: 70%;
+    border: "1px solid transparent";
+    /*background-color: rgb(142, 0, 12,0.8)*/
+}
+
+.titre {
+    color: midnightblue;
+    font-weight: bold;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 36px;
+}
+
+.Price {
+    font-size: 13px;
+}
+
+.container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+        text-align: center;
+}
+
+.chooseDoc {
+        background-color: #3d4bc5;
+        font-size: 16px;
+        font-weight: bold;
+        color: #fff;
+}
+ 
+/*.chooseDoc {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+/*.logo-crea {
     position: absolute;
     width: 300px;
     height: 400px;
     margin-top: 100px;
     margin-left: 1200px;
-}
-
-#description {
-   border: midnightblue;
-   border-style: solid;
-}
-
-.titre {
-    color: midnightblue;
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: x-large;
-}
-
-.inputFichier {
-    border: solid 2px;
-}
-
-.btn-soumettre {
-    background-color: rgb(16, 71, 20);
-    color: rgb(16, 71, 20);
-}
-
-#tsparticles {
-    position: absolute;
-    width: 100%;
-    height: 88%;
-    z-index: -1;
-    /* background-color: #0d47a1; */
-    background-image: url("");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 50% 50%;
-  }
+}*/
