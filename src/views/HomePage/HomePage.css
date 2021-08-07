@@ -1,3 +1,9 @@
+.App h2 {
+  font-size: 28px;
+  font-weight: 600;
+  color: rgb(68 72 189);
+}
+
 .text-logo {
   display: flex;
   margin-left: auto;
@@ -29,6 +35,7 @@
   background-position: 50% 50%;
 }
 
-.MuiSwitch-root {
-  float: right;
+.App .MuiSwitch-root {
+  position: absolute;
+  right: 12px;
 }

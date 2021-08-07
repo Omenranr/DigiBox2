@@ -5,6 +5,8 @@ import NFT from "../../Components/NFT/NFT";
 import Particles from 'react-particles-js';
 import Switch from '@material-ui/core/Switch';
 import "./HomePage.css";
+import LogoDigibox from '../../Images/LogoDigiBox.png';
+import skydive from '../../Images/skydive.jpg';
 
 export default function HomePage() {
     const [showParticles, setShowParticles] = useState(false);
@@ -34,11 +36,27 @@ export default function HomePage() {
                 }}
             />
             }
-            <h1 className="title">DigiBox, le plaisir d'offrir!</h1> <hr></hr>
-            <div className="text-logo">
-                <h2 className="subTitle">Les DigiBox du moment</h2>
+
+            <div className="fst-section">
+                <div className="grid-column">
+                    <img className="logo" src={LogoDigibox} alt="logo"/>
+                </div>
+                <div className="grid-column">
+                    <h2>Profitez de l'expérience Digibox !</h2>
+                    <img className="logo" src={skydive} alt="logo"/>
+                </div>
             </div>
-            <NFT />
+            <div className="snd-section">
+                <h2>Les dernières offres</h2>
+                <NFT />
+            </div>
+            <div className="thrd-section">
+                <h2>Notre Équipe</h2>
+            </div>
+            <div className="frth-section">
+                <h2>Roadmap</h2>
+            </div>
+
             <NavBarDetail />
         </div>
     )
