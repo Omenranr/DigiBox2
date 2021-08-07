@@ -8,9 +8,9 @@ export default function WhitePaper() {
 
     
     return (
-        <div className="WhitePaper">
+        <div className="App">
            <NavBar /> 
-              <div> 
+              <div className="WhitePaper"> 
               <iframe src="https://drive.google.com/file/d/1CMpL2HkQnLCNHl-EMX-kydQhXnj9nweS/preview" allow="autoplay"></iframe>
              </div>
             <NavBarDetail /> 
