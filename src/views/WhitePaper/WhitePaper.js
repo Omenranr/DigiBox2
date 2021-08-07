@@ -10,9 +10,8 @@ export default function WhitePaper() {
     return (
         <div className="WhitePaper">
            <NavBar /> 
-            <h1 className="white"> WhitePaper. </h1> <hr></hr>
               <div> 
-              <iframe src="https://drive.google.com/file/d/1CMpL2HkQnLCNHl-EMX-kydQhXnj9nweS/preview" width="1640" height="680" allow="autoplay"></iframe>
+              <iframe src="https://drive.google.com/file/d/1CMpL2HkQnLCNHl-EMX-kydQhXnj9nweS/preview" allow="autoplay"></iframe>
              </div>
             <NavBarDetail /> 
         </div>

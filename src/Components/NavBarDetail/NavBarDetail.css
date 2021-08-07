@@ -1,7 +1,9 @@
 .footer {
-    bottom: 0;
-    position:absolute;
-    color: aliceblue;
+    position: absolute;
+    right: 0;
+    /* bottom: 0; */
+    left: 0;
+    color: #fff;
     font-family: Poppins,Arial,sans-serif;
     text-align: center;
     font-size: 14px;

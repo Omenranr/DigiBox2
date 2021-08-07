@@ -3,3 +3,11 @@
     font-size: medium;
     font-family: Poppins,Arial,sans-serif;
 }
+
+.WhitePaper iframe {
+    width: 1100px;
+    height: 600px;
+    display: block;
+    margin: 20px auto;
+    border: 2px solid #ccc;
+}
