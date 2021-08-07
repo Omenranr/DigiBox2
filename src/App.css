@@ -1,5 +1,8 @@
 .App {
+  min-height: 100vh;
+  position: relative;
   text-align: center;
+  padding-bottom: 87px;
 }
 
 html{

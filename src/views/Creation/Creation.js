@@ -115,17 +115,17 @@ function Creation() {
     return (
         <div>
             <NavBar />  
-            <h1 className="titre"> Vous souhaitez proposer une offre ?</h1>
+            <h1 className="titre"> Vous souhaitez proposer une offre ?</h1> <hr></hr> <br></br>
 
                {/* <img className="logo-crea" src={logo} alt="logo"/> */} 
 
                <div className="container">
-                <div className="chooseDoc">
-                 <input ref={fileInput} type="file" onChange={handleFileInput}/>
-                </div> <br></br>
-                    <div className="upload">
-                     <Button onClick={e => fileInput.current && fileInput.current.click()} variant="contained" color="primary">Upload File</Button>
-                    </div>
+                    <div className="chooseDoc">
+                      <input ref={fileInput} type="file" onChange={handleFileInput}/>
+                    </div> <br></br>
+                        <div className="upload">
+                          <Button onClick={e => fileInput.current && fileInput.current.click()} variant="contained" color="primary">Upload File</Button>
+                        </div>
                 </div>
                 
                 <Grid className="grid" container alignItems="" justify="center" direction="column" >

@@ -9,13 +9,20 @@
 .grp-btn {
     position: absolute;
     right: 340px;
-    height: 20px;
+    height: 64px;
+}
+
+.grp-btn .separator.MuiButtonGroup-groupedTextHorizontal {
+    min-width: 0;
+    height: 25px;
+    margin-top: 19px;
+    border-right: 1px solid rgba(255, 255, 255, 0.7);
 }
 
 .grp-btn button.MuiButtonGroup-groupedTextHorizontal {
     color: #fff;
     padding: 0 20px;
-    border-right: 1px solid rgba(255, 255, 255, 0.7);
+    border: none;
     text-transform: none;
     font-weight: 500;
     font-size: 16px;

@@ -137,12 +137,15 @@ export default function PrimarySearchAppBar() {
             <Button className="btn-center">
               <Link to={"/HomePage"}>Accueil</Link>
             </Button>
+            <div className="separator"></div>
             <Button className="btn-left">
               <Link to={"/Creation de l'offre"}>Offres</Link>
             </Button>
+            <div className="separator"></div>
             <Button className="btn-right">
               <Link to={"/Profil"}>Mes NFTs</Link>
             </Button>
+            <div className="separator"></div>
             <Button className="btn-right">
               <Link to={"/WhitePaper"}>WhitePaper</Link>
             </Button> 

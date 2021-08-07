@@ -49,6 +49,18 @@
         font-size: 16px;
         font-weight: bold;
         color: #fff;
+        text-align: center;
+        margin: auto;
+        /*display: none;*/
+}
+
+.upload {
+    text-align: center;
+}
+
+.container {
+    margin-left: 40%;
+    display:grid ;
 }
  
 /*.chooseDoc {
