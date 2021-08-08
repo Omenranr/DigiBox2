@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import erc721Json from "../../contracts/TokenERC721.json";
 import Web3 from 'web3'
+import {AlertBanners} from "../../Components"
 // import { AlertBanner } from "../../Components/AlertBanners/SnackBarAlert";
 import InfoIcon from '@material-ui/icons/Info';
 
@@ -21,6 +22,7 @@ function Creation() {
     const [Description, setDescription] = useState("");
     const [Ether, setEther] = useState("");
     const [selectedFile, setSelectedFile] = useState("");
+    const [connectionSuccess, setConnectionSuccess] = useState(false)
     const fileInput = useRef();
 
     const [account, setAccount] = useState(null)
@@ -94,6 +96,7 @@ function Creation() {
         axios.post(process.env.REACT_APP_API_URL + '/offers/create', formData, config)
         .then(response => {
             console.log(response, "success");
+            setConnectionSuccess(true)
             // RESET FORM FIELDS
             resetFormFields()
         })
@@ -199,6 +202,13 @@ function Creation() {
                 <div className="submit">
                   <Button  onClick={addOffer} variant="contained" color="primary">Soumettre mon offre</Button>
                 </div>
+                <AlertBanners 
+                    open={connectionSuccess} 
+                    setOpen={setConnectionSuccess} 
+                    severity="success"
+                    alertMessage="Added offer successfully"
+                    autoHideDuration={1500}
+                />
             </div>
             <NavBarDetail /> 
         </div>
