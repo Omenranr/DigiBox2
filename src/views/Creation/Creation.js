@@ -9,11 +9,8 @@ import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import erc721Json from "../../contracts/TokenERC721.json";
 import Web3 from 'web3'
-import { AlertBanner } from "../../Components/AlertBanners/SnackBarAlert";
+// import { AlertBanner } from "../../Components/AlertBanners/SnackBarAlert";
 import InfoIcon from '@material-ui/icons/Info';
-// import { classNames } from '@react-pdf-viewer/core';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-import Particles from 'react-particles-js';
 
 
 function Creation() {
@@ -107,23 +104,24 @@ function Creation() {
         const file = e.target.files[0];
         if (file.size / 1000 > 1024)
             alert("File size cannot exceed more than 1MB" );
-        else
+        else {
             setSelectedFile(file);
+        }
     }
 
     return (
         <div className="App">
-            <NavBar />  
-            <h1 className="titre"> Vous souhaitez proposer une offre ?</h1> <hr></hr> <br></br>
+            <NavBar />
+            <div className="containerOffer">
+                <h1 className="titre">Vous souhaitez proposer une offre ?</h1>
 
-               {/* <img className="logo-crea" src={logo} alt="logo"/> */} 
-
-               <div className="container">
+                <div className="container">
                     <div className="chooseDoc">
                       <input ref={fileInput} type="file" onChange={handleFileInput}/>
                     </div> <br></br>
                         <div className="upload">
-                          <Button onClick={e => fileInput.current && fileInput.current.click()} variant="contained" color="primary">Upload File</Button>
+                            <Button onClick={e => fileInput.current && fileInput.current.click()} variant="contained" color="primary">Ajouter une image</Button>
+                            <span>{selectedFile.name || "Aucun fichier sélectionné"}</span>
                         </div>
                 </div>
                 
@@ -134,7 +132,6 @@ function Creation() {
                             id="provider-input"
                             provider="provider"
                             label="Nom du prestataire"
-                            style={{ margin: 8}}
                             type="text"
                             onChange={(event) => {
                                 setProvider(event.target.value);
@@ -147,7 +144,6 @@ function Creation() {
                             id="title-input"
                             name="title"
                             label="Titre de l'offre"
-                            style={{ margin: 8}}
                             fullWidth
                             type="text"
                             onChange={(event) => {
@@ -161,7 +157,6 @@ function Creation() {
                             id="description"
                             name="description"
                             label="Description de l'offre"
-                            style={{ margin: 8}}
                             type="text"
                             onChange={(event) => {
                                 setDescription(event.target.value);
@@ -174,7 +169,6 @@ function Creation() {
                             id="price"
                             name="price"
                             label="Prix en Ether"
-                            style={{ margin: 8}}
                             type="text"
                             onChange={(event) => {
                                 setPrice(event.target.value);
@@ -185,16 +179,15 @@ function Creation() {
                        <Container 
                             className="Price" maxWidth="xs">
                             <InfoIcon />
-                            1 Ether =  
-                            {Ether}$
-                            - mis à jour par CoinGecko
+                            1 Ether = {Ether}$ - mis à jour par CoinGecko
                         </Container> <br></br>
                     
                 </Grid>
                 <div className="submit">
                   <Button  onClick={addOffer} variant="contained" color="primary">Soumettre mon offre</Button>
                 </div>
-        <NavBarDetail /> 
+            </div>
+            <NavBarDetail /> 
         </div>
     )
 }

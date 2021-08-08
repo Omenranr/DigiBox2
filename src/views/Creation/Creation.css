@@ -1,42 +1,30 @@
-.grid {
+.containerOffer {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.containerOffer .grid {
     margin-top: 50px;
     position: relative;
-    padding-left: 30px;
-    text-align: center;
-
+    text-align: left;
     margin-top: 10px;
 }
 
-.logo-crea {
-    position: absolute;
-    width: 300px;
-    height: 400px;
-    margin-top: 100px;
-    border:  2px solid midnightblue;
-    font-family: Poppins,Arial,sans-serif;
-}
-
-.submit {
-    position: flex;
-    align-items: center;
-    margin-left: 70%;
-    border: "1px solid transparent";
-    /*background-color: rgb(142, 0, 12,0.8)*/
-}
-
-.titre {
-    color: midnightblue;
+.containerOffer .titre {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    color: rgb(68 72 189);
     font-weight: bold;
-    text-align: center;
+    text-align: left;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 36px;
 }
 
-.Price {
+.containerOffer .Price {
     font-size: 13px;
 }
 
-.container {
+.containerOffer .container {
         display: flex;
         align-items: center;
         justify-content: flex-start;
@@ -44,36 +32,28 @@
         text-align: center;
 }
 
-.chooseDoc {
-        background-color: #3d4bc5;
-        font-size: 16px;
-        font-weight: bold;
-        color: #fff;
-        text-align: center;
-        margin: auto;
-        /*display: none;*/
+.containerOffer .chooseDoc {
+    display: none;
 }
 
-.upload {
+.containerOffer .upload {
     text-align: center;
 }
 
-.container {
-    margin-left: 40%;
-    display:grid ;
-}
- 
-/*.chooseDoc {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    width: 100%;
+.containerOffer .upload button.MuiButton-containedPrimary {
+    margin-right: 10px;
+    background-image: linear-gradient(45deg, rgb(68 72 189), rgb(81 36 204));
 }
 
-/*.logo-crea {
-    position: absolute;
-    width: 300px;
-    height: 400px;
-    margin-top: 100px;
-    margin-left: 1200px;
-}*/
+.containerOffer .submit {
+    margin: 0 auto;
+    margin-bottom: 40px;
+}
+
+.containerOffer .submit button {
+    background-image: linear-gradient(45deg, rgb(68 72 189), rgb(81 36 204));
+}
+
+.containerOffer .container {
+    display:grid ;
+}
