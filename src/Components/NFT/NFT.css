@@ -1,15 +1,76 @@
 .holdingContainer {
-    width: 100%;
-    display: flex;
-    padding:3%;
-    justify-content: center;
-
-    box-sizing: border-box;
-    border: black 2px;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1160px;
+    margin: 0 auto 40px auto;
 }
 
 .cardDisplay {
-    flex: 1;
+    margin-bottom: 20px;
+}
+
+.cardDisplay .MuiCardMedia-root {
+    height: 250px;
+}
+
+.cardDisplay .MuiCardContent-root {
+    height: 150px;
+    text-align: left;
+}
+
+.cardDisplay .MuiCardContent-root h5 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.cardDisplay .MuiCardContent-root h4 {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.54);
+    margin-bottom: 10px;
+}
+
+.cardDisplay .MuiCardContent-root p {
+    color: inherit;
+    font-size: 14px;
+    margin-bottom: 10px;
+    height: 42px;
+}
+
+.cardDisplay .MuiCardContent-root img {
+    display: inline;
+    width: 10px;
+    margin-right: 5px;
+}
+
+.cardDisplay .MuiCardContent-root span {
+    float: right;
+    color: inherit;
+    font-size: 16px;
+}
+
+.cardDisplay .MuiCardActions-root {
+    padding: 10px 10px 10px 10px;
+}
+
+.cardDisplay .MuiCardActions-root button {
+    margin: 0 auto;
+    width: 100%;
+    color: #fff;
+    padding: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    background-image: linear-gradient(to right, rgb(64 112 246) 0%, rgb(132 73 208) 51%, rgb(64 112 246) 100%);
+    background-size: 200% auto;
+    box-shadow: 0 0 20px #eee;
+    transition: 0.5s;
+}
+
+.cardDisplay .MuiCardActions-root button:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
 }
 
 @media screen and (max-width: 1000px) {

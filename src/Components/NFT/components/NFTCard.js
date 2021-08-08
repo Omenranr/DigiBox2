@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import axios from 'axios'
 import Web3 from 'web3'
 import erc721Json from "../../../contracts/TokenERC721.json";
-
+import logoETH from '../../../Images/logoETH.svg';
 
 export default function NftCard(props) {
 
@@ -128,17 +128,18 @@ export default function NftCard(props) {
           title={props.offer.filename}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {props.offer.provider}
-          </Typography>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="h5" component="h5">
             {props.offer.title}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {props.offer.price}
+          <Typography gutterBottom variant="h5" component="h4">
+            {props.offer.provider}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             {props.offer.description}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="span">
+            <img src={logoETH} />
+            {Web3.utils.fromWei(props.offer.price, 'ether')}
           </Typography>
         </CardContent>
       </CardActionArea>

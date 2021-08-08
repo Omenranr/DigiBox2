@@ -67,10 +67,13 @@
 }
 
 .App .snd-section h2 {
+  margin-bottom: 40px;
   font-weight: 600;
   font-size: 24px;
   color: rgb(4, 17, 29);
 }
+
+/*  */
 
 .App h2 {
   font-size: 28px;

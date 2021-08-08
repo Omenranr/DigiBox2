@@ -7,6 +7,7 @@ import Switch from '@material-ui/core/Switch';
 import "./HomePage.css";
 import LogoDigibox from '../../Images/LogoDigiBox.png';
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
 export default function HomePage() {
     const [showParticles, setShowParticles] = useState(false);
@@ -42,15 +43,19 @@ export default function HomePage() {
                     <h2>Découvrez, Offrez, et Déposez<br/>vos offres sous forme de<br/>NFT</h2>
                     <h3>La première plateforme<br/>de cadeaux en NFTs</h3>
                     <div className="button-container">
-                        <Button variant="contained">Découvrir</Button>
-                        <Button variant="outlined">Créer</Button>
+                        <Button variant="contained">
+                            <Link to={"#snd-section"}>Découvrir</Link>
+                        </Button>
+                        <Button variant="outlined">
+                            <Link to={"/Creation de l'offre"}>Créer</Link>
+                        </Button>
                     </div>
                 </div>
                 <div className="grid-column">
                     <img src={LogoDigibox} alt="logo"/>
                 </div>
             </div>
-            <div className="snd-section">
+            <div id="#snd-section" className="snd-section">
                 <h2>Les dernières offres</h2>
                 <NFT />
             </div>
