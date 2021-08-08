@@ -1,15 +1,22 @@
 .App {
+  min-height: 100vh;
+  position: relative;
   text-align: center;
+  padding-bottom: 92px;
 }
 
-/*.btn-meta {
-  position: absolute;
-  text-align: center;
-  left: 1150px;
-  top: 95px;
-  color: midnightblue;
+html{
+  height: 100%;
+  box-sizing: border-box;
 }
 
-.display-meta{
-  font-size: smaller;
-} */
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  position: relative;
+  min-height: 100%;
+}

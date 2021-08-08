@@ -11,11 +11,11 @@ export default function Layout({ children }) {
     <Flex
       flexDirection="column"
       position="absolute"
-      left="1000px"
+      right="24px"
       alignItems="center"
       justifyContent="center"
       h="8vh"
-      bg="gray.800"
+      bg="rgba(0,0,0,0)"
     >
       {children}
     </Flex>

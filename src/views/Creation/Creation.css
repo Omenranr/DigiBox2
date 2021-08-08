@@ -1,32 +1,59 @@
-.title-offer {
-    text-align: center;
-    color: midnightblue;
+.containerOffer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-left: 20px;
 }
 
-.grid {
-    margin-top: 150px;
-}
-
-.meta-btn {
-    text-align: center;
+.containerOffer .grid {
+    margin-top: 50px;
+    position: relative;
+    text-align: left;
     margin-top: 10px;
 }
 
-.Price-Eth {
-    position: absolute;
-    left: 50px;
-    margin-top: 100px;
-    border:  2px solid midnightblue;
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
-    background-color: black;
-    color: #fff;
+.containerOffer .titre {
+    margin-top: 80px;
+    margin-bottom: 20px;
+    color: rgb(68 72 189);
+    font-weight: 600;
+    text-align: left;
+    font-size: 32px;
 }
 
-.logo-crea {
-    position: absolute;
-    width: 300px;
-    height: 400px;
-    margin-top: 100px;
-    margin-left: 1000px;
+.containerOffer .Price {
+    font-size: 13px;
+}
+
+.containerOffer .container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+        text-align: center;
+}
+
+.containerOffer .chooseDoc {
+    display: none;
+}
+
+.containerOffer .upload {
+    text-align: center;
+}
+
+.containerOffer .upload button.MuiButton-containedPrimary {
+    margin-right: 10px;
+    background-image: linear-gradient(45deg, rgb(68 72 189), rgb(81 36 204));
+}
+
+.containerOffer .submit {
+    margin: 0 auto;
+    margin-bottom: 40px;
+}
+
+.containerOffer .submit button {
+    background-image: linear-gradient(45deg, rgb(68 72 189), rgb(81 36 204));
+}
+
+.containerOffer .container {
+    display:grid ;
 }

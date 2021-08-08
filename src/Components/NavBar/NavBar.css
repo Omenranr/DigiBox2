@@ -1,12 +1,39 @@
 .logo {
     position: absolute;
     height: auto;
-    left: 230px;
+    left: 24px;
+    width: 160px;
+    float: left;
 }
 
 .grp-btn {
     position: absolute;
-    left: 470px;
+    right: 340px;
+    height: 64px;
+}
+
+.grp-btn .separator.MuiButtonGroup-groupedTextHorizontal {
+    min-width: 0;
+    height: 25px;
+    margin-top: 19px;
+    border-right: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.grp-btn button.MuiButtonGroup-groupedTextHorizontal {
+    color: #fff;
+    padding: 0 20px;
+    border: none;
+    text-transform: none;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.grp-btn button:last-child {
+    border: none;
+}
+
+.MuiAppBar-colorPrimary {
+    background: linear-gradient(45deg, rgb(68 72 189), rgb(81 36 204))
 }
 
 @media screen and (max-width: 500px) {
